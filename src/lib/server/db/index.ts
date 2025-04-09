@@ -1,17 +1,17 @@
-import 'dotenv/config';
-import { drizzle } from 'drizzle-orm/node-postgres';
-import { eq } from 'drizzle-orm';
-import pg from 'pg';
-import * as schema from '$lib/server/db/schema'; // assuming usersTable is exported from here
+// src/lib/server/db/index.ts
+import { drizzle } from 'drizzle-orm/postgres-js';
+import postgres from 'postgres';
+import { env } from '$env/dynamic/private'; // Use SvelteKit's env handling
+import * as schema from './schema';
 
-const pool = new pg.Pool({
-  connectionString: process.env.DATABASE_URL,
-});
+if (!env.DATABASE_URL) {
+  throw new Error('DATABASE_URL environment variable is not set');
+}
 
-// Now schema is passed in here 👇
-export const db = drizzle(pool, { schema }); 
+const client = postgres(env.DATABASE_URL);
+export const db = drizzle(client, { schema });
 
-
+// You might export the client too if needed elsewhere, but usually just db
 // async function main() {
 //   const current_user: typeof schema.usersTable.$inferInsert = {
 //     id: 'John',

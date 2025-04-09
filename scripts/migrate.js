@@ -1,27 +1,33 @@
-import { migrate } from 'drizzle-orm/node-postgres/migrator';
-import { db, pool } from '../src/lib/server/db/index.js';
-import path from 'path';
-import { fileURLToPath } from 'url';
+// src/migrate.js
+import { drizzle } from 'drizzle-orm/postgres-js';
+import { migrate } from 'drizzle-orm/postgres-js/migrator';
+import postgres from 'postgres';
+import 'dotenv/config'; // Load .env variables
 
-const __dirname = path.dirname(fileURLToPath(import.meta.url));
-
-// Path to migrations folder
-const migrationsFolder = path.join(__dirname, '../migrations');
-
-async function runMigrations() {
-  console.log(`Running migrations from ${migrationsFolder}...`);
-  
-  try {
-    // This will run all pending migrations
-    await migrate(db, { migrationsFolder });
-    console.log('Migrations completed successfully!');
-  } catch (error) {
-    console.error('Migration failed:', error);
-    process.exit(1);
-  } finally {
-    // Close the pool to end the process
-    await pool.end();
+const runMigrate = async () => {
+  if (!process.env.DATABASE_URL) {
+    throw new Error('DATABASE_URL environment variable is not set');
   }
-}
 
-runMigrations().catch(console.error);
+  const connectionString = process.env.DATABASE_URL;
+  const sql = postgres(connectionString, { max: 1 });
+  const db = drizzle(sql);
+
+  console.log('⏳ Running migrations...');
+
+  const start = Date.now();
+
+  await migrate(db, { migrationsFolder: 'drizzle' });
+
+  const end = Date.now();
+
+  console.log(`✅ Migrations completed in ${end - start}ms`);
+
+  process.exit(0);
+};
+
+runMigrate().catch((err) => {
+  console.error('❌ Migration failed');
+  console.error(err);
+  process.exit(1);
+});

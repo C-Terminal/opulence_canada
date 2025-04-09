@@ -1,78 +1,107 @@
-import { pgTable, text, bigint, timestamp, varchar, uuid, boolean, integer } from 'drizzle-orm/pg-core';
+// src/lib/server/db/schema.ts
+import {
+  timestamp,
+  pgTable,
+  text,
+  primaryKey,
+  integer,
+  boolean,
+  serial,
+  numeric, // Added for potential custom fields
+} from 'drizzle-orm/pg-core';
+import type { AdapterAccount } from '@auth/core/adapters'; // Use AdapterAccount type for correctness
+ // Use AdapterAccount type for correctness
+import type { InferSelectModel, InferInsertModel } from 'drizzle-orm';
 
-// Auth User Table
-export const userTable = pgTable('auth_user', {
-  id: text('id').primaryKey(),
-  username: varchar('username').notNull().unique(),
-  email: text('email').notNull().unique(),
-  age: integer().notNull()
+export const usersTable = pgTable('user', {
+  id: text('id').notNull().primaryKey(),
+  name: text('name'),
+  email: text('email').notNull().unique(), // Ensure email is unique
+  emailVerified: timestamp('emailVerified', { mode: 'date' }),
+  image: text('image'),
+  // Add any custom user fields here
+  // Example: role: text('role').default('user'),
+  // Example: isActive: boolean('isActive').default(true),
+  hashedPassword: text('hashedPassword')// ADD THIS LINE (nullable)
 });
 
+export const accountsTable = pgTable(
+  'account',
+  {
+      userId: text('userId')
+          .notNull()
+          .references(() => usersTable.id, { onDelete: 'cascade' }),
+      type: text('type').$type<AdapterAccount['type']>().notNull(),
+      provider: text('provider').notNull(),
+      providerAccountId: text('providerAccountId').notNull(),
+      refresh_token: text('refresh_token'),
+      access_token: text('access_token'),
+      expires_at: integer('expires_at'),
+      token_type: text('token_type'),
+      scope: text('scope'),
+      id_token: text('id_token'),
+      session_state: text('session_state'),
+  },
+  (account) => ({
+      compoundKey: primaryKey({
+          columns: [account.provider, account.providerAccountId],
+      }),
+  })
+);
 
-// Auth Sessions Table
-export const sessionTable = pgTable('auth_session', {
-  id: text('id').primaryKey(),
-  userId: text('user_id')
-    .notNull()
-    .references(() => userTable.id, { onDelete: 'cascade' }),
-  activeExpires: bigint('active_expires', { mode: 'number' }).notNull(),
-  idleExpires: bigint('idle_expires', { mode: 'number' }).notNull(),
-  expiresAt: timestamp('expires_at', {
-    withTimezone: true,
-    mode: 'date'
-  }).notNull(),
+export const sessions = pgTable('session', {
+  sessionToken: text('sessionToken').notNull().primaryKey(),
+  userId: text('userId')
+      .notNull()
+      .references(() => usersTable.id, { onDelete: 'cascade' }),
+  expires: timestamp('expires', { mode: 'date' }).notNull(),
 });
 
-// Auth Keys Table
-export const keys = pgTable('auth_key', {
-  id: text('id').primaryKey(),
-  userId: text('user_id')
-    .notNull()
-    .references(() => userTable.id, { onDelete: 'cascade' }),
-  hashedPassword: text('hashed_password')
+export const verificationTokens = pgTable(
+  'verificationToken',
+  {
+      identifier: text('identifier').notNull(),
+      token: text('token').notNull(),
+      expires: timestamp('expires', { mode: 'date' }).notNull(),
+  },
+  (vt) => ({
+      compoundKey: primaryKey({ columns: [vt.identifier, vt.token] }),
+  })
+);
+
+//TODO: run npx drizzle-kit generate:pg later for these additions
+
+export const transactions = pgTable('transactions', {
+  id: serial('id').primaryKey(),
+  merchant: text('merchant').notNull(),
+  amount: numeric('amount', { precision: 10, scale: 2 }).notNull(),
+  date: timestamp('date').defaultNow().notNull(),
+  status: text('status').default('completed'),
+  logo: text('logo')
 });
 
-// User Profiles Table
-export const userProfiles = pgTable('user_profiles', {
-  userId: text('user_id')
-    .primaryKey()
-    .references(() => userTable.id, { onDelete: 'cascade' }),
-  fullName: text('full_name'),
-  createdAt: timestamp('created_at').defaultNow().notNull(),
-  updatedAt: timestamp('updated_at').defaultNow().notNull()
+export const bills = pgTable('bills', {
+  id: serial('id').primaryKey(),
+  name: text('name').notNull(),
+  amount: numeric('amount', { precision: 10, scale: 2 }).notNull(),
+  dueDate: timestamp('due_date').notNull(),
+  category: text('category').notNull(),
+  logo: text('logo')
 });
 
-//create
-
-// Example of additional tables you might want to add
-export const posts = pgTable('posts', {
-  id: uuid('id').defaultRandom().primaryKey(),
-  title: varchar('title', { length: 255 }).notNull(),
-  content: text('content').notNull(),
-  published: boolean('published').default(false).notNull(),
-  authorId: text('author_id')
-    .notNull()
-    .references(() => userTable.id, { onDelete: 'cascade' }),
-  createdAt: timestamp('created_at').defaultNow().notNull(),
-  updatedAt: timestamp('updated_at').defaultNow().notNull()
+export const wallets = pgTable('wallets', {
+  id: serial('id').primaryKey(),
+  name: text('name').notNull(),
+  balance: numeric('balance', { precision: 12, scale: 2 }).notNull(),
+  type: text('type').notNull()
 });
 
-export const comments = pgTable('comments', {
-  id: uuid('id').defaultRandom().primaryKey(),
-  content: text('content').notNull(),
-  postId: uuid('post_id')
-    .notNull()
-    .references(() => posts.id, { onDelete: 'cascade' }),
-  authorId: text('author_id')
-    .notNull()
-    .references(() => userTable.id, { onDelete: 'cascade' }),
-  createdAt: timestamp('created_at').defaultNow().notNull()
-});
-// export type Sessions = typeof sessions.$inferSelect;
-
-export type SelectUser = typeof userTable.$inferSelect;
-
-export type InsertUser = typeof userTable.$inferInsert;
-
-
-
+// --- Types for convenience ---
+export type User = InferSelectModel<typeof usersTable>;
+export type NewUser = InferInsertModel<typeof usersTable>;
+export type Account = InferSelectModel<typeof accountsTable>;
+export type NewAccount = InferInsertModel<typeof accountsTable>;
+export type Session = InferSelectModel<typeof sessions>;
+export type NewSession = InferInsertModel<typeof sessions>;
+export type VerificationToken = InferSelectModel<typeof verificationTokens>;
+export type NewVerificationToken = InferInsertModel<typeof verificationTokens>;
