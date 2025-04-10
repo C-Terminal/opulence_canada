@@ -42,6 +42,7 @@
 		"@types/bcrypt": "^5.0.2",
 		"@types/node": "^22.14.0",
 		"@types/pg": "^8.11.11",
+		"autoprefixer": "^10.4.21",
 		"drizzle-kit": "^0.30.6",
 		"eslint": "^9.18.0",
 		"eslint-config-prettier": "^10.0.1",
@@ -49,6 +50,7 @@
 		"globals": "^16.0.0",
 		"jsdom": "^26.0.0",
 		"lucia": "^3.2.2",
+		"postcss": "^8.5.3",
 		"prettier": "^3.4.2",
 		"prettier-plugin-svelte": "^3.3.3",
 		"prettier-plugin-tailwindcss": "^0.6.11",
@@ -70,12 +72,16 @@
 		"@node-rs/argon2": "^2.0.2",
 		"@oslojs/crypto": "^1.0.1",
 		"@oslojs/encoding": "^1.1.0",
+		"@tabler/icons-svelte": "^3.31.0",
 		"bcrypt": "^5.1.1",
+		"clsx": "^2.1.1",
 		"daisyui": "^5.0.16",
 		"dotenv": "^16.4.7",
 		"drizzle-orm": "^0.40.1",
 		"pg": "^8.14.1",
 		"postgres": "^3.4.5",
+		"svelte-motion": "^0.12.2",
+		"tailwind-merge": "^3.2.0",
 		"zod": "^3.24.2"
 	}
 }

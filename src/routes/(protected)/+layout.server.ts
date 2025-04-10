@@ -8,7 +8,8 @@ export const load: LayoutServerLoad = async (event) => {
     // If the user is not logged in, redirect them to the sign-in page
     if (!session?.user) {
         // You can store the intended URL to redirect back after login
-        const redirectTo = `/auth/signin?callbackUrl=${encodeURIComponent(event.url.pathname)}`;
+        const url = new URL(event.url);
+        const redirectTo = `/auth/signin?callbackUrl=${encodeURIComponent('/login')}`;
         throw redirect(302, redirectTo);
     }
 

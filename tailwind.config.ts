@@ -35,5 +35,5 @@ export default {
         // Add other theme extensions: spacing, animations, etc.
       },
     },
-    plugins: [],
+    plugins: ["daisyUI"],
   }
