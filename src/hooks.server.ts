@@ -10,90 +10,97 @@ import type { Handle } from '@sveltejs/kit';
 import bcrypt from 'bcrypt'; // Import bcrypt
 import { eq } from 'drizzle-orm'; // Import eq for Drizzle queries
 import { sequence } from '@sveltejs/kit/hooks';
+import GitHub from '@auth/core/providers/github';
 
 // ... (Ensure environment variables are checked) ...
 
+const providers = [
+    GitHub,
+    Google({ /* ... */ }),
+    // Add CredentialsProvider
+    CredentialsProvider({
+        // The name to display on the sign in form (e.g. "Sign in with...")
+        name: 'Email & Password',
+        // `credentials` is used to generate a form on the sign-in page.
+        // You can specify which fields should be submitted. The values are sent to
+        // the `authorize` function below (as the first parameter).
+        credentials: {
+            email: { label: "Email", type: "email", placeholder: "user@example.com" },
+            password: { label: "Password", type: "password" }
+        },
+        // The core authorization logic
+        async authorize(credentials, req): Promise<schema.User | null> {
+            // --- 1. Basic Validation ---
+            if (!credentials?.email || !credentials.password) {
+                console.error("Credentials missing email or password");
+                // You can throw an error or return null
+                // Throwing displays a generic error on the sign-in page
+                // Returning null does the same by default
+                return null;
+                // Or throw new Error("Please enter both email and password.");
+            }
+
+            const email = credentials.email as string;
+            const password = credentials.password as string;
+
+            // --- 2. Find User in Database ---
+            console.log(`Attempting login for email: ${email}`);
+            const user = await db.query.usersTable.findFirst({
+                where: eq(schema.usersTable.email, email.toLowerCase()) // Store/check emails case-insensitively
+            });
+
+            if (!user) {
+                console.log(`User not found: ${email}`);
+                // Optionally: use timing attacks resistant comparison, but user not found is common
+                return null; // User not found
+            }
+
+            // --- 3. Check if User has a Password (might be OAuth only user) ---
+            if (!user.hashedPassword) {
+                console.log(`User ${email} found but has no password set (likely OAuth user).`);
+                // Decide how to handle this:
+                // a) Deny login via credentials
+                return null;
+                // b) Or, potentially redirect to a "set password" flow if desired (more complex)
+            }
+
+            // --- 4. Verify Password ---
+            const isValidPassword = await bcrypt.compare(password, user.hashedPassword);
+
+            if (!isValidPassword) {
+                console.log(`Invalid password attempt for user: ${email}`);
+                return null; // Passwords don't match
+            }
+
+            // --- 5. Return User Object (must match Auth.js expected user structure) ---
+            console.log(`Successful credentials login for user: ${email}`);
+            // Ensure the returned object has at least id, email, name, image
+            // Drizzle's return type 'User' should align if defined correctly
+            return {
+                id: user.id,
+                name: user.name,
+                email: user.email,
+                emailVerified: user.emailVerified, // Include if needed by session/callbacks
+                image: user.image,
+                hashedPassword: null,
+                // DO NOT RETURN hashedPassword here!
+            };
+        } // end authorize
+    }) // end CredentialsProvider
+];
+
+
+
 const authHandle: Handle = SvelteKitAuth({
     adapter: DrizzleAdapter(db, schema),
-    providers: [
-        Google({ /* ... */ }),
-        // Add CredentialsProvider
-        CredentialsProvider({
-            // The name to display on the sign in form (e.g. "Sign in with...")
-            name: 'Email & Password',
-            // `credentials` is used to generate a form on the sign-in page.
-            // You can specify which fields should be submitted. The values are sent to
-            // the `authorize` function below (as the first parameter).
-            credentials: {
-                email: { label: "Email", type: "email", placeholder: "user@example.com" },
-                password: { label: "Password", type: "password" }
-            },
-            // The core authorization logic
-            async authorize(credentials, req): Promise<schema.User | null> {
-                // --- 1. Basic Validation ---
-                if (!credentials?.email || !credentials.password) {
-                    console.error("Credentials missing email or password");
-                    // You can throw an error or return null
-                    // Throwing displays a generic error on the sign-in page
-                    // Returning null does the same by default
-                    return null;
-                    // Or throw new Error("Please enter both email and password.");
-                }
-
-                const email = credentials.email as string;
-                const password = credentials.password as string;
-
-                // --- 2. Find User in Database ---
-                console.log(`Attempting login for email: ${email}`);
-                const user = await db.query.usersTable.findFirst({
-                    where: eq(schema.usersTable.email, email.toLowerCase()) // Store/check emails case-insensitively
-                });
-
-                if (!user) {
-                    console.log(`User not found: ${email}`);
-                    // Optionally: use timing attacks resistant comparison, but user not found is common
-                    return null; // User not found
-                }
-
-                // --- 3. Check if User has a Password (might be OAuth only user) ---
-                if (!user.hashedPassword) {
-                    console.log(`User ${email} found but has no password set (likely OAuth user).`);
-                    // Decide how to handle this:
-                    // a) Deny login via credentials
-                    return null;
-                    // b) Or, potentially redirect to a "set password" flow if desired (more complex)
-                }
-
-                // --- 4. Verify Password ---
-                const isValidPassword = await bcrypt.compare(password, user.hashedPassword);
-
-                if (!isValidPassword) {
-                    console.log(`Invalid password attempt for user: ${email}`);
-                    return null; // Passwords don't match
-                }
-
-                // --- 5. Return User Object (must match Auth.js expected user structure) ---
-                console.log(`Successful credentials login for user: ${email}`);
-                // Ensure the returned object has at least id, email, name, image
-                // Drizzle's return type 'User' should align if defined correctly
-                return {
-                    id: user.id,
-                    name: user.name,
-                    email: user.email,
-                    emailVerified: user.emailVerified, // Include if needed by session/callbacks
-                    image: user.image,
-                    hashedPassword: null,
-                    // DO NOT RETURN hashedPassword here!
-                };
-            } // end authorize
-        }) // end CredentialsProvider
-    ],
+    providers,
     session: {
         strategy: 'database', // 'jwt' is also an option, but database is common with adapters
         maxAge: 30 * 24 * 60 * 60, // 30 days
         updateAge: 24 * 60 * 60, // 24 hours
     },
     callbacks: {
+
         // Use callbacks to control behavior, e.g., add custom data to session/token
         async session({ session, user }) {
             // Add custom properties to the session object
@@ -104,15 +111,6 @@ const authHandle: Handle = SvelteKitAuth({
             }
             return session;
         },
-        // async jwt({ token, user, account, profile }) {
-        //   // Only needed if session strategy is 'jwt'
-        //   // Persist data to the JWT
-        //   if (user) {
-        //     token.id = user.id;
-        //     // token.role = user.role;
-        //   }
-        //   return token;
-        // },
         async signIn({ user, account, profile, email, credentials }) {
             // You can add validation logic here before a user signs in
             // Example: Check if the user's email domain is allowed
@@ -133,14 +131,16 @@ const authHandle: Handle = SvelteKitAuth({
         // }
     },
     pages: {
-  // Optional: Customize pages if you don't want the defaults
-  //This is a server route!!!!
-        signIn: '/auth/signin',
+        // Optional: Customize pages if you don't want the defaults
+        //This is a server route!!!!
+        signIn: '/login',
+
         // signOut: '/auth/signout',
         error: '/auth/error', // Error code passed in query string as ?error=
         // verifyRequest: '/auth/verify-request', // (Email provider)
         // newUser: '/auth/new-user' // New users will be directed here on first sign in (leave unset if not needed)
     },
+
     debug: process.env.NODE_ENV === 'development',
 }).handle;
 
@@ -149,8 +149,16 @@ const dbHandle: Handle = async ({ event, resolve }) => {
     event.locals.db = db;
     const response = await resolve(event);
     return response;
-  };
-  
-  export const handle = sequence(authHandle, dbHandle);
+};
 
-// export const handle = authHandle;
+
+// export const handle = sequence(authHandle, dbHandle);
+
+export const {signIn, signOut } = SvelteKitAuth({
+    providers,
+    pages: {
+      signIn: "/login",
+    },
+  })
+// export {handle } from "./auth"
+export const handle = authHandle;

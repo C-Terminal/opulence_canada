@@ -8,7 +8,7 @@ import { env } from "$env/dynamic/private";
 import bcrypt from "bcrypt";
 import { eq } from "drizzle-orm";
 import { db } from "$lib/server/db"; // Adjust path to your actual DB setup
-import * as schema from "$lib/server/db/schema"; // Adjust path to your schema
+import * as schema from "$lib/server/db/schema"; // Adjust path  to your schema
 import { DrizzleAdapter } from "@auth/drizzle-adapter";
 
 // Define provider configurations in a type-safe way
