@@ -1,9 +1,9 @@
 <script>
 const navigation = [
     { name: 'Home', icon: 'home', href: '/' },
-    { name: 'Transactions', icon: 'credit-card', href: '/transactions' },
-    { name: 'Payments', icon: 'wallet', href: '/payments' },
-    { name: 'Accounts', icon: 'briefcase', href: '/accounts' }
+    { name: 'Transactions', icon: 'credit-card', href: '/admin/transactions' },
+    { name: 'Payments', icon: 'wallet', href: '/admin/payments' },
+    { name: 'Accounts', icon: 'briefcase', href: '/admin/accounts' }
   ];
 </script>
 

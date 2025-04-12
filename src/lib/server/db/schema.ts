@@ -5,13 +5,12 @@ import {
   text,
   primaryKey,
   integer,
-  boolean,
   serial,
   numeric, // Added for potential custom fields
 } from 'drizzle-orm/pg-core';
 import type { AdapterAccount } from '@auth/core/adapters'; // Use AdapterAccount type for correctness
  // Use AdapterAccount type for correctness
-import type { InferSelectModel, InferInsertModel } from 'drizzle-orm';
+import { type InferSelectModel, type InferInsertModel, relations } from 'drizzle-orm';
 
 export const usersTable = pgTable('user', {
   id: text('id').notNull().primaryKey(),
@@ -69,7 +68,26 @@ export const verificationTokens = pgTable(
   })
 );
 
-//TODO: run npx drizzle-kit generate:pg later for these additions
+// Define relations
+export const usersRelations = relations(usersTable, ({ many }) => ({
+  accounts: many(accountsTable),
+  sessions: many(sessions)
+}));
+
+export const accountsRelations = relations(accountsTable, ({ one }) => ({
+  user: one(usersTable, {
+    fields: [accountsTable.userId],
+    references: [usersTable.id]
+  })
+}));
+
+export const sessionsRelations = relations(sessions, ({ one }) => ({
+  user: one(usersTable, {
+    fields: [sessions.userId],
+    references: [usersTable.id]
+  })
+}));
+
 
 export const transactions = pgTable('transactions', {
   id: serial('id').primaryKey(),
@@ -95,6 +113,9 @@ export const wallets = pgTable('wallets', {
   balance: numeric('balance', { precision: 12, scale: 2 }).notNull(),
   type: text('type').notNull()
 });
+
+
+
 
 // --- Types for convenience ---
 export type User = InferSelectModel<typeof usersTable>;

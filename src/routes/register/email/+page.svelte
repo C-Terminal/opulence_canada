@@ -53,7 +53,7 @@
     }
   </script>
   
-  <div class="register-container">
+  <div class="register-container text-black">
     <h1>Create your account</h1>
     <p class="subtitle">Enter your information to sign up</p>
     
@@ -62,8 +62,8 @@
         <div class="error-message">{errorMessage}</div>
       {/if}
       
-      <div class="form-group">
-        <label for="name">Full Name</label>
+      <div class="form-group ">
+        <label for="name" class="text-white">Full Name</label>
         <input 
           id="name"
           type="text" 
