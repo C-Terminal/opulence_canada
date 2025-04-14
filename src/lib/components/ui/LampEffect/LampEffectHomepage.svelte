@@ -30,8 +30,8 @@
 				ease: 'easeInOut'
 			}}
 		>
-			<div use:motion class="fade-in-content w-1/2 flex items-center justify-center mt-10">
-				<img alt="Logo" src="/images/logo/opulent_canada.png" class="center" />
+			<div use:motion class="fade-in-content md:w-1/2 w-full flex items-center justify-center mt-10">
+				<img alt="Logo" src="/images/logo/opulent_canada.png" class="center " />
 			</div>
 		</Motion>
 	</Motion>

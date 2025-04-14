@@ -1,32 +1,37 @@
-<!-- src/routes/+page.svelte -->
 <script lang="ts">
+	import { onMount } from 'svelte'; // Import onMount if needed for triggering
 	import { LampEffectHomepage } from '$lib/components/ui/LampEffect';
 
-	let isLoggedIn = false;
-	// Define the modal element with proper TypeScript typing
-	let modal: HTMLDialogElement;
+	let isLoggedIn = false; // Currently unused, keep or remove as needed
 
-	// Function to open modal
+	// Define the modal element reference - Svelte will populate this
+	let modal: HTMLDialogElement | null = null; // Initialize as null
+
+	// Function to open modal using the bound reference
 	function openModal() {
-		modal = document.getElementById('modal') as HTMLDialogElement;
+		// Check if the element has been bound by Svelte
 		if (modal) {
-			modal.showModal();
+			modal.showModal(); // Use the native method on the bound element
+		} else {
+			console.error('Modal element is not yet available.');
+			// Or handle the case where the modal isn't ready
 		}
 	}
+
+	// --- Example Trigger ---
+	// If you want to open it on mount (for testing, maybe?)
+	// import { BROWSER } from '$app/environment'; // Ensure code runs only in browser
+	// onMount(() => {
+	//     if (BROWSER) {
+	//       // Example: Open after a short delay to ensure everything is ready
+	//       setTimeout(openModal, 100);
+	//     }
+	// });
+
+	// Or more commonly, trigger with a button:
+	// <button on:click={openModal} class="btn">Open Modal</button>
 </script>
 
-<dialog id="modal" class="modal modal-bottom sm:modal-middle" bind:this={modal}>
-	<div class="modal-box">
-		<h3 class="text-lg font-bold">Coming soon!</h3>
-		<p class="py-4">Stay tuned</p>
-		<div class="modal-action">
-			<form method="dialog">
-				<!-- if there is a button in form, it will close the modal -->
-				<button class="btn">Close</button>
-			</form>
-		</div>
-	</div>
-</dialog>
 <div class="relative min-h-screen overflow-hidden bg-black text-white">
 	<!-- Star background effect -->
 	<div class="absolute inset-0 z-0">
@@ -44,9 +49,34 @@
 
 	<!-- Main Content -->
 	<div class="relative z-20 container mx-auto px-4 py-6">
-					
-		
+		<div
+			class="mx-auto mb-20 flex max-w-xl flex-col items-center justify-center space-y-1 rounded-full bg-zinc-900 px-6 py-4 md:flex-row md:space-y-0 md:space-x-2"
+		>
+			<span class="text-sm text-gray-400">Regional access TBA soon</span>
+			<span class="mx-2 hidden text-gray-500 md:block">•</span>
+
+			<span class="hidden text-sm text-gray-400 md:block">Canada</span>
+			<span class="mx-2 hidden text-gray-500 md:block">•</span>
+			<span class="cursor-pointer text-sm text-gray-400 underline">Get the app</span>
+			<span class="ml-1 text-sm">→</span>
+		</div>
+
 		<LampEffectHomepage />
+
+		<dialog id="modal" class="modal modal-bottom sm:modal-middle" bind:this={modal}>
+			<div class="modal-box">
+				<h3 class="text-lg font-bold">Coming soon!</h3>
+				<p class="py-4">Stay tuned</p>
+				<div class="modal-action">
+					<form method="dialog">
+						<button class="btn">Close</button>
+					</form>
+				</div>
+			</div>
+			<form method="dialog" class="modal-backdrop">
+				<button>close</button>
+			</form>
+		</dialog>
 		<!-- TODO: Consider reusing the navigation bar component -->
 		<!-- Navigation Bar -->
 		<!-- <nav class="mb-12 flex items-center justify-between">
@@ -78,11 +108,8 @@
 			</div>
 		</nav> -->
 
-		<!-- Availability Banner -->
-		<!-- //TODO: Replace with relevant image and lamp-effect6 -->
-
 		<!-- Hero Content -->
-		<div class="mx-auto mb-12 mt-6 max-w-4xl text-center">
+		<div class="mx-auto mt-6 mb-12 max-w-4xl text-center">
 			<p class="mx-auto mb-8 max-w-2xl text-gray-400">
 				Opulent Canada offers global professionals a way to get paid faster from the Canada, save
 				their money in dollars and spend with an international Mastercard.
@@ -93,18 +120,6 @@
 				class="btn rounded-full bg-yellow-400 px-6 py-3 font-medium text-black hover:bg-yellow-500"
 				on:click={openModal}>Request Early Access</button
 			>
-		</div>
-
-		<div
-			class="mx-auto mb-20 flex max-w-xl flex-col items-center justify-center space-y-1 rounded-full bg-zinc-900 px-6 py-4 md:flex-row md:space-y-0 md:space-x-2"
-		>
-			<span class="text-sm text-gray-400">Regional access TBA soon</span>
-			<span class="mx-2 hidden text-gray-500 md:block">•</span>
-
-			<span class="hidden text-sm text-gray-400 md:block">Canada</span>
-			<span class="mx-2 hidden text-gray-500 md:block">•</span>
-			<span class="cursor-pointer text-sm text-gray-400 underline">Get the app</span>
-			<span class="ml-1 text-sm">→</span>
 		</div>
 	</div>
 </div>
@@ -159,7 +174,14 @@
 		opacity: 0.3;
 	}
 
-	.modal {
-		transition: transform 1s ease-in-out;
+	/* Optional: Ensure backdrop works correctly if needed */
+	.modal-backdrop {
+		background-color: transparent; /* Or your desired backdrop style */
+		position: fixed;
+		top: 0;
+		left: 0;
+		right: 0;
+		bottom: 0;
+		z-index: -1; /* Ensure it's behind the modal box */
 	}
 </style>
