@@ -1,6 +1,6 @@
 <!-- src/routes/+page.svelte -->
 <script lang="ts">
-	import { onMount } from 'svelte';
+	import { LampEffectHomepage } from '$lib/components/ui/LampEffect';
 
 	let isLoggedIn = false;
 	// Define the modal element with proper TypeScript typing
@@ -42,12 +42,14 @@
     <img src="/images/cube.png" alt="Floating cube" class="w-16 md:w-24" />
   </div> -->
 
-	<!-- //TODO: change navbar to hamburger menu -->
-
 	<!-- Main Content -->
 	<div class="relative z-20 container mx-auto px-4 py-6">
+					
+		
+		<LampEffectHomepage />
+		<!-- TODO: Consider reusing the navigation bar component -->
 		<!-- Navigation Bar -->
-		<nav class="mb-12 flex items-center justify-between">
+		<!-- <nav class="mb-12 flex items-center justify-between">
 			<div class="flex items-center">
 				<div class="flex items-center">
 					<div
@@ -74,28 +76,13 @@
 					<div class="ml-4 h-8 w-8 rounded-full bg-gray-300"></div>
 				{/if}
 			</div>
-		</nav>
+		</nav> -->
 
 		<!-- Availability Banner -->
 		<!-- //TODO: Replace with relevant image and lamp-effect6 -->
-		<div
-			class="mx-auto mb-20 flex max-w-xl flex-col items-center justify-center space-y-1 rounded-full bg-zinc-900 px-6 py-4 md:flex-row md:space-y-0 md:space-x-2"
-		>
-			<span class="text-sm text-gray-400">Regional access TBA soon</span>
-			<span class="mx-2 hidden text-gray-500 md:block">•</span>
-
-			<span class="hidden text-sm text-gray-400 md:block">Canada</span>
-			<span class="mx-2 hidden text-gray-500 md:block">•</span>
-			<span class="cursor-pointer text-sm text-gray-400 underline">Get the app</span>
-			<span class="ml-1 text-sm">→</span>
-		</div>
 
 		<!-- Hero Content -->
-		<div class="mx-auto mb-12 max-w-4xl text-center">
-			<h1 class="mb-6 text-4xl leading-tight font-bold md:text-6xl">
-				Canadian Banking for global digital professionals
-			</h1>
-
+		<div class="mx-auto mb-12 mt-6 max-w-4xl text-center">
 			<p class="mx-auto mb-8 max-w-2xl text-gray-400">
 				Opulent Canada offers global professionals a way to get paid faster from the Canada, save
 				their money in dollars and spend with an international Mastercard.
@@ -106,6 +93,18 @@
 				class="btn rounded-full bg-yellow-400 px-6 py-3 font-medium text-black hover:bg-yellow-500"
 				on:click={openModal}>Request Early Access</button
 			>
+		</div>
+
+		<div
+			class="mx-auto mb-20 flex max-w-xl flex-col items-center justify-center space-y-1 rounded-full bg-zinc-900 px-6 py-4 md:flex-row md:space-y-0 md:space-x-2"
+		>
+			<span class="text-sm text-gray-400">Regional access TBA soon</span>
+			<span class="mx-2 hidden text-gray-500 md:block">•</span>
+
+			<span class="hidden text-sm text-gray-400 md:block">Canada</span>
+			<span class="mx-2 hidden text-gray-500 md:block">•</span>
+			<span class="cursor-pointer text-sm text-gray-400 underline">Get the app</span>
+			<span class="ml-1 text-sm">→</span>
 		</div>
 	</div>
 </div>
@@ -161,6 +160,6 @@
 	}
 
 	.modal {
-		transition: transform 0.3s ease-in-out;
+		transition: transform 1s ease-in-out;
 	}
 </style>
