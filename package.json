@@ -69,6 +69,7 @@
 		"@auth/sveltekit": "^1.8.0",
 		"@lucia-auth/adapter-drizzle": "^1.1.0",
 		"@lucia-auth/adapter-postgresql": "^3.1.2",
+		"@lucide/svelte": "^0.488.0",
 		"@node-rs/argon2": "^2.0.2",
 		"@oslojs/crypto": "^1.0.1",
 		"@oslojs/encoding": "^1.1.0",
@@ -78,8 +79,10 @@
 		"daisyui": "^5.0.16",
 		"dotenv": "^16.4.7",
 		"drizzle-orm": "^0.40.1",
+		"maska": "^3.1.1",
 		"pg": "^8.14.1",
 		"postgres": "^3.4.5",
+		"svelte-inview": "^4.0.4",
 		"svelte-motion": "^0.12.2",
 		"tailwind-merge": "^3.2.0",
 		"zod": "^3.24.2"

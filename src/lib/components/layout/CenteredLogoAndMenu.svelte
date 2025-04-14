@@ -1,39 +1,34 @@
-<script lang="ts">
-	import Footer from '$lib/components/layout/Footer.svelte';
+<!-- <script>
+	import Button from '../common/Button.svelte';
 
-	import type { LayoutData } from './$types';
-
-	export let data: LayoutData;
-	import '../app.css'; // Tailwind CSS import
-
-	$: session = data.session; // Session data is reactive
+	let { logo = '' } = $props();
 </script>
 
 <nav class="navbar bg-base-300 justify-center">
 	<a class="btn btn-ghost text-lg">
-		<img alt="Logo" src="/images/logo/opulent_canada.png" class="w-20" />
-		Opulent Canada
+		<img alt="Logo" src={logo} class="w-4" />
+		Store Name
 	</a>
 </nav>
 
 <nav class="bg-base-200 flex justify-center">
 	<ul class="menu menu-horizontal justify-center">
 		<li>
-			<a href="/">
+			<a>
 				<i class="fa-solid fa-shop text-secondary"></i>
-				Home
+				Shop
 			</a>
 		</li>
 		<li>
-			<a href="/forex">
+			<a>
 				<i class="fa-solid fa-book-open text-secondary"></i>
-				Foreign Exchange
+				Catalog
 			</a>
 		</li>
 		<li>
-			<a href="/remittance">
+			<a>
 				<i class="fa-solid fa-newspaper text-secondary"></i>
-				Payments
+				News
 			</a>
 		</li>
 		<li>
@@ -49,35 +44,12 @@
 			</a>
 		</li>
 		<li>
-			<!-- {#if session?.user}
-		<span>Welcome, {session.user.name ?? session.user.email}!</span>
-		<img
-			src={session.user.image ?? '/default-avatar.png'}
-			alt="User avatar"
-			width="32"
-			height="32"
-			style="border-radius: 50%; margin-left: 10px;"
-		/>
-		<form action="/auth/signout" method="POST">
-			<button type="submit">Sign Out</button>
-		</form>
-	{:else}
-		<span>You are not signed in.</span>
-		<a href="/auth/signin">Sign In</a>
-	{/if} -->
-
-			<!-- {#if session?.user}
-				<li><Button variant="secondary" size="sm" href="/admin">Admin Portal</Button></li>
-				<li>
-					<form action="/auth/signout" method="POST">
-						<button type="submit">Sign Out</button>
-					</form>
-				</li>
+			{#if loggedIn}
+				<Button variant="secondary" size="sm" href="/admin">Admin Portal</Button>
+				<Button variant="outline" size="sm" onclick={() => logout()}>Logout</Button>
 			{:else}
-				<li><Button variant="primary" size="sm" href="/login">Login</Button></li>
+				<Button variant="primary" size="sm" href="/login">Login</Button>
 			{/if}
-		</li>
-		<li>
 			<button
 				onclick={() => document.documentElement.classList.toggle('dark')}
 				class="dark:hover:bg-background-dark-secondary rounded-md p-2 transition-colors hover:bg-gray-200"
@@ -112,16 +84,6 @@
 					/>
 				</svg>
 			</button>
-		</li> -->
 		</li>
 	</ul>
-</nav>
-
-<hr />
-<div class="flex min-h-screen flex-col">
-	<main class="flex-grow">
-		<slot />
-	</main>
-
-	<Footer />
-</div>
+</nav> -->

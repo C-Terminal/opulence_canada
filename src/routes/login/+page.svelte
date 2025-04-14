@@ -39,7 +39,7 @@
 			}
 
 			// Login successful, redirect to Dashboard page
-			goto('/dashboard');
+			goto('/admin/dashboard');
 		} catch (error) {
 			console.error('Login error:', error);
 			errorMessage = 'An error occurred during Login';
@@ -49,7 +49,6 @@
 	}
 </script>
 
-// src/routes/login/+page.svelte (corrected version)
 <div class="login-container">
 	<h1>Sign in to your account</h1>
 

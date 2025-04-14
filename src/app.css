@@ -1,4 +1,21 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700&family=Inter:wght@400&display=swap');
+
 @import 'tailwindcss';
 @plugin '@tailwindcss/forms';
 @plugin '@tailwindcss/typography';
 @plugin "daisyui";
+
+
+body {
+  font-family: 'Inter', sans-serif; /* Default body font */
+}
+
+h1, h2, h3 {
+  font-family: 'Montserrat', sans-serif; /* Heading font */
+  font-weight: 600; /* Or 700 for bolder */
+}
+@layer base {
+  html {
+    @apply text-gray-900 dark:text-white;
+  }
+}
