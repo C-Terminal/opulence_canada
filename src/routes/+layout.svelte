@@ -1,70 +1,93 @@
 <script lang="ts">
 	import Footer from '$lib/components/layout/Footer.svelte';
-
+	import '../app.css'; // Tailwind CSS import
+	import ThemeToggle from '$lib/components/ThemeToggle.svelte';
 	import type { LayoutData } from './$types';
 
 	export let data: LayoutData;
-	import '../app.css'; // Tailwind CSS import
 
 	$: session = data.session; // Session data is reactive
+
+	// This script ensures the correct theme is applied before the page renders
+	// to prevent theme flickering
+	if (typeof window !== 'undefined') {
+		const script = document.createElement('script');
+		script.textContent = `
+      (function() {
+        const theme = localStorage.getItem('theme') || 
+          (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+        document.documentElement.classList.toggle('dark', theme === 'dark');
+      })();
+    `;
+		document.head.appendChild(script);
+	}
 </script>
 
 <nav class="navbar bg-base-100 shadow-sm" aria-label="Main navigation">
-    <div class="navbar-start">
-        <div class="dropdown">
-            <button type="button" class="btn btn-ghost btn-circle" aria-label="Toggle navigation menu" aria-haspopup="true" aria-controls="mobile-menu" tabindex="0">
-                <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    class="h-6 w-6" fill="none"
-                    viewBox="0 0 24 24"
-                    stroke="currentColor"
-                    aria-hidden="true" 
-                    focusable="false" >
-                    <path
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
-                        stroke-width="2"
-                        d="M4 6h16M4 12h16M4 18h7"
-                    />
-                </svg>
-            </button>
-            <ul
-                id="mobile-menu"
-                class="menu menu-md dropdown-content bg-base-100 rounded-box z-[1] mt-3 w-52 p-2 shadow" 
-                role="menu" 
-            >
-                <li><a href="/" role="menuitem">Homepage</a></li>
-                 <li><a href="/forex" role="menuitem">Foreign Exchange</a></li>
-                 <li><a href="/remittance" role="menuitem">Remittances</a></li>
-                 <li><a href="/transfer" role="menuitem">Money Transfer</a></li>
-            </ul>
-        </div>
-    </div>
-    <div class="navbar-center">
-        <a href="/" class="btn btn-ghost text-xl">
-             Opulent Canada
-        </a>
-    </div>
-    <div class="navbar-end">
-        <button class="btn btn-ghost btn-circle" aria-label="Search">
-            <svg
-                xmlns="http://www.w3.org/2000/svg"
-                class="h-6 w-6" fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-                aria-hidden="true"
-                focusable="false" >
-                <path
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    stroke-width="2"
-                    d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
-                />
-            </svg>
-        </button>
-        </div>
+	<div class="navbar-start">
+		<div class="dropdown">
+			<button
+				type="button"
+				class="btn btn-ghost btn-circle"
+				aria-label="Toggle navigation menu"
+				aria-haspopup="true"
+				aria-controls="mobile-menu"
+				tabindex="0"
+			>
+				<svg
+					xmlns="http://www.w3.org/2000/svg"
+					class="h-6 w-6"
+					fill="none"
+					viewBox="0 0 24 24"
+					stroke="currentColor"
+					aria-hidden="true"
+					focusable="false"
+				>
+					<path
+						stroke-linecap="round"
+						stroke-linejoin="round"
+						stroke-width="2"
+						d="M4 6h16M4 12h16M4 18h7"
+					/>
+				</svg>
+			</button>
+			<ul
+				id="mobile-menu"
+				class="menu menu-md dropdown-content bg-base-100 rounded-box z-[1] mt-3 w-52 p-2 shadow"
+				role="menu"
+			>
+				<li><a href="/" role="menuitem">Homepage</a></li>
+				<li><a href="/forex" role="menuitem">Foreign Exchange</a></li>
+				<li><a href="/remittance" role="menuitem">Remittances</a></li>
+				<li><a href="/transfer" role="menuitem">Money Transfer</a></li>
+			</ul>
+		</div>
+	</div>
+	<div class="navbar-center">
+		<a href="/" class="btn btn-ghost text-xl"> Opulent Canada </a>
+	</div>
+	<div class="navbar-end">
+		<button class="btn btn-ghost btn-circle" aria-label="Search">
+			<svg
+				xmlns="http://www.w3.org/2000/svg"
+				class="h-6 w-6"
+				fill="none"
+				viewBox="0 0 24 24"
+				stroke="currentColor"
+				aria-hidden="true"
+				focusable="false"
+			>
+				<path
+					stroke-linecap="round"
+					stroke-linejoin="round"
+					stroke-width="2"
+					d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
+				/>
+			</svg>
+		</button>
+	</div>
 </nav>
-			<!-- {#if session?.user}
+<!-- {#if session?.user}
 		<span>Welcome, {session.user.name ?? session.user.email}!</span>
 		<img
 			src={session.user.image ?? '/default-avatar.png'}
@@ -81,7 +104,7 @@
 		<a href="/auth/signin">Sign In</a>
 	{/if} -->
 
-			<!-- {#if session?.user}
+<!-- {#if session?.user}
 				<li><Button variant="secondary" size="sm" href="/admin">Admin Portal</Button></li>
 				<li>
 					<form action="/auth/signout" method="POST">
@@ -128,7 +151,7 @@
 				</svg>
 			</button>
 		</li> -->
-		<!-- </li>
+<!-- </li>
 	</ul>
 </nav> -->
 <div class="flex min-h-screen flex-col">

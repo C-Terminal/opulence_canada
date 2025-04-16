@@ -1,21 +1,315 @@
-@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700&family=Inter:wght@400&display=swap');
-
 @import 'tailwindcss';
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600;700&family=Inter:wght@300;400;500&display=swap');
+
 @plugin '@tailwindcss/forms';
 @plugin '@tailwindcss/typography';
 @plugin "daisyui";
 
 
-body {
-  font-family: 'Inter', sans-serif; /* Default body font */
+
+:root {
+  /* Light theme colors */
+  --color-primary: #1e3a8a;
+  --color-primary-light: #2563eb;
+  --color-primary-dark: #1e40af;
+  --color-secondary: #0f766e;
+  --color-secondary-light: #0d9488;
+  --color-secondary-dark: #115e59;
+  --color-accent: #00ff99;
+  --color-accent-light: #4fffb4;
+  --color-accent-dark: #00cc7a;
+  --color-warning: #f5c400;
+  --color-warning-light: #fcd34d;
+  --color-warning-dark: #d97706;
+  --color-danger: #ff4444;
+  --color-danger-light: #f87171;
+  --color-danger-dark: #dc2626;
+  --color-success: #10b981;
+  --color-success-light: #34d399;
+  --color-success-dark: #059669;
+  --color-info: #3b82f6;
+  --color-info-light: #60a5fa;
+  --color-info-dark: #2563eb;
+  
+  /* Neutral colors */
+  --color-background: #ffffff;
+  --color-surface: #f9fafb;
+  --color-surface-variant: #f3f4f6;
+  --color-on-surface: #1f2937;
+  --color-on-surface-muted: #4b5563;
+  --color-border: #e5e7eb;
+  --color-border-light: #f3f4f6;
+  
+  /* Typography */
+  --color-text-primary: #111827;
+  --color-text-secondary: #4b5563;
+  --color-text-tertiary: #9ca3af;
+  
+  /* Fintech specific */
+  --color-fintech-blue: #1e3a8a;
+  --color-fintech-teal: #0f766e;
+  --color-fintech-yellow: #f5c400;
+  --color-fintech-green: #00ff99;
 }
 
-h1, h2, h3 {
-  font-family: 'Montserrat', sans-serif; /* Heading font */
-  font-weight: 600; /* Or 700 for bolder */
+.dark {
+  /* Dark theme colors */
+  --color-primary: #3b82f6;
+  --color-primary-light: #60a5fa;
+  --color-primary-dark: #2563eb;
+  --color-secondary: #14b8a6;
+  --color-secondary-light: #2dd4bf;
+  --color-secondary-dark: #0d9488;
+  --color-accent: #00ff99;
+  --color-accent-light: #4fffb4;
+  --color-accent-dark: #00cc7a;
+  --color-warning: #fbbf24;
+  --color-warning-light: #fcd34d;
+  --color-warning-dark: #d97706;
+  --color-danger: #ef4444;
+  --color-danger-light: #f87171;
+  --color-danger-dark: #dc2626;
+  --color-success: #10b981;
+  --color-success-light: #34d399;
+  --color-success-dark: #059669;
+  --color-info: #3b82f6;
+  --color-info-light: #60a5fa;
+  --color-info-dark: #2563eb;
+  
+  /* Neutral colors */
+  --color-background: #0d0d0d;
+  --color-surface: #1a1a1a;
+  --color-surface-variant: #2a2a2a;
+  --color-on-surface: #f9fafb;
+  --color-on-surface-muted: #d1d5db;
+  --color-border: #3a3a3a;
+  --color-border-light: #4b5563;
+  
+  /* Typography */
+  --color-text-primary: #f9fafb;
+--color-text-secondary: #e5e7eb;
+  --color-text-tertiary: #9ca3af;
+  
+  /* Fintech specific */
+  --color-fintech-dark: #0d0d0d;
+  --color-fintech-muted: #2a2a2a;
+  --color-fintech-dark-gray: #1a1a1a;
+  --color-fintech-gray: #3a3a3a;
+  --color-fintech-light-gray: #d1d5db;
+  --color-fintech-white: #f9fafb;
 }
+
+@theme {
+  --color-fintech-dark: #0d0d0d;
+  --color-fintech-muted: #2a2a2a;
+  --color-fintech-dark-gray: #1a1a1a;
+  --color-fintech-gray: #3a3a3a;
+  --color-fintech-light-gray: #d1d5db;
+  --color-fintech-white: #f9fafb;
+  --color-fintech-accent: #00ff99;
+  --color-fintech-yellow: #f5c400;
+  --color-fintech-warn: #ff4444;
+  --color-fintech-blue: #1e3a8a;
+  --color-fintech-teal: #0f766e;
+  --color-fintech-green: #00ff99;
+}
+
+
+.bg-background { background-color: var(--color-background); }
+
+
 @layer base {
   html {
-    @apply text-gray-900 dark:text-white;
+    @apply antialiased;
+    font-family: 'Inter', sans-serif;
+  }
+  
+  body {
+    @apply bg-background text-text-primary transition-colors duration-200 ease-in-out;
+  }
+  
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-montserrat font-semibold tracking-tight;
+  }
+  
+  h1 {
+    @apply text-3xl md:text-4xl lg:text-5xl;
+  }
+  
+  h2 {
+    @apply text-2xl md:text-3xl lg:text-4xl;
+  }
+  
+  h3 {
+    @apply text-xl md:text-2xl lg:text-3xl;
+  }
+  
+  h4 {
+    @apply text-lg md:text-xl;
+  }
+  
+  a {
+    @apply text-primary hover:text-primary-dark transition-colors duration-200;
+  }
+  
+  /* Custom focus styles */
+  :focus-visible {
+    @apply outline-none ring-2 ring-accent ring-offset-2 ring-offset-background;
+  }
+}
+
+@layer components {
+  /* Card component */
+  .card {
+    @apply bg-surface rounded-lg border border-border p-6 shadow-sm transition-shadow duration-200 hover:shadow-md;
+  }
+  
+  /* Button base styles */
+  .btn {
+    @apply inline-flex items-center justify-center rounded-md font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 disabled:opacity-50 disabled:pointer-events-none;
+  }
+  
+  /* Button sizes */
+  .btn-sm {
+    @apply h-8 px-3 text-xs;
+  }
+  
+  .btn-md {
+    @apply h-10 px-4 py-2 text-sm;
+  }
+  
+  .btn-lg {
+    @apply h-12 px-5 py-2 text-base;
+  }
+  
+  /* Button variants */
+  .btn-primary {
+    @apply bg-primary text-white hover:bg-primary-dark focus-visible:ring-primary;
+  }
+  
+  .btn-secondary {
+    @apply bg-secondary text-white hover:bg-secondary-dark focus-visible:ring-secondary;
+  }
+  
+  .btn-accent {
+    @apply bg-accent text-black hover:bg-accent-dark focus-visible:ring-accent;
+  }
+  
+  .btn-outline {
+    @apply border border-border bg-transparent hover:bg-surface-variant focus-visible:ring-primary;
+  }
+  
+  .btn-ghost {
+    @apply bg-transparent hover:bg-surface-variant focus-visible:ring-primary;
+  }
+  
+  /* Input component */
+  .input {
+    @apply h-10 w-full rounded-md border border-border bg-surface px-3 py-2 text-sm ring-offset-background placeholder:text-text-tertiary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50;
+  }
+  
+  /* Badge component */
+  .badge {
+    @apply inline-flex items-center rounded-full border border-border px-2.5 py-0.5 text-xs font-semibold transition-colors focus:outline-none focus:ring-2 focus:ring-offset-2;
+  }
+  
+  .badge-primary {
+    @apply bg-primary/10 text-primary border-primary/20;
+  }
+  
+  .badge-secondary {
+    @apply bg-secondary/10 text-secondary border-secondary/20;
+  }
+  
+  .badge-accent {
+    @apply bg-accent/10 text-accent-dark border-accent/20;
+  }
+  
+  /* Toggle component for theme switching */
+  .theme-toggle {
+    @apply inline-flex h-6 w-11 items-center rounded-full bg-surface-variant transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2;
+  }
+  
+  .theme-toggle[data-state="checked"] {
+    @apply bg-primary;
+  }
+  
+  .theme-toggle-thumb {
+    @apply pointer-events-none block h-5 w-5 rounded-full bg-white shadow-lg ring-0 transition-transform;
+  }
+  
+  .theme-toggle[data-state="checked"] .theme-toggle-thumb {
+    @apply translate-x-5;
+  }
+}
+
+@utility bg-background {
+  background-color: var(--color-background);
+}
+
+@utility font-montserrat {
+  font-family: 'Montserrat', sans-serif;
+}
+
+@utility text-text-primary { color: var(--color-text-primary); }
+@utility text-text-tertiary { color: var(--color-text-tertiary); }
+@utility bg-primary { background-color: var(--color-primary); }
+@utility bg-primary-dark { background-color: var(--color-primary-dark); }
+@utility bg-secondary { background-color: var(--color-secondary); }
+@utility bg-secondary-dark { background-color: var(--color-secondary-dark); }
+@utility bg-accent { background-color: var(--color-accent); }
+@utility bg-accent-dark { background-color: var(--color-accent-dark); }
+@utility text-primary { color: var(--color-primary); }
+@utility text-primary-dark { color: var(--color-primary-dark); }
+@utility text-accent-dark { color: var(--color-accent-dark); }
+@utility ring-accent { --tw-ring-color: var(--color-accent); }
+@utility ring-offset-background { --tw-ring-offset-color: var(--color-background); }
+@utility bg-surface { background-color: var(--color-surface); }
+@utility bg-surface-variant { background-color: var(--color-surface-variant); }
+@utility border-border { border-color: var(--color-border); }
+
+
+/* Additional utility classes */
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+  
+  .text-pretty {
+    text-wrap: pretty;
+  }
+
+  /* Glass effect */
+  .glass {
+    @apply bg-white/10 backdrop-blur-md backdrop-saturate-150 border border-white/20;
+    @apply dark:bg-black/20 dark:border-white/10;
+  }
+
+
+  
+  /* Gradient text */
+  .text-gradient {
+    @reference bg-clip-text text-transparent bg-gradient-to-r from-primary to-secondary;
+  }
+  
+  /* Fintech specific utilities */
+  .fintech-card {
+    @apply bg-surface border border-border rounded-xl p-6 shadow-sm;
+    @apply dark:bg-fintech-dark-gray dark:border-fintech-gray;
+  }
+  
+  .fintech-input {
+    @apply input bg-surface-variant border-fintech-gray;
+    @apply dark:bg-fintech-muted dark:border-fintech-gray;
+  }
+  
+  .fintech-button {
+    @apply btn bg-fintech-blue text-white hover:bg-blue-800;
+    @apply dark:bg-fintech-teal dark:hover:bg-teal-700;
+  }
+  
+  .fintech-accent {
+    @apply text-fintech-yellow font-semibold;
+    @apply dark:text-fintech-green;
   }
 }
