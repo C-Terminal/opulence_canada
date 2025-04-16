@@ -1,6 +1,7 @@
 <script lang="ts">
 	import { onMount } from 'svelte'; // Import onMount if needed for triggering
-	import { LampEffectHomepage } from '$lib/components/ui/LampEffect';
+	import { LampEffectHomepage, LampEffect } from '$lib/components/ui/LampEffect';
+	import { fade } from 'svelte/transition';
 
 	let isLoggedIn = false; // Currently unused, keep or remove as needed
 
@@ -34,21 +35,74 @@
 
 <div class="relative min-h-screen overflow-hidden bg-black text-white">
 	<!-- Star background effect -->
-	<div class="absolute inset-0 z-0">
+	<!-- <div class="absolute inset-0 z-0">
 		<div class="stars"></div>
-	</div>
+	</div> -->
 
-	<!-- Floating 3D elements -->
-	<!-- <div class="absolute right-24 top-24 md:right-32 md:top-24 z-10 animate-float-slow">
-    <img src="/images/astronaut.png" alt="Floating astronaut" class="w-24 md:w-32" />
-  </div>
-  
-  <div class="absolute left-16 bottom-24 z-10 animate-float">
-    <img src="/images/cube.png" alt="Floating cube" class="w-16 md:w-24" />
-  </div> -->
+	<!-- Hero Section -->
+	<section
+		class="bg-fintech-dark relative flex min-h-screen items-center justify-center overflow-hidden"
+	>
+		<!-- Background Gradient -->
+		<div class="from-fintech-muted/20 absolute inset-0 bg-gradient-to-br to-transparent"></div>
+
+		<div class="z-10 container mx-auto px-6 text-center" in:fade={{ duration: 1000 }}>
+			<h1
+				class="from-fintech-accent mb-6 bg-gradient-to-r to-white bg-clip-text text-5xl font-bold tracking-tight text-transparent md:text-7xl"
+			>
+				Empower Your Wealth
+			</h1>
+			<p class="mx-auto mb-8 max-w-2xl text-xl text-gray-400 md:text-2xl">
+				Unleash the future of finance with cutting-edge tools designed for the bold.
+			</p>
+			<div class="mx-auto mt-6 mb-12 max-w-4xl text-center">
+				<!-- Use bind:this directly instead of document.getElementById -->
+				<button
+					class="btn rounded-full bg-yellow-400 px-6 py-3 font-medium text-black hover:bg-yellow-500"
+					on:click={openModal}>Request Early Access</button
+				>
+			</div>
+		</div>
+	</section>
+
+	<!-- Features Section -->
+	<section class="bg-fintech-muted py-20">
+		<div class="container mx-auto px-6">
+			<h2 class="mb-12 text-center text-4xl font-bold">Why Choose Us?</h2>
+			<div class="grid grid-cols-1 gap-8 md:grid-cols-3">
+				<!-- Feature 1 -->
+				<div
+					class="bg-fintech-dark hover:shadow-fintech-accent/50 rounded-lg p-6 shadow-xl transition-shadow duration-300"
+				>
+					<h3 class="mb-4 text-2xl font-semibold">Seamless Transactions</h3>
+					<p class="text-gray-400">
+						Execute trades and transfers with unparalleled speed and security.
+					</p>
+				</div>
+				<!-- Feature 2 -->
+				<div
+					class="bg-fintech-dark hover:shadow-fintech-accent/50 rounded-lg p-6 shadow-xl transition-shadow duration-300"
+				>
+					<h3 class="mb-4 text-2xl font-semibold">Advanced Analytics</h3>
+					<p class="text-gray-400">
+						Gain insights with real-time data and predictive market trends.
+					</p>
+				</div>
+				<!-- Feature 3 -->
+				<div
+					class="bg-fintech-dark hover:shadow-fintech-accent/50 rounded-lg p-6 shadow-xl transition-shadow duration-300"
+				>
+					<h3 class="mb-4 text-2xl font-semibold">Ironclad Security</h3>
+					<p class="text-gray-400">Your assets are protected by state-of-the-art encryption.</p>
+				</div>
+			</div>
+		</div>
+	</section>
 
 	<!-- Main Content -->
 	<div class="relative z-20 container mx-auto px-4 py-6">
+		<!-- <LampEffectHomepage /> -->
+
 		<div
 			class="mx-auto mb-20 flex max-w-xl flex-col items-center justify-center space-y-1 rounded-full bg-zinc-900 px-6 py-4 md:flex-row md:space-y-0 md:space-x-2"
 		>
@@ -60,8 +114,6 @@
 			<span class="cursor-pointer text-sm text-gray-400 underline">Get the app</span>
 			<span class="ml-1 text-sm">→</span>
 		</div>
-
-		<LampEffectHomepage />
 
 		<dialog id="modal" class="modal modal-bottom sm:modal-middle" bind:this={modal}>
 			<div class="modal-box">
@@ -77,50 +129,6 @@
 				<button>close</button>
 			</form>
 		</dialog>
-		<!-- TODO: Consider reusing the navigation bar component -->
-		<!-- Navigation Bar -->
-		<!-- <nav class="mb-12 flex items-center justify-between">
-			<div class="flex items-center">
-				<div class="flex items-center">
-					<div
-						class="mr-2 flex h-8 w-8 items-center justify-center rounded-full bg-white text-black"
-					>
-						<span class="font-bold">O</span>
-					</div>
-					<span class="text-lg font-bold">Canada</span>
-				</div>
-
-				<div class="ml-8 hidden md:flex">
-					<a href="#" class="mx-3 text-sm text-gray-400 hover:text-white">FAQs</a>
-					<a href="#" class="mx-3 text-sm text-gray-400 hover:text-white">Community</a>
-				</div>
-			</div>
-
-			<div class="flex items-center">
-				<button class="rounded-full bg-zinc-800 px-4 py-2 text-sm text-white hover:bg-zinc-700">
-					Request early access
-				</button>
-				{#if isLoggedIn}
-					<div class="ml-4 h-8 w-8 rounded-full bg-gray-300"></div>
-				{:else}
-					<div class="ml-4 h-8 w-8 rounded-full bg-gray-300"></div>
-				{/if}
-			</div>
-		</nav> -->
-
-		<!-- Hero Content -->
-		<div class="mx-auto mt-6 mb-12 max-w-4xl text-center">
-			<p class="mx-auto mb-8 max-w-2xl text-gray-400">
-				Opulent Canada offers global professionals a way to get paid faster from the Canada, save
-				their money in dollars and spend with an international Mastercard.
-			</p>
-
-			<!-- Use bind:this directly instead of document.getElementById -->
-			<button
-				class="btn rounded-full bg-yellow-400 px-6 py-3 font-medium text-black hover:bg-yellow-500"
-				on:click={openModal}>Request Early Access</button
-			>
-		</div>
 	</div>
 </div>
 
@@ -148,6 +156,11 @@
 		100% {
 			transform: translateY(0px) rotate(0deg);
 		}
+	}
+
+	/* Add a subtle animation for the button hover */
+	a:hover {
+		@apply scale-105 transform;
 	}
 
 	.animate-float {
