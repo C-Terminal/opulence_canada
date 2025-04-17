@@ -19,7 +19,8 @@ const connectionString = isProd
 const clientOptions = {
 	max: isProd ? 3 : 10, // Fewer connections in prod (serverless environment)
 	idle_timeout: isProd ? 20 : 30, // Shorter timeouts in prod
-	connect_timeout: isProd ? 10 : 30
+	connect_timeout: isProd ? 10 : 30,
+	ssl: isProd ? { rejectUnauthorized: true } : false,
 };
 
 // Create postgres client
