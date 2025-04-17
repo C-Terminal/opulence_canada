@@ -103,7 +103,7 @@
   --color-fintech-dark: #0d0d0d;
   --color-fintech-muted: #2a2a2a;
   --color-fintech-dark-gray: #1a1a1a;
-  --color-fintech-gray: #3a3a3a;
+  --color-fintech-gray: #3a3d41;
   --color-fintech-light-gray: #d1d5db;
   --color-fintech-white: #f9fafb;
   --color-fintech-accent: #00ff99;
@@ -112,6 +112,8 @@
   --color-fintech-blue: #1e3a8a;
   --color-fintech-teal: #0f766e;
   --color-fintech-green: #00ff99;
+  --color-fintech-accent-muted: #00cc7a;
+  --color-fintech-dark-muted: #151515;
 }
 
 
@@ -125,7 +127,7 @@
   }
   
   body {
-    @apply bg-background text-text-primary transition-colors duration-200 ease-in-out;
+    @apply bg-background bg-fintech-dark text-white font-['Inter'] dark:bg-fintech-dark dark:text-white transition-colors duration-200 ease-in-out;
   }
   
   h1, h2, h3, h4, h5, h6 {
@@ -151,6 +153,7 @@
   a {
     @apply text-primary hover:text-primary-dark transition-colors duration-200;
   }
+
   
   /* Custom focus styles */
   :focus-visible {

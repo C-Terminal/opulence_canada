@@ -1,8 +1,9 @@
 <script lang="ts">
 	import { onMount } from 'svelte';
+	import { fade } from 'svelte/transition';
 
 	// Form data
-	let recipientData = {
+	let recipientData = $state({
 		fullName: '',
 		email: '',
 		accountNumber: '',
@@ -17,25 +18,24 @@
 			country: 'US'
 		},
 		description: ''
-	};
+	});
 
 	interface Errors {
-        accountType?: string;
-        city?: string;
-        state?: string;
-        postalCode?: string;
-        fullName?: string;
-        email?: string;
+		accountType?: string;
+		city?: string;
+		state?: string;
+		postalCode?: string;
+		fullName?: string;
+		email?: string;
 		accountNumber?: string;
 		routingNumber?: string;
 		addressLine1?: string;
-		// Add other potential error properties here
 	}
 
 	// Validation state
-	let errors : Errors = {};
-	let formSubmitted = false;
-	let formValid = false;
+	let errors: Errors = $state({});
+	let formSubmitted = $state(false);
+	let formValid = $state(false);
 
 	// Country options
 	const countries = [
@@ -59,14 +59,12 @@
 	function validateForm() {
 		errors = {};
 
-		// Validate name
 		if (!recipientData.fullName.trim()) {
 			errors.fullName = 'Full name is required';
 		} else if (recipientData.fullName.trim().length < 2) {
 			errors.fullName = 'Name must be at least 2 characters';
 		}
 
-		// Validate email
 		const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 		if (!recipientData.email.trim()) {
 			errors.email = 'Email is required';
@@ -74,7 +72,6 @@
 			errors.email = 'Please enter a valid email address';
 		}
 
-		// Validate account number
 		if (!recipientData.accountNumber.trim()) {
 			errors.accountNumber = 'Account number is required';
 		} else if (!/^\d+$/.test(recipientData.accountNumber)) {
@@ -83,7 +80,6 @@
 			errors.accountNumber = 'Account number must be between 8-17 digits';
 		}
 
-		// Validate routing number for US accounts
 		if (recipientData.address.country === 'US') {
 			if (!recipientData.routingNumber.trim()) {
 				errors.routingNumber = 'Routing number is required';
@@ -92,7 +88,6 @@
 			}
 		}
 
-		// Validate address
 		if (!recipientData.address.line1.trim()) {
 			errors.addressLine1 = 'Address line 1 is required';
 		}
@@ -103,14 +98,11 @@
 
 		if (!recipientData.address.postalCode.trim()) {
 			errors.postalCode = 'Postal code is required';
-		} else {
-			// Different postal code formats for different countries
-			if (
-				recipientData.address.country === 'US' &&
-				!/^\d{5}(-\d{4})?$/.test(recipientData.address.postalCode)
-			) {
-				errors.postalCode = 'Invalid US postal code format';
-			}
+		} else if (
+			recipientData.address.country === 'US' &&
+			!/^\d{5}(-\d{4})?$/.test(recipientData.address.postalCode)
+		) {
+			errors.postalCode = 'Invalid US postal code format';
 		}
 
 		if (!recipientData.address.state.trim()) {
@@ -126,73 +118,103 @@
 		if (validateForm()) {
 			alert('Form is valid! Ready to submit payment recipient details.');
 			console.log('Recipient data:', recipientData);
-			// Here you would typically send the data to your backend
 		}
 	}
 
-	// Validate as user types after first submission attempt
-	$: if (formSubmitted) validateForm();
+	$effect(() => {
+		formSubmitted ? validateForm(): null;
+	});
+
+
 </script>
 
-<div class="bg-base-200 flex min-h-screen items-center justify-center p-4">
-	<div class="card bg-base-100 w-full max-w-xl shadow-xl">
-		<div class="card-body">
-			<h2 class="card-title mb-6 text-center text-2xl font-bold">Payment Recipient Details</h2>
+<div
+	class="bg-fintech-white dark:bg-fintech-dark flex min-h-screen items-center justify-center p-4"
+	in:fade={{ duration: 400 }}
+>
+	<div
+		class="bg-fintech-white dark:bg-fintech-dark border-fintech-light-gray dark:border-fintech-muted w-full max-w-xl rounded-xl border shadow-xl"
+	>
+		<div class="p-6">
+			<h2
+				class="text-fintech-accent dark:text-fintech-accent mb-6 text-center text-2xl font-bold tracking-tight"
+			>
+				Payment Recipient Details
+			</h2>
 
-			<form on:submit|preventDefault={handleSubmit} class="space-y-4">
+			<form on:submit|preventDefault={handleSubmit} class="space-y-6">
 				<!-- Personal Information Section -->
-				<div class="divider">Personal Information</div>
+				<div class="border-fintech-light-gray dark:border-fintech-muted my-6 border-t"></div>
+				<h3
+					class="text-fintech-accent dark:text-fintech-accent text-sm font-semibold tracking-wider uppercase"
+				>
+					Personal Information
+				</h3>
 
 				<!-- Full Name -->
 				<div class="form-control">
-					<label for="fullName" class="label">
-						<span class="label-text">Full Name</span>
+					<label
+						for="fullName"
+						class="mb-1 block text-sm font-medium text-gray-700 dark:text-gray-400"
+					>
+						Full Name
 					</label>
 					<input
 						type="text"
 						id="fullName"
 						bind:value={recipientData.fullName}
-						class="input input-bordered {errors.fullName ? 'input-error' : ''}"
+						class="border-fintech-light-gray dark:border-fintech-muted bg-fintech-white dark:bg-fintech-dark-muted w-full rounded-lg border p-3 text-gray-900 dark:text-white {errors.fullName
+							? 'border-fintech-warn'
+							: ''} focus:border-fintech-accent focus:ring-fintech-accent transition-colors focus:ring-2"
 						placeholder="Enter recipient's full name"
 					/>
 					{#if errors.fullName}
-						<label class="label">
-							<span class="label-text-alt text-error">{errors.fullName}</span>
-						</label>
+						<span class="text-fintech-warn mt-1 text-sm">{errors.fullName}</span>
 					{/if}
 				</div>
 
 				<!-- Email -->
 				<div class="form-control">
-					<label for="email" class="label">
-						<span class="label-text">Email Address</span>
+					<label
+						for="email"
+						class="mb-1 block text-sm font-medium text-gray-700 dark:text-gray-400"
+					>
+						Email Address
 					</label>
 					<input
 						type="email"
 						id="email"
 						bind:value={recipientData.email}
-						class="input input-bordered {errors.email ? 'input-error' : ''}"
+						class="border-fintech-light-gray dark:border-fintech-muted bg-fintech-white dark:bg-fintech-dark-muted w-full rounded-lg border p-3 text-gray-900 dark:text-white {errors.email
+							? 'border-fintech-warn'
+							: ''} focus:border-fintech-accent focus:ring-fintech-accent transition-colors focus:ring-2"
 						placeholder="recipient@example.com"
 					/>
 					{#if errors.email}
-						<label class="label">
-							<span class="label-text-alt text-error">{errors.email}</span>
-						</label>
+						<span class="text-fintech-warn mt-1 text-sm">{errors.email}</span>
 					{/if}
 				</div>
 
 				<!-- Bank Account Section -->
-				<div class="divider">Bank Account Information</div>
+				<div class="border-fintech-light-gray dark:border-fintech-muted my-6 border-t"></div>
+				<h3
+					class="text-fintech-accent dark:text-fintech-accent text-sm font-semibold tracking-wider uppercase"
+				>
+					Bank Account Information
+				</h3>
 
 				<!-- Account Type -->
 				<div class="form-control">
-					<label for="accountType" class="label">
-						<span class="label-text">Account Type</span>
+					<label
+						for="accountType"
+						class="mb-1 block text-sm font-medium text-gray-700 dark:text-gray-400"
+					>
+						Account Type
 					</label>
 					<select
 						id="accountType"
 						bind:value={recipientData.accountType}
-						class="select select-bordered w-full"
+						class="border-fintech-light-gray dark:border-fintech-muted bg-fintech-white dark:bg-fintech-dark-muted focus:border-fintech-accent focus:ring-fintech-accent w-full rounded-lg border p-3 text-gray-900 transition-colors focus:ring-2 dark:text-white"
 					>
 						{#each accountTypes as type}
 							<option value={type.value}>{type.label}</option>
@@ -202,58 +224,68 @@
 
 				<!-- Account Number -->
 				<div class="form-control">
-					<label for="accountNumber" class="label">
-						<span class="label-text">Account Number</span>
+					<label
+						for="accountNumber"
+						class="mb-1 block text-sm font-medium text-gray-700 dark:text-gray-400"
+					>
+						Account Number
 					</label>
 					<input
 						type="text"
 						id="accountNumber"
 						bind:value={recipientData.accountNumber}
-						class="input input-bordered {errors.accountNumber ? 'input-error' : ''}"
+						class="border-fintech-light-gray dark:border-fintech-muted bg-fintech-white dark:bg-fintech-dark-muted w-full rounded-lg border p-3 text-gray-900 dark:text-white {errors.accountNumber
+							? 'border-fintech-warn'
+							: ''} focus:border-fintech-accent focus:ring-fintech-accent transition-colors focus:ring-2"
 						placeholder="Enter account number"
 					/>
 					{#if errors.accountNumber}
-						<label class="label">
-							<span class="label-text-alt text-error">{errors.accountNumber}</span>
-						</label>
+						<span class="text-fintech-warn mt-1 text-sm">{errors.accountNumber}</span>
 					{/if}
 				</div>
 
 				<!-- Routing Number -->
 				<div class="form-control">
-					<label for="routingNumber" class="label">
-						<span class="label-text"
-							>Routing Number {recipientData.address.country !== 'US'
-								? '(Optional for non-US)'
-								: ''}</span
-						>
+					<label
+						for="routingNumber"
+						class="mb-1 block text-sm font-medium text-gray-700 dark:text-gray-400"
+					>
+						Routing Number {recipientData.address.country !== 'US' ? '(Optional for non-US)' : ''}
 					</label>
 					<input
 						type="text"
 						id="routingNumber"
 						bind:value={recipientData.routingNumber}
-						class="input input-bordered {errors.routingNumber ? 'input-error' : ''}"
+						class="border-fintech-light-gray dark:border-fintech-muted bg-fintech-white dark:bg-fintech-dark-muted w-full rounded-lg border p-3 text-gray-900 dark:text-white {errors.routingNumber
+							? 'border-fintech-warn'
+							: ''} focus:border-fintech-accent focus:ring-fintech-accent transition-colors focus:ring-2"
 						placeholder="Enter routing number"
 					/>
 					{#if errors.routingNumber}
-						<label class="label">
-							<span class="label-text-alt text-error">{errors.routingNumber}</span>
-						</label>
+						<span class="text-fintech-warn mt-1 text-sm">{errors.routingNumber}</span>
 					{/if}
 				</div>
 
 				<!-- Address Section -->
-				<div class="divider">Address</div>
+				<div class="border-fintech-light-gray dark:border-fintech-muted my-6 border-t"></div>
+				<h3
+					class="text-fintech-accent dark:text-fintech-accent text-sm font-semibold tracking-wider uppercase"
+				>
+					Address
+				</h3>
 
 				<!-- Country -->
 				<div class="form-control">
-					<label for="country" class="label">
-						<span class="label-text">Country</span>
+					<label
+						for="country"
+						class="mb-1 block text-sm font-medium text-gray-700 dark:text-gray-400"
+					>
+						Country
 					</label>
 					<select
 						id="country"
 						bind:value={recipientData.address.country}
-						class="select select-bordered w-full"
+						class="border-fintech-light-gray dark:border-fintech-muted bg-fintech-white dark:bg-fintech-dark-muted focus:border-fintech-accent focus:ring-fintech-accent w-full rounded-lg border p-3 text-gray-900 transition-colors focus:ring-2 dark:text-white"
 					>
 						{#each countries as country}
 							<option value={country.code}>{country.name}</option>
@@ -263,124 +295,156 @@
 
 				<!-- Address Line 1 -->
 				<div class="form-control">
-					<label for="addressLine1" class="label">
-						<span class="label-text">Address Line 1</span>
+					<label
+						for="addressLine1"
+						class="mb-1 block text-sm font-medium text-gray-700 dark:text-gray-400"
+					>
+						Address Line 1
 					</label>
 					<input
 						type="text"
 						id="addressLine1"
 						bind:value={recipientData.address.line1}
-						class="input input-bordered {errors.addressLine1 ? 'input-error' : ''}"
+						class="border-fintech-light-gray dark:border-fintech-muted bg-fintech-white dark:bg-fintech-dark-muted w-full rounded-lg border p-3 text-gray-900 dark:text-white {errors.addressLine1
+							? 'border-fintech-warn'
+							: ''} focus:border-fintech-accent focus:ring-fintech-accent transition-colors focus:ring-2"
 						placeholder="Street address, P.O. box, etc."
 					/>
 					{#if errors.addressLine1}
-						<label class="label">
-							<span class="label-text-alt text-error">{errors.addressLine1}</span>
-						</label>
+						<span class="text-fintech-warn mt-1 text-sm">{errors.addressLine1}</span>
 					{/if}
 				</div>
 
 				<!-- Address Line 2 -->
 				<div class="form-control">
-					<label for="addressLine2" class="label">
-						<span class="label-text">Address Line 2 (Optional)</span>
+					<label
+						for="addressLine2"
+						class="mb-1 block text-sm font-medium text-gray-700 dark:text-gray-400"
+					>
+						Address Line 2 (Optional)
 					</label>
 					<input
 						type="text"
 						id="addressLine2"
 						bind:value={recipientData.address.line2}
-						class="input input-bordered"
+						class="border-fintech-light-gray dark:border-fintech-muted bg-fintech-white dark:bg-fintech-dark-muted focus:border-fintech-accent focus:ring-fintech-accent w-full rounded-lg border p-3 text-gray-900 transition-colors focus:ring-2 dark:text-white"
 						placeholder="Apartment, suite, unit, building, floor, etc."
 					/>
 				</div>
 
-				<!-- City, State, Postal Code in a grid for larger screens -->
-				<div class="grid gap-3 md:grid-cols-3">
+				<!-- City, State, Postal Code -->
+				<div class="grid gap-6 md:grid-cols-3">
 					<div class="form-control">
-						<label for="city" class="label">
-							<span class="label-text">City</span>
+						<label
+							for="city"
+							class="mb-1 block text-sm font-medium text-gray-700 dark:text-gray-400"
+						>
+							City
 						</label>
 						<input
 							type="text"
 							id="city"
 							bind:value={recipientData.address.city}
-							class="input input-bordered {errors.city ? 'input-error' : ''}"
+							class="border-fintech-light-gray dark:border-fintech-muted bg-fintech-white dark:bg-fintech-dark-muted w-full rounded-lg border p-3 text-gray-900 dark:text-white {errors.city
+								? 'border-fintech-warn'
+								: ''} focus:border-fintech-accent focus:ring-fintech-accent transition-colors focus:ring-2"
 							placeholder="City"
 						/>
 						{#if errors.city}
-							<label class="label">
-								<span class="label-text-alt text-error">{errors.city}</span>
-							</label>
+							<span class="text-fintech-warn mt-1 text-sm">{errors.city}</span>
 						{/if}
 					</div>
 
 					<div class="form-control">
-						<label for="state" class="label">
-							<span class="label-text">State/Province</span>
+						<label
+							for="state"
+							class="mb-1 block text-sm font-medium text-gray-700 dark:text-gray-400"
+						>
+							State/Province
 						</label>
 						<input
 							type="text"
 							id="state"
 							bind:value={recipientData.address.state}
-							class="input input-bordered {errors.state ? 'input-error' : ''}"
+							class="border-fintech-light-gray dark:border-fintech-muted bg-fintech-white dark:bg-fintech-dark-muted w-full rounded-lg border p-3 text-gray-900 dark:text-white {errors.state
+								? 'border-fintech-warn'
+								: ''} focus:border-fintech-accent focus:ring-fintech-accent transition-colors focus:ring-2"
 							placeholder="State/Province"
 						/>
 						{#if errors.state}
-							<label class="label">
-								<span class="label-text-alt text-error">{errors.state}</span>
-							</label>
+							<span class="text-fintech-warn mt-1 text-sm">{errors.state}</span>
 						{/if}
 					</div>
 
 					<div class="form-control">
-						<label for="postalCode" class="label">
-							<span class="label-text">Postal Code</span>
+						<label
+							for="postalCode"
+							class="mb-1 block text-sm font-medium text-gray-700 dark:text-gray-400"
+						>
+							Postal Code
 						</label>
 						<input
 							type="text"
 							id="postalCode"
 							bind:value={recipientData.address.postalCode}
-							class="input input-bordered {errors.postalCode ? 'input-error' : ''}"
+							class="border-fintech-light-gray dark:border-fintech-muted bg-fintech-white dark:bg-fintech-dark-muted w-full rounded-lg border p-3 text-gray-900 dark:text-white {errors.postalCode
+								? 'border-fintech-warn'
+								: ''} focus:border-fintech-accent focus:ring-fintech-accent transition-colors focus:ring-2"
 							placeholder="Postal code"
 						/>
 						{#if errors.postalCode}
-							<label class="label">
-								<span class="label-text-alt text-error">{errors.postalCode}</span>
-							</label>
+							<span class="text-fintech-warn mt-1 text-sm">{errors.postalCode}</span>
 						{/if}
 					</div>
 				</div>
 
 				<!-- Payment Details -->
-				<div class="divider">Payment Details</div>
+				<div class="border-fintech-light-gray dark:border-fintech-muted my-6 border-t"></div>
+				<h3
+					class="text-fintech-accent dark:text-fintech-accent text-sm font-semibold tracking-wider uppercase"
+				>
+					Payment Details
+				</h3>
 
 				<!-- Description -->
 				<div class="form-control">
-					<label for="description" class="label">
-						<span class="label-text">Payment Description (Optional)</span>
+					<label
+						for="description"
+						class="mb-1 block text-sm font-medium text-gray-700 dark:text-gray-400"
+					>
+						Payment Description (Optional)
 					</label>
 					<textarea
 						id="description"
 						bind:value={recipientData.description}
-						class="textarea textarea-bordered h-24"
+						class="border-fintech-light-gray dark:border-fintech-muted bg-fintech-white dark:bg-fintech-dark-muted focus:border-fintech-accent focus:ring-fintech-accent h-24 w-full rounded-lg border p-3 text-gray-900 transition-colors focus:ring-2 dark:text-white"
 						placeholder="Enter payment purpose or description"
 					></textarea>
 				</div>
 
 				<!-- Submit Button -->
-				<div class="form-control mt-6">
-					<button type="submit" class="btn btn-primary">Save Recipient</button>
+				<div class="form-control mt-8">
+					<button
+						type="submit"
+						class="bg-fintech-accent text-fintech-dark hover:bg-fintech-accent-muted hover:shadow-fintech-accent/50 focus:ring-fintech-accent dark:focus:ring-offset-fintech-dark w-full rounded-lg px-6 py-3 font-medium shadow-lg transition-colors focus:ring-2 focus:ring-offset-2"
+					>
+						Save Recipient
+					</button>
 				</div>
 			</form>
 
 			<!-- Form Status Messages -->
 			{#if formSubmitted && !formValid}
-				<div class="alert alert-error mt-4">
+				<div
+					class="bg-fintech-warn/10 mt-6 flex items-center space-x-3 rounded-lg p-4"
+					in:fade={{ duration: 300 }}
+				>
 					<svg
 						xmlns="http://www.w3.org/2000/svg"
-						class="h-6 w-6 shrink-0 stroke-current"
+						class="text-fintech-warn h-6 w-6"
 						fill="none"
 						viewBox="0 0 24 24"
+						stroke="currentColor"
 					>
 						<path
 							stroke-linecap="round"
@@ -389,7 +453,7 @@
 							d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z"
 						/>
 					</svg>
-					<span>Please correct the errors in the form.</span>
+					<span class="text-fintech-warn text-sm">Please correct the errors in the form.</span>
 				</div>
 			{/if}
 		</div>
