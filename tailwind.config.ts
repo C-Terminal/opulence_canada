@@ -66,7 +66,7 @@ export default {
 		  'fintech-gray': 'var(--color-fintech-gray)',
 		  'fintech-light-gray': 'var(--color-fintech-light-gray)',
 		  'fintech-white': 'var(--color-fintech-white)',
-		  'fintech-accent': 'var(--color-fintech-green)',
+		  'fintech-accent': 'var(--color-fintech-red)',
 		  'fintech-yellow': 'var(--color-fintech-yellow)',
 		  'fintech-warn': 'var(--color-fintech-warn)',
 		  'fintech-blue': 'var(--color-fintech-blue)',

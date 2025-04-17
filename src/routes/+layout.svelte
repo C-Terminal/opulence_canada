@@ -25,7 +25,7 @@
 </script>
 
 <NavigationHomePage/>
-<ThemeToggle/>
+<!-- <ThemeToggle/> -->
 <div class="flex min-h-screen flex-col">
 	<main class="flex-grow">
 		<slot />

@@ -319,7 +319,7 @@
   
 			<button
 			  type="submit"
-			  class="w-full rounded-lg bg-fintech-accent text-fintech-dark px-6 py-4 font-medium hover:bg-fintech-accent-muted transition-colors shadow-lg hover:shadow-fintech-accent/50 focus:ring-2 focus:ring-fintech-accent focus:ring-offset-2 focus:outline-none disabled:bg-fintech-gray disabled:text-gray-400"
+			  class="w-full rounded-lg bg-fintech-accent text-fintech-white px-6 py-4 font-medium  transition-colors shadow-lg hover:shadow-fintech-accent/50 focus:ring-2 focus:ring-fintech-accent focus:ring-offset-2 focus:outline-none disabled:bg-fintech-gray disabled:text-gray-400"
 			  disabled={isSubmitting}
 			>
 			  {isSubmitting ? 'Processing...' : 'Send Remittance'}
@@ -487,7 +487,7 @@
   
 			<button
 			  type="submit"
-			  class="w-full rounded-lg bg-fintech-accent text-fintech-dark px-6 py-4 font-medium hover:bg-fintech-accent-muted transition-colors shadow-lg hover:shadow-fintech-accent/50 focus:ring-2 focus:ring-fintech-accent focus:ring-offset-2 focus:outline-none disabled:bg-fintech-gray disabled:text-gray-400"
+			  class="w-full rounded-lg bg-fintech-accent text-fintech-white px-6 py-4 font-medium  transition-colors shadow-lg hover:shadow-fintech-accent/50 focus:ring-2 focus:ring-fintech-accent focus:ring-offset-2 focus:outline-none disabled:bg-fintech-gray disabled:text-gray-400"
 			  disabled={isSubmitting}
 			>
 			  {isSubmitting ? 'Processing...' : 'Purchase Money Order'}

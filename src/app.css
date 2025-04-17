@@ -97,6 +97,16 @@
   --color-fintech-gray: #3a3a3a;
   --color-fintech-light-gray: #d1d5db;
   --color-fintech-white: #f9fafb;
+  --color-fintech-yellow: #f5c400;
+  --color-fintech-warn: #ff4444;
+  --color-fintech-blue: #1e3a8a;
+  --color-fintech-teal: #0f766e;
+  --color-fintech-green: #00ff99;
+  --color-fintech-accent-muted: #00cc7a;
+  --color-fintech-dark-muted: #151515;
+  --color-fintech-red: #c8102e; /* Inspired by Canadian flag red but balanced */
+--color-fintech-red-light: #e63946; /* Slightly lighter for accents */
+--color-fintech-red-dark: #9b0d26;
 }
 
 @theme {
@@ -106,7 +116,7 @@
   --color-fintech-gray: #3a3d41;
   --color-fintech-light-gray: #d1d5db;
   --color-fintech-white: #f9fafb;
-  --color-fintech-accent: #00ff99;
+  --color-fintech-accent: #c8102e;
   --color-fintech-yellow: #f5c400;
   --color-fintech-warn: #ff4444;
   --color-fintech-blue: #1e3a8a;
@@ -114,6 +124,10 @@
   --color-fintech-green: #00ff99;
   --color-fintech-accent-muted: #00cc7a;
   --color-fintech-dark-muted: #151515;
+  --color-fintech-red: #c8102e; /* Inspired by Canadian flag red but balanced */
+--color-fintech-red-light: #e63946; /* Slightly lighter for accents */
+--color-fintech-red-dark: #9b0d26; /* Deeper, muted shade for darker themes */
+
 }
 
 
@@ -262,6 +276,7 @@
 @utility bg-secondary-dark { background-color: var(--color-secondary-dark); }
 @utility bg-accent { background-color: var(--color-accent); }
 @utility bg-accent-dark { background-color: var(--color-accent-dark); }
+@utility bg-danger { background-color: var(--color-danger); }
 @utility text-primary { color: var(--color-primary); }
 @utility text-primary-dark { color: var(--color-primary-dark); }
 @utility text-accent-dark { color: var(--color-accent-dark); }
@@ -313,6 +328,6 @@
   
   .fintech-accent {
     @apply text-fintech-yellow font-semibold;
-    @apply dark:text-fintech-green;
+    @apply dark:text-fintech-red;
   }
 }

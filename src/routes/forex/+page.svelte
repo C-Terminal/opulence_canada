@@ -167,7 +167,7 @@
 			</div>
 		  </div>
 		  <button
-			class="mt-3 w-full rounded-lg px-4 py-3 text-fintech-dark font-medium bg-fintech-accent hover:bg-fintech-accent-muted transition-colors shadow-lg hover:shadow-fintech-accent/50"
+			class="mt-3 w-full rounded-lg px-4 py-3 text-fintech-white font-medium bg-fintech-accent  transition-colors shadow-lg hover:shadow-fintech-accent/50"
 		  >
 			Trade Now
 		  </button>
@@ -176,9 +176,9 @@
 	</div>
   
 	<!-- Hidden on mobile, will show on larger screens -->
-	<div class="mt-8 hidden md:block">
+	<!-- <div class="mt-8 hidden md:block">
 	  <CurrencyExchangeClientSide />
-	</div>
+	</div> -->
   
 	<!-- Call to Action -->
 	<div
@@ -191,7 +191,7 @@
 		Open an account today and access competitive foreign exchange rates.
 	  </p>
 	  <button
-		class="rounded-lg px-6 py-2 bg-fintech-accent text-fintech-dark font-medium hover:bg-fintech-accent-muted transition-colors shadow-lg hover:shadow-fintech-accent/50"
+		class="rounded-lg px-6 py-2 bg-fintech-accent text-fintech-white font-medium hover:bg-fintech-red-light transition-colors shadow-lg hover:shadow-fintech-accent/50"
 	  >
 		Create Account
 	  </button>
