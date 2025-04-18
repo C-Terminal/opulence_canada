@@ -40,7 +40,7 @@
 			<div class="mx-auto mt-6 mb-12 max-w-4xl text-center">
 				<!-- Use bind:this directly instead of document.getElementById -->
 				<button
-					class="btn rounded-full bg-yellow-400 px-6 py-3 font-medium text-black hover:bg-yellow-500"
+					class="btn-ghost rounded-full bg-yellow-400 px-6 py-3 font-medium text-black hover:bg-yellow-500"
 					on:click={openModal}>Request Early Access</button
 				>
 			</div>
@@ -76,20 +76,21 @@
 	</section>
 
 	<!-- Main Content -->
-	<div class="relative z-20 container mx-auto px-4 py-6">
+	<div class="relative z-20 container mx-auto px-4 pt-20">
 		<div
-			class="mx-auto mb-20 flex max-w-xl flex-col items-center justify-around space-y-1 rounded-full bg-zinc-900 px-6 py-4 md:flex-row md:space-y-0 md:space-x-2"
+			class="mx-auto mb-20 flex max-w-xl flex-col items-center justify-evenly space-y-1  rounded-full bg-zinc-900 px-6 py-4 md:flex-row md:space-y-0 md:space-x-2"
 		>
-			<span class="hidden text-sm text-gray-400 md:block">Regional access TBA soon</span>
-			<span class=" hidden text-gray-500 md:block">|</span>
-			<button class="btn btn-s rounded-2xl" on:click={openModal}>Get the app</button>
+			<span class="hidden text-sm text-gray-200 md:block">Regional access TBA soon</span>
 
+			<button class="btn btn-md rounded-2xl " on:click={openModal}>Get the app</button>
 		</div>
 
 		<dialog id="modal" class="modal modal-bottom sm:modal-middle" bind:this={modal}>
 			<div class="modal-box">
-				<h3 class="text-lg font-bold text-fintech-dark-gray">Coming soon!</h3>
-				<p class="py-4 text-fintech-dark-gray">Stay tuned</p>
+				<h3 class="text-fintech-dark-gray dark:text-fintech-light-gray text-lg font-bold">
+					Coming soon!
+				</h3>
+				<p class="text-fintech-dark-gray dark:text-fintech-light-gray py-4">Stay tuned</p>
 				<div class="modal-action">
 					<form method="dialog">
 						<button class="btn">Close</button>
