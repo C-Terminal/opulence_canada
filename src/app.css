@@ -105,7 +105,7 @@
   --color-fintech-accent-muted: #00cc7a;
   --color-fintech-dark-muted: #151515;
   --color-fintech-red: #c8102e; /* Inspired by Canadian flag red but balanced */
---color-fintech-red-light: #e63946; /* Slightly lighter for accents */
+--color-fintech-red-canadian: #e63946; /* Slightly lighter for accents */
 --color-fintech-red-dark: #9b0d26;
 }
 
@@ -125,7 +125,7 @@
   --color-fintech-accent-muted: #00cc7a;
   --color-fintech-dark-muted: #151515;
   --color-fintech-red: #c8102e; /* Inspired by Canadian flag red but balanced */
---color-fintech-red-light: #e63946; /* Slightly lighter for accents */
+--color-fintech-red-canadian: #e63946; /* Slightly lighter for accents */
 --color-fintech-red-dark: #9b0d26; /* Deeper, muted shade for darker themes */
 
 }

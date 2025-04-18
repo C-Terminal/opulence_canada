@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { onMount } from 'svelte'; // Import onMount if needed for triggering
-	import { LampEffectHomepage, LampEffect } from '$lib/components/ui/LampEffect';
+	import TouchableDiv from '$lib/components/common/TouchableDiv.svelte';
 	import { fade } from 'svelte/transition';
 
 	let isLoggedIn = false; // Currently unused, keep or remove as needed
@@ -18,27 +18,9 @@
 			// Or handle the case where the modal isn't ready
 		}
 	}
-
-	// --- Example Trigger ---
-	// If you want to open it on mount (for testing, maybe?)
-	// import { BROWSER } from '$app/environment'; // Ensure code runs only in browser
-	// onMount(() => {
-	//     if (BROWSER) {
-	//       // Example: Open after a short delay to ensure everything is ready
-	//       setTimeout(openModal, 100);
-	//     }
-	// });
-
-	// Or more commonly, trigger with a button:
-	// <button on:click={openModal} class="btn">Open Modal</button>
 </script>
 
 <div class="relative min-h-screen overflow-hidden bg-black text-white">
-	<!-- Star background effect -->
-	<!-- <div class="absolute inset-0 z-0">
-		<div class="stars"></div>
-	</div> -->
-
 	<!-- Hero Section -->
 	<section
 		class="bg-fintech-dark relative flex min-h-screen items-center justify-center overflow-hidden"
@@ -71,54 +53,43 @@
 			<h2 class="mb-12 text-center text-4xl font-bold">Why Choose Us?</h2>
 			<div class="grid grid-cols-1 gap-8 md:grid-cols-3">
 				<!-- Feature 1 -->
-				<div
-					class="bg-fintech-dark hover:shadow-fintech-accent/50 rounded-lg p-6 shadow-xl transition-shadow duration-300"
-				>
+				<TouchableDiv>
 					<h3 class="mb-4 text-2xl font-semibold">Seamless Transactions</h3>
 					<p class="text-gray-400">
 						Execute trades and transfers with unparalleled speed and security.
 					</p>
-				</div>
+				</TouchableDiv>
 				<!-- Feature 2 -->
-				<div
-					class="bg-fintech-dark hover:shadow-fintech-accent/50 rounded-lg p-6 shadow-xl transition-shadow duration-300"
-				>
+				<TouchableDiv>
 					<h3 class="mb-4 text-2xl font-semibold">Advanced Analytics</h3>
 					<p class="text-gray-400">
 						Gain insights with real-time data and predictive market trends.
 					</p>
-				</div>
+				</TouchableDiv>
 				<!-- Feature 3 -->
-				<div
-					class="bg-fintech-dark hover:shadow-fintech-accent/50 rounded-lg p-6 shadow-xl transition-shadow duration-300"
-				>
+				<TouchableDiv>
 					<h3 class="mb-4 text-2xl font-semibold">Ironclad Security</h3>
 					<p class="text-gray-400">Your assets are protected by state-of-the-art encryption.</p>
-				</div>
+				</TouchableDiv>
 			</div>
 		</div>
 	</section>
 
 	<!-- Main Content -->
 	<div class="relative z-20 container mx-auto px-4 py-6">
-		<!-- <LampEffectHomepage /> -->
-
 		<div
-			class="mx-auto mb-20 flex max-w-xl flex-col items-center justify-center space-y-1 rounded-full bg-zinc-900 px-6 py-4 md:flex-row md:space-y-0 md:space-x-2"
+			class="mx-auto mb-20 flex max-w-xl flex-col items-center justify-around space-y-1 rounded-full bg-zinc-900 px-6 py-4 md:flex-row md:space-y-0 md:space-x-2"
 		>
-			<span class="text-sm text-gray-400">Regional access TBA soon</span>
-			<span class="mx-2 hidden text-gray-500 md:block">•</span>
+			<span class="hidden text-sm text-gray-400 md:block">Regional access TBA soon</span>
+			<span class=" hidden text-gray-500 md:block">|</span>
+			<button class="btn btn-s rounded-2xl" on:click={openModal}>Get the app</button>
 
-			<span class="hidden text-sm text-gray-400 md:block">Canada</span>
-			<span class="mx-2 hidden text-gray-500 md:block">•</span>
-			<span class="cursor-pointer text-sm text-gray-400 underline">Get the app</span>
-			<span class="ml-1 text-sm">→</span>
 		</div>
 
 		<dialog id="modal" class="modal modal-bottom sm:modal-middle" bind:this={modal}>
 			<div class="modal-box">
-				<h3 class="text-lg font-bold">Coming soon!</h3>
-				<p class="py-4">Stay tuned</p>
+				<h3 class="text-lg font-bold text-fintech-dark-gray">Coming soon!</h3>
+				<p class="py-4 text-fintech-dark-gray">Stay tuned</p>
 				<div class="modal-action">
 					<form method="dialog">
 						<button class="btn">Close</button>

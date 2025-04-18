@@ -45,19 +45,20 @@
 		<div class="flex-shrink-0">
 			<a
 				href="/"
-				class="text-fintech-accent dark:text-fintech-accent text-xl font-bold"
+				class="text-fintech-red-canadian dark:text-fintech-red-canadian text-xl font-bold"
 				aria-label="Opulent Canada Homepage"
 			>
-				Opulent Canada
+			<span class="text-fintech-dark dark:text-fintech-white">Opulent</span>
+			<span>Canada</span>
 			</a>
 		</div>
 
 		<!-- Desktop Navigation (md: and up) -->
-		<div class="hidden md:flex md:items-center md:space-x-6">
+		<div class="hidden md:flex md:items-center md:space-x-6 font-serif">
 			{#each navLinks as link, index}
 				<a
 					href={link.href}
-					class="hover:text-fintech-accent dark:hover:text-fintech-accent focus:ring-fintech-accent dark:focus:ring-offset-fintech-dark text-gray-600 transition-colors duration-200 focus:ring-2 focus:ring-offset-2 focus:outline-none dark:text-gray-400"
+					class="hover:text-fintech-accent dark:hover:text-fintech-red-canadian focus:ring-fintech-accent dark:focus:ring-offset-fintech-dark text-gray-600 transition-colors duration-200 focus:ring-2 focus:ring-offset-2 focus:outline-none dark:text-gray-200"
 					in:fade={{ duration: 300, delay: index * 100 }}
 				>
 					{link.name}
@@ -69,7 +70,7 @@
 		<div class="flex items-center space-x-2">
 			<!-- Search Button (visible on all screens) -->
 			<button
-				class="hover:text-fintech-accent dark:hover:text-fintech-accent focus:ring-fintech-accent dark:focus:ring-offset-fintech-dark rounded-full p-2 text-gray-500 transition-colors focus:ring-2 focus:ring-offset-2 focus:outline-none dark:text-gray-400"
+				class="hover:text-fintech-accent dark:hover:text-fintech-red-canadian focus:ring-fintech-accent dark:focus:ring-offset-fintech-dark rounded-full p-2 text-gray-500 transition-colors focus:ring-2 focus:ring-offset-2 focus:outline-none dark:text-gray-200"
 				aria-label="Search"
 			>
 				<svg
@@ -92,7 +93,7 @@
 			<!-- Hamburger Button (mobile only) -->
 			<button
 				type="button"
-				class="hover:text-fintech-accent dark:hover:text-fintech-accent p-2 text-gray-500 transition-transform duration-200 md:hidden dark:text-gray-400 {isMenuOpen
+				class="hover:text-fintech-accent dark:hover:text-fintech-red-canadian p-2 text-gray-500 transition-transform duration-200 md:hidden dark:text-gray-200 {isMenuOpen
 					? 'rotate-90'
 					: ''}"
 				aria-label="Toggle navigation menu"
@@ -123,7 +124,7 @@
 	<!-- Mobile Menu (visible when toggled on mobile) -->
 	{#if isMenuOpen}
 		<div
-			class="bg-fintech-white dark:bg-fintech-dark border-fintech-light-gray dark:border-fintech-muted border-t md:hidden"
+			class="bg-fintech-white dark:bg-fintech-dark border-fintech-light-gray dark:border-fintech-muted border-t md:hidden font-montserrat"
 			id="mobile-menu"
 			role="menu"
 			in:slide={{ duration: 300 }}
@@ -134,7 +135,7 @@
 					<li>
 						<a
 							href={link.href}
-							class="hover:text-fintech-accent dark:hover:text-fintech-accent focus:ring-fintech-accent dark:focus:ring-offset-fintech-dark block text-gray-600 transition-colors duration-200 focus:ring-2 focus:ring-offset-2 focus:outline-none dark:text-gray-400"
+							class="hover:text-fintech-accent dark:hover:text-fintech-red-canadian focus:ring-fintech-accent dark:focus:ring-offset-fintech-dark block text-gray-600 transition-colors duration-200 focus:ring-2 focus:ring-offset-2 focus:outline-none dark:text-gray-200"
 							role="menuitem"
 							on:click={closeMenu}
 						>

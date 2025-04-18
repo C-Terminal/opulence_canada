@@ -54,7 +54,7 @@
 </script>
 
 <footer
-  class="bg-fintech-white dark:bg-fintech-dark border-t border-fintech-light-gray dark:border-fintech-muted text-gray-900 dark:text-gray-400"
+  class="bg-fintech-white font-sans dark:bg-fintech-dark border-t border-fintech-light-gray dark:border-fintech-muted text-gray-900 dark:text-gray-200"
 >
   <div class="container mx-auto px-4 py-12 md:py-16">
     <div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-8 mb-10">
@@ -66,12 +66,12 @@
           aria-label="Opulent Canada Homepage"
         >
           <span
-            class="text-lg font-semibold text-fintech-accent dark:text-fintech-accent"
+            class="text-lg font-semibold text-fintech-red-canadian dark:text-fintech-red-canadian"
           >
             Opulent Canada
           </span>
         </a>
-        <p class="text-sm text-gray-600 dark:text-gray-400">
+        <p class="text-sm text-gray-600 dark:text-gray-200">
           Innovating the future of financial services.
         </p>
       </div>
@@ -80,7 +80,7 @@
       {#each linkSections as section}
         <div>
           <h3
-            class="text-sm font-semibold uppercase tracking-wider text-fintech-accent dark:text-fintech-accent mb-4"
+            class="text-sm font-semibold uppercase tracking-wider text-fintech-red-canadian dark:text-fintech-red-canadian mb-4"
           >
             {section.title}
           </h3>
@@ -89,7 +89,7 @@
               <li>
                 <a
                   href={link.href}
-                  class="text-md text-gray-600 dark:text-gray-400 hover:text-fintech-accent dark:hover:text-fintech-accent transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-fintech-accent focus:ring-offset-2 dark:focus:ring-offset-fintech-dark"
+                  class="text-md text-gray-600 dark:text-gray-200 hover:text-fintech-red-canadian dark:hover:text-fintech-red-canadian transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-fintech-red-canadian focus:ring-offset-2 dark:focus:ring-offset-fintech-dark"
                 >
                   {link.name}
                 </a>
@@ -105,13 +105,13 @@
       class="mt-10 pt-8 border-t border-fintech-light-gray dark:border-fintech-muted flex flex-col md:flex-row items-center justify-between text-sm"
     >
       <div class="text-center md:text-left mb-4 md:mb-0">
-        <p class="text-gray-600 dark:text-gray-400">
+        <p class="text-gray-600 dark:text-gray-200">
           © {currentYear} Opulent Canada Inc. All rights reserved.
         </p>
-        <p class="mt-1 text-xs text-gray-500 dark:text-gray-400 opacity-80">
+        <p class="mt-1 text-xs text-gray-500 dark:text-gray-200 opacity-80">
           Financial services involve risk. Please read our full disclosures and terms. Not investment advice.
         </p>
-        <p class="mt-1 text-xs text-gray-500 dark:text-gray-400 opacity-80">
+        <p class="mt-1 text-xs text-gray-500 dark:text-gray-200 opacity-80">
           Based in Mississauga, ON, Canada. Current time: {currentTime} EDT.
         </p>
       </div>
@@ -120,7 +120,7 @@
         <a
           href="https://twitter.com"
           aria-label="Twitter"
-          class="text-gray-600 dark:text-gray-400 hover:text-fintech-accent dark:hover:text-fintech-accent transition-colors focus:outline-none focus:ring-2 focus:ring-fintech-accent focus:ring-offset-2 dark:focus:ring-offset-fintech-dark rounded-sm"
+          class="text-gray-600 dark:text-gray-200 hover:text-fintech-red-canadian dark:hover:text-fintech-red-canadian transition-colors focus:outline-none focus:ring-2 focus:ring-fintech-red-canadian focus:ring-offset-2 dark:focus:ring-offset-fintech-dark rounded-sm"
         >
           <svg
             class="w-5 h-5"
@@ -136,7 +136,7 @@
         <a
           href="https://linkedin.com"
           aria-label="LinkedIn"
-          class="text-gray-600 dark:text-gray-400 hover:text-fintech-accent dark:hover:text-fintech-accent transition-colors focus:outline-none focus:ring-2 focus:ring-fintech-accent focus:ring-offset-2 dark:focus:ring-offset-fintech-dark rounded-sm"
+          class="text-gray-600 dark:text-gray-200 hover:text-fintech-red-canadian dark:hover:text-fintech-red-canadian transition-colors focus:outline-none focus:ring-2 focus:ring-fintech-red-canadian focus:ring-offset-2 dark:focus:ring-offset-fintech-dark rounded-sm"
         >
           <svg
             class="w-5 h-5"
@@ -152,7 +152,7 @@
         <a
           href="https://facebook.com"
           aria-label="Facebook"
-          class="text-gray-600 dark:text-gray-400 hover:text-fintech-accent dark:hover:text-fintech-accent transition-colors focus:outline-none focus:ring-2 focus:ring-fintech-accent focus:ring-offset-2 dark:focus:ring-offset-fintech-dark rounded-sm"
+          class="text-gray-600 dark:text-gray-200 hover:text-fintech-red-canadian dark:hover:text-fintech-red-canadian transition-colors focus:outline-none focus:ring-2 focus:ring-fintech-red-canadian focus:ring-offset-2 dark:focus:ring-offset-fintech-dark rounded-sm"
         >
           <svg
             class="w-5 h-5"

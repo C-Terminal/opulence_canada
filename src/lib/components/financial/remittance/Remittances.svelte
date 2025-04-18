@@ -112,22 +112,22 @@
   </script>
   
   <div
-	class="mx-auto max-w-4xl p-6 rounded-xl bg-fintech-white dark:bg-fintech-dark border border-fintech-light-gray dark:border-fintech-muted shadow-xl"
+	class="font-serif mx-auto max-w-4xl p-6 rounded-xl bg-fintech-white dark:bg-fintech-dark border border-fintech-light-gray dark:border-fintech-muted shadow-xl"
   >
 	<!-- Service Selection Tabs -->
 	<div class="mb-8 flex rounded-lg bg-fintech-light-gray dark:bg-fintech-muted p-1">
 	  <button
 		class="flex-1 rounded-lg px-6 py-3 text-center font-medium transition-all duration-200 {activeTab === 'remittance'
-		  ? 'bg-fintech-accent text-fintech-dark shadow-md'
-		  : 'text-gray-600 dark:text-gray-400 hover:bg-fintech-gray dark:hover:bg-fintech-dark-gray'}"
+		  ? 'bg-fintech-accent dark:text-fintech-dark text-fintech-white shadow-md'
+		  : 'text-gray-600 dark:text-gray-200 hover:bg-fintech-gray dark:hover:bg-fintech-dark-gray'}"
 		on:click={() => (activeTab = 'remittance')}
 	  >
 		International Remittances
 	  </button>
 	  <button
 		class="flex-1 rounded-lg px-6 py-3 text-center font-medium transition-all duration-200 {activeTab === 'moneyOrder'
-		  ? 'bg-fintech-accent text-fintech-dark shadow-md'
-		  : 'text-gray-600 dark:text-gray-400 hover:bg-fintech-gray dark:hover:bg-fintech-dark-gray'}"
+		  ? 'bg-fintech-accent dark:text-fintech-dark text-fintech-white shadow-md'
+		  : 'text-gray-600 dark:text-gray-200 hover:bg-fintech-gray dark:hover:bg-fintech-dark-gray'}"
 		on:click={() => (activeTab = 'moneyOrder')}
 	  >
 		Money Orders
@@ -138,10 +138,10 @@
 	  <!-- Remittance Form -->
 	  {#if activeTab === 'remittance'}
 		<div in:fade={{ duration: 400 }}>
-		  <h2 class="mb-6 text-2xl font-bold tracking-tight text-fintech-accent dark:text-fintech-accent">
+		  <h2 class="mb-6 text-2xl font-bold tracking-tight text-fintech-accent dark:text-fintech-yellow">
 			Send Money Home
 		  </h2>
-		  <p class="mb-8 text-gray-600 dark:text-gray-400">
+		  <p class="mb-8 text-gray-600 dark:text-gray-200">
 			Support your loved ones by sending money back home quickly and securely with competitive
 			rates.
 		  </p>
@@ -151,7 +151,7 @@
 			  <div>
 				<label
 				  for="senderName"
-				  class="mb-1 block text-sm font-medium text-gray-700 dark:text-gray-400"
+				  class="mb-1 block text-sm font-medium text-gray-700 dark:text-gray-200"
 				>
 				  Your Name
 				</label>
@@ -167,7 +167,7 @@
 			  <div>
 				<label
 				  for="recipientName"
-				  class="mb-1 block text-sm font-medium text-gray-700 dark:text-gray-400"
+				  class="mb-1 block text-sm font-medium text-gray-700 dark:text-gray-200"
 				>
 				  Recipient Name
 				</label>
@@ -186,7 +186,7 @@
 			  <div>
 				<label
 				  for="country"
-				  class="mb-1 block text-sm font-medium text-gray-700 dark:text-gray-400"
+				  class="mb-1 block text-sm font-medium text-gray-700 dark:text-gray-200"
 				>
 				  Recipient Country
 				</label>
@@ -207,7 +207,7 @@
 				<div>
 				  <label
 					for="amount"
-					class="mb-1 block text-sm font-medium text-gray-700 dark:text-gray-400"
+					class="mb-1 block text-sm font-medium text-gray-700 dark:text-gray-200"
 				  >
 					Amount
 				  </label>
@@ -225,7 +225,7 @@
 				<div>
 				  <label
 					for="currency"
-					class="mb-1 block text-sm font-medium text-gray-700 dark:text-gray-400"
+					class="mb-1 block text-sm font-medium text-gray-700 dark:text-gray-200"
 				  >
 					Currency
 				  </label>
@@ -245,7 +245,7 @@
 			<div>
 			  <label
 				for="paymentMethod"
-				class="mb-1 block text-sm font-medium text-gray-700 dark:text-gray-400"
+				class="mb-1 block text-sm font-medium text-gray-700 dark:text-gray-200"
 			  >
 				Payment Method
 			  </label>
@@ -295,13 +295,13 @@
 				class="rounded-lg border border-fintech-light-gray dark:border-fintech-muted bg-fintech-white dark:bg-fintech-muted p-4"
 			  >
 				<div class="mb-2 flex items-center justify-between">
-				  <span class="text-gray-600 dark:text-gray-400">Amount</span>
+				  <span class="text-gray-600 dark:text-gray-200">Amount</span>
 				  <span class="font-medium text-gray-900 dark:text-white"
 					>{parseFloat(remittanceData.amount).toFixed(2)} {remittanceData.currency}</span
 				  >
 				</div>
 				<div class="mb-2 flex items-center justify-between">
-				  <span class="text-gray-600 dark:text-gray-400">Transfer Fee</span>
+				  <span class="text-gray-600 dark:text-gray-200">Transfer Fee</span>
 				  <span class="font-medium text-gray-900 dark:text-white"
 					>{remittanceFee.toFixed(2)} {remittanceData.currency}</span
 				  >
@@ -319,7 +319,7 @@
   
 			<button
 			  type="submit"
-			  class="w-full rounded-lg bg-fintech-accent text-fintech-white px-6 py-4 font-medium  transition-colors shadow-lg hover:shadow-fintech-accent/50 focus:ring-2 focus:ring-fintech-accent focus:ring-offset-2 focus:outline-none disabled:bg-fintech-gray disabled:text-gray-400"
+			  class="w-full rounded-lg bg-fintech-accent text-fintech-white px-6 py-4 font-medium  transition-colors shadow-lg hover:shadow-fintech-accent/50 focus:ring-2 focus:ring-fintech-accent focus:ring-offset-2 focus:outline-none disabled:bg-fintech-gray disabled:text-gray-200"
 			  disabled={isSubmitting}
 			>
 			  {isSubmitting ? 'Processing...' : 'Send Remittance'}
@@ -334,7 +334,7 @@
 		  <h2 class="mb-6 text-2xl font-bold tracking-tight text-fintech-accent dark:text-fintech-accent">
 			Purchase Money Orders
 		  </h2>
-		  <p class="mb-8 text-gray-600 dark:text-gray-400">
+		  <p class="mb-8 text-gray-600 dark:text-gray-200">
 			Secure alternative to cash or personal checks for convenient and trackable payments.
 		  </p>
   
@@ -343,7 +343,7 @@
 			  <div>
 				<label
 				  for="purchaserName"
-				  class="mb-1 block text-sm font-medium text-gray-700 dark:text-gray-400"
+				  class="mb-1 block text-sm font-medium text-gray-700 dark:text-gray-200"
 				>
 				  Purchaser Name
 				</label>
@@ -359,7 +359,7 @@
 			  <div>
 				<label
 				  for="moRecipientName"
-				  class="mb-1 block text-sm font-medium text-gray-700 dark:text-gray-400"
+				  class="mb-1 block text-sm font-medium text-gray-700 dark:text-gray-200"
 				>
 				  Payable To
 				</label>
@@ -379,7 +379,7 @@
 				<div>
 				  <label
 					for="moAmount"
-					class="mb-1 block text-sm font-medium text-gray-700 dark:text-gray-400"
+					class="mb-1 block text-sm font-medium text-gray-700 dark:text-gray-200"
 				  >
 					Amount
 				  </label>
@@ -398,7 +398,7 @@
 				<div>
 				  <label
 					for="moCurrency"
-					class="mb-1 block text-sm font-medium text-gray-700 dark:text-gray-400"
+					class="mb-1 block text-sm font-medium text-gray-700 dark:text-gray-200"
 				  >
 					Currency
 				  </label>
@@ -417,7 +417,7 @@
 			  <div>
 				<fieldset>
 				  <legend
-					class="mb-1 block text-sm font-medium text-gray-700 dark:text-gray-400"
+					class="mb-1 block text-sm font-medium text-gray-700 dark:text-gray-200"
 				  >
 					Delivery Method
 				  </legend>
@@ -456,20 +456,20 @@
 				class="rounded-lg border border-fintech-light-gray dark:border-fintech-muted bg-fintech-white dark:bg-fintech-muted p-4"
 			  >
 				<div class="mb-2 flex items-center justify-between">
-				  <span class="text-gray-600 dark:text-gray-400">Money Order Amount</span>
+				  <span class="text-gray-600 dark:text-gray-200">Money Order Amount</span>
 				  <span class="font-medium text-gray-900 dark:text-white"
 					>{parseFloat(moneyOrderData.amount).toFixed(2)} {moneyOrderData.currency}</span
 				  >
 				</div>
 				<div class="mb-2 flex items-center justify-between">
-				  <span class="text-gray-600 dark:text-gray-400">Service Fee</span>
+				  <span class="text-gray-600 dark:text-gray-200">Service Fee</span>
 				  <span class="font-medium text-gray-900 dark:text-white"
 					>{moneyOrderFee.toFixed(2)} {moneyOrderData.currency}</span
 				  >
 				</div>
 				{#if moneyOrderData.deliveryMethod === 'mail'}
 				  <div class="mb-2 flex items-center justify-between">
-					<span class="text-gray-600 dark:text-gray-400">Shipping</span>
+					<span class="text-gray-600 dark:text-gray-200">Shipping</span>
 					<span class="font-medium text-gray-900 dark:text-white"
 					  >5.00 {moneyOrderData.currency}</span
 					>
@@ -487,7 +487,7 @@
   
 			<button
 			  type="submit"
-			  class="w-full rounded-lg bg-fintech-accent text-fintech-white px-6 py-4 font-medium  transition-colors shadow-lg hover:shadow-fintech-accent/50 focus:ring-2 focus:ring-fintech-accent focus:ring-offset-2 focus:outline-none disabled:bg-fintech-gray disabled:text-gray-400"
+			  class="w-full rounded-lg bg-fintech-accent text-fintech-white px-6 py-4 font-medium  transition-colors shadow-lg hover:shadow-fintech-accent/50 focus:ring-2 focus:ring-fintech-accent focus:ring-offset-2 focus:outline-none disabled:bg-fintech-gray disabled:text-gray-200"
 			  disabled={isSubmitting}
 			>
 			  {isSubmitting ? 'Processing...' : 'Purchase Money Order'}
@@ -523,7 +523,7 @@
 		  {activeTab === 'remittance' ? 'Remittance Sent!' : 'Money Order Purchased!'}
 		</h2>
   
-		<p class="mb-6 text-gray-600 dark:text-gray-400">
+		<p class="mb-6 text-gray-600 dark:text-gray-200">
 		  {#if activeTab === 'remittance'}
 			Your money is on its way to {remittanceData.recipientName} in {remittanceData.recipientCountry}.
 		  {:else}
@@ -537,19 +537,19 @@
 		  class="mx-auto mb-8 max-w-sm rounded-lg border border-fintech-light-gray dark:border-fintech-muted bg-fintech-white dark:bg-fintech-muted p-4"
 		>
 		  <div class="mb-2 flex items-center justify-between">
-			<span class="text-gray-600 dark:text-gray-400">Reference ID</span>
+			<span class="text-gray-600 dark:text-gray-200">Reference ID</span>
 			<span class="font-medium text-gray-900 dark:text-white"
 			  >{Math.random().toString(36).substring(2, 10).toUpperCase()}</span
 			>
 		  </div>
 		  <div class="mb-2 flex items-center justify-between">
-			<span class="text-gray-600 dark:text-gray-400">Date</span>
+			<span class="text-gray-600 dark:text-gray-200">Date</span>
 			<span class="font-medium text-gray-900 dark:text-white"
 			  >{new Date().toLocaleDateString()}</span
 			>
 		  </div>
 		  <div class="flex items-center justify-between">
-			<span class="text-gray-600 dark:text-gray-400">Status</span>
+			<span class="text-gray-600 dark:text-gray-200">Status</span>
 			<span
 			  class="inline-flex items-center rounded-full bg-fintech-green/10 dark:bg-fintech-green/20 px-2.5 py-0.5 text-xs font-medium text-fintech-green"
 			>

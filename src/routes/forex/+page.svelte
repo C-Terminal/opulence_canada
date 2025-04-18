@@ -56,16 +56,16 @@
   <div class="container mx-auto px-4 py-8">
 	<!-- Header with updated timestamp -->
 	<div class="mb-6">
-	  <h1 class="text-3xl font-bold tracking-tight text-fintech-accent dark:text-fintech-accent">
+	  <h1 class="text-3xl font-bold tracking-tight text-fintech-yellow dark:text-fintech-yellow">
 		Foreign Exchange
 	  </h1>
-	  <p class="mt-2 text-base text-gray-600 dark:text-gray-400">
+	  <p class="mt-2 text-base text-gray-300 dark:text-gray-200">
 		Access competitive exchange rates for international currency needs.
 	  </p>
-	  <div class="mt-2 flex items-center text-sm text-gray-500 dark:text-gray-400">
+	  <div class="mt-2 flex items-center text-sm text-gray-300 dark:text-gray-200">
 		<span>Updated: {lastUpdated.toLocaleTimeString()}</span>
 		<button
-		  class="ml-2 rounded-full p-1 text-gray-500 dark:text-gray-400 hover:bg-fintech-muted dark:hover:bg-fintech-muted transition-colors"
+		  class="ml-2 rounded-full p-1 text-gray-500 dark:text-gray-200 hover:bg-fintech-muted dark:hover:bg-fintech-muted transition-colors"
 		  on:click={updateRates}
 		>
 		  <RefreshCw size={16} class={isLoading ? 'animate-spin' : ''} />
@@ -77,12 +77,12 @@
 	<div
 	  class="mb-6 rounded-xl p-4 shadow-xl bg-fintech-white dark:bg-fintech-dark border border-fintech-light-gray dark:border-fintech-muted"
 	>
-	  <h2 class="text-lg font-semibold text-fintech-accent dark:text-fintech-accent mb-3">
+	  <h2 class="text-lg font-semibold text-fintech-red-canadian dark:text-fintech-yellow mb-3">
 		Quick Converter
 	  </h2>
 	  <div class="space-y-4">
 		<div class="flex flex-col">
-		  <label class="mb-1 text-sm text-gray-500 dark:text-gray-400">Amount</label>
+		  <label class="mb-1 text-sm text-gray-500 dark:text-gray-200">Amount</label>
 		  <input
 			type="number"
 			bind:value={amount}
@@ -92,7 +92,7 @@
   
 		<div class="flex items-center">
 		  <div class="flex-1">
-			<label class="mb-1 text-sm text-gray-500 dark:text-gray-400">From</label>
+			<label class="mb-1 text-sm text-gray-500 dark:text-gray-200">From</label>
 			<select
 			  bind:value={fromCurrency}
 			  class="w-full rounded-lg border border-fintech-light-gray dark:border-fintech-muted bg-fintech-white dark:bg-fintech-dark-muted p-2 text-gray-900 dark:text-white focus:ring-2 focus:ring-fintech-accent focus:border-fintech-accent transition-colors"
@@ -104,14 +104,14 @@
 		  </div>
   
 		  <button
-			class="mx-2 rounded-full p-2 text-gray-500 dark:text-gray-400 hover:bg-fintech-muted dark:hover:bg-fintech-muted transition-colors"
+			class="mx-2 rounded-full p-2 text-gray-500 dark:text-gray-200 hover:bg-fintech-muted dark:hover:bg-fintech-muted transition-colors"
 			on:click={swapCurrencies}
 		  >
 			<ArrowLeftRight size={20} />
 		  </button>
   
 		  <div class="flex-1">
-			<label class="mb-1 text-sm text-gray-500 dark:text-gray-400">To</label>
+			<label class="mb-1 text-sm text-gray-500 dark:text-gray-200">To</label>
 			<select
 			  bind:value={toCurrency}
 			  class="w-full rounded-lg border border-fintech-light-gray dark:border-fintech-muted bg-fintech-white dark:bg-fintech-dark-muted p-2 text-gray-900 dark:text-white focus:ring-2 focus:ring-fintech-accent focus:border-fintech-accent transition-colors"
@@ -124,7 +124,7 @@
 		</div>
   
 		<div class="rounded-lg bg-fintech-light-gray dark:bg-fintech-muted p-3">
-		  <div class="text-sm text-gray-500 dark:text-gray-400">Converted Amount</div>
+		  <div class="text-sm text-gray-500 dark:text-gray-200">Converted Amount</div>
 		  <div class="text-xl font-bold text-gray-900 dark:text-white">
 			{convertedAmount.toFixed(2)} {toCurrency}
 		  </div>
@@ -143,10 +143,10 @@
 		>
 		  <div class="flex items-center justify-between">
 			<div>
-			  <h3 class="text-lg font-semibold text-fintech-accent dark:text-fintech-accent">
+			  <h3 class="text-lg font-semibold text-fintech-red-canadian dark:text-fintech-red-canadian">
 				{pair}
 			  </h3>
-			  <p class="text-xs text-gray-500 dark:text-gray-400">Live Market Rate</p>
+			  <p class="text-xs text-gray-500 dark:text-gray-200">Live Market Rate</p>
 			</div>
 			<div class="text-right">
 			  <p class="text-2xl font-bold text-gray-900 dark:text-white">
@@ -184,14 +184,14 @@
 	<div
 	  class="mt-8 rounded-xl p-6 text-center bg-fintech-light-gray dark:bg-fintech-muted"
 	>
-	  <h2 class="text-xl font-semibold text-fintech-accent dark:text-fintech-accent mb-2">
+	  <h2 class="text-xl font-semibold text-fintech-red-canadian dark:text-green-500 mb-2">
 		Ready to Start Trading?
 	  </h2>
-	  <p class="mb-4 text-gray-600 dark:text-gray-400">
+	  <p class="mb-4 text-gray-600 dark:text-gray-200">
 		Open an account today and access competitive foreign exchange rates.
 	  </p>
 	  <button
-		class="rounded-lg px-6 py-2 bg-fintech-accent text-fintech-white font-medium hover:bg-fintech-red-light transition-colors shadow-lg hover:shadow-fintech-accent/50"
+		class="rounded-lg px-6 py-2 bg-fintech-accent text-fintech-white font-medium hover:bg-fintech-red-canadian transition-colors shadow-lg hover:shadow-fintech-accent/50"
 	  >
 		Create Account
 	  </button>

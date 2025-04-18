@@ -133,7 +133,7 @@
 	in:fade={{ duration: 400 }}
 >
 	<div
-		class="bg-fintech-white dark:bg-fintech-dark border-fintech-light-gray dark:border-fintech-muted w-full max-w-xl rounded-xl border shadow-xl"
+		class="bg-fintech-white dark:bg-fintech-dark border-fintech-light-gray dark:border-fintech-muted w-full max-w-xl rounded-xl border shadow-xl font-serif"
 	>
 		<div class="p-6">
 			<h2
@@ -155,7 +155,7 @@
 				<div class="form-control">
 					<label
 						for="fullName"
-						class="mb-1 block text-sm font-medium text-gray-700 dark:text-gray-400"
+						class="mb-1 block text-sm font-medium text-gray-700 dark:text-gray-200"
 					>
 						Full Name
 					</label>
@@ -177,7 +177,7 @@
 				<div class="form-control">
 					<label
 						for="email"
-						class="mb-1 block text-sm font-medium text-gray-700 dark:text-gray-400"
+						class="mb-1 block text-sm font-medium text-gray-700 dark:text-gray-200"
 					>
 						Email Address
 					</label>
@@ -207,7 +207,7 @@
 				<div class="form-control">
 					<label
 						for="accountType"
-						class="mb-1 block text-sm font-medium text-gray-700 dark:text-gray-400"
+						class="mb-1 block text-sm font-medium text-gray-700 dark:text-gray-200"
 					>
 						Account Type
 					</label>
@@ -226,7 +226,7 @@
 				<div class="form-control">
 					<label
 						for="accountNumber"
-						class="mb-1 block text-sm font-medium text-gray-700 dark:text-gray-400"
+						class="mb-1 block text-sm font-medium text-gray-700 dark:text-gray-200"
 					>
 						Account Number
 					</label>
@@ -248,7 +248,7 @@
 				<div class="form-control">
 					<label
 						for="routingNumber"
-						class="mb-1 block text-sm font-medium text-gray-700 dark:text-gray-400"
+						class="mb-1 block text-sm font-medium text-gray-700 dark:text-gray-200"
 					>
 						Routing Number {recipientData.address.country !== 'US' ? '(Optional for non-US)' : ''}
 					</label>
@@ -278,7 +278,7 @@
 				<div class="form-control">
 					<label
 						for="country"
-						class="mb-1 block text-sm font-medium text-gray-700 dark:text-gray-400"
+						class="mb-1 block text-sm font-medium text-gray-700 dark:text-gray-200"
 					>
 						Country
 					</label>
@@ -297,7 +297,7 @@
 				<div class="form-control">
 					<label
 						for="addressLine1"
-						class="mb-1 block text-sm font-medium text-gray-700 dark:text-gray-400"
+						class="mb-1 block text-sm font-medium text-gray-700 dark:text-gray-200"
 					>
 						Address Line 1
 					</label>
@@ -319,7 +319,7 @@
 				<div class="form-control">
 					<label
 						for="addressLine2"
-						class="mb-1 block text-sm font-medium text-gray-700 dark:text-gray-400"
+						class="mb-1 block text-sm font-medium text-gray-700 dark:text-gray-200"
 					>
 						Address Line 2 (Optional)
 					</label>
@@ -337,7 +337,7 @@
 					<div class="form-control">
 						<label
 							for="city"
-							class="mb-1 block text-sm font-medium text-gray-700 dark:text-gray-400"
+							class="mb-1 block text-sm font-medium text-gray-700 dark:text-gray-200"
 						>
 							City
 						</label>
@@ -358,7 +358,7 @@
 					<div class="form-control">
 						<label
 							for="state"
-							class="mb-1 block text-sm font-medium text-gray-700 dark:text-gray-400"
+							class="mb-1 block text-sm font-medium text-gray-700 dark:text-gray-200"
 						>
 							State/Province
 						</label>
@@ -379,7 +379,7 @@
 					<div class="form-control">
 						<label
 							for="postalCode"
-							class="mb-1 block text-sm font-medium text-gray-700 dark:text-gray-400"
+							class="mb-1 block text-sm font-medium text-gray-700 dark:text-gray-200"
 						>
 							Postal Code
 						</label>
@@ -410,7 +410,7 @@
 				<div class="form-control">
 					<label
 						for="description"
-						class="mb-1 block text-sm font-medium text-gray-700 dark:text-gray-400"
+						class="mb-1 block text-sm font-medium text-gray-700 dark:text-gray-200"
 					>
 						Payment Description (Optional)
 					</label>

@@ -1,5 +1,5 @@
 <script lang="ts">
-	import NavigationHomePage from '$lib/components/NavigationHomePage.svelte';
+	import NavigationHomePage from '$lib/components/layout/NavigationHomePage.svelte';
 	import Footer from '$lib/components/layout/Footer.svelte';
 	import '../app.css'; // Tailwind CSS import
 	import ThemeToggle from '$lib/components/ThemeToggle.svelte';
