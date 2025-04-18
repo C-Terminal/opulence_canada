@@ -49,11 +49,11 @@
   </script>
   
   <svelte:head>
-	<title>Foreign Exchange | Opulent Canada</title>
+	<title>Foreign Exchange | Opulence Canada</title>
 	<meta name="description" content="Real-time foreign exchange rates and dealing services." />
   </svelte:head>
   
-  <div class="container mx-auto px-4 py-8">
+  <div class="container mx-auto px-4 py-8 max-w-5xl">
 	<!-- Header with updated timestamp -->
 	<div class="mb-6">
 	  <h1 class="text-3xl font-bold tracking-tight text-fintech-yellow dark:text-fintech-yellow">

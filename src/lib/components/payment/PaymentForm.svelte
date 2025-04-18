@@ -137,7 +137,7 @@
 	>
 		<div class="p-6">
 			<h2
-				class="text-fintech-accent dark:text-fintech-accent mb-6 text-center text-2xl font-bold tracking-tight"
+				class="text-fintech-red-canadian dark:text-fintech-red-canadian mb-6 text-center text-2xl font-bold tracking-tight"
 			>
 				Payment Recipient Details
 			</h2>
@@ -146,7 +146,7 @@
 				<!-- Personal Information Section -->
 				<div class="border-fintech-light-gray dark:border-fintech-muted my-6 border-t"></div>
 				<h3
-					class="text-fintech-accent dark:text-fintech-accent text-sm font-semibold tracking-wider uppercase"
+					class="text-fintech-red-canadian dark:text-fintech-red-canadian text-sm font-semibold tracking-wider uppercase"
 				>
 					Personal Information
 				</h3>
@@ -165,7 +165,7 @@
 						bind:value={recipientData.fullName}
 						class="border-fintech-light-gray dark:border-fintech-muted bg-fintech-white dark:bg-fintech-dark-muted w-full rounded-lg border p-3 text-gray-900 dark:text-white {errors.fullName
 							? 'border-fintech-warn'
-							: ''} focus:border-fintech-accent focus:ring-fintech-accent transition-colors focus:ring-2"
+							: ''} focus:border-fintech-red-canadian focus:ring-fintech-red-canadian transition-colors focus:ring-2"
 						placeholder="Enter recipient's full name"
 					/>
 					{#if errors.fullName}
@@ -187,7 +187,7 @@
 						bind:value={recipientData.email}
 						class="border-fintech-light-gray dark:border-fintech-muted bg-fintech-white dark:bg-fintech-dark-muted w-full rounded-lg border p-3 text-gray-900 dark:text-white {errors.email
 							? 'border-fintech-warn'
-							: ''} focus:border-fintech-accent focus:ring-fintech-accent transition-colors focus:ring-2"
+							: ''} focus:border-fintech-red-canadian focus:ring-fintech-red-canadian transition-colors focus:ring-2"
 						placeholder="recipient@example.com"
 					/>
 					{#if errors.email}
@@ -198,7 +198,7 @@
 				<!-- Bank Account Section -->
 				<div class="border-fintech-light-gray dark:border-fintech-muted my-6 border-t"></div>
 				<h3
-					class="text-fintech-accent dark:text-fintech-accent text-sm font-semibold tracking-wider uppercase"
+					class="text-fintech-red-canadian dark:text-fintech-red-canadian text-sm font-semibold tracking-wider uppercase"
 				>
 					Bank Account Information
 				</h3>
@@ -214,7 +214,7 @@
 					<select
 						id="accountType"
 						bind:value={recipientData.accountType}
-						class="border-fintech-light-gray dark:border-fintech-muted bg-fintech-white dark:bg-fintech-dark-muted focus:border-fintech-accent focus:ring-fintech-accent w-full rounded-lg border p-3 text-gray-900 transition-colors focus:ring-2 dark:text-white"
+						class="border-fintech-light-gray dark:border-fintech-muted bg-fintech-white dark:bg-fintech-dark-muted focus:border-fintech-red-canadian focus:ring-fintech-red-canadian w-full rounded-lg border p-3 text-gray-900 transition-colors focus:ring-2 dark:text-white"
 					>
 						{#each accountTypes as type}
 							<option value={type.value}>{type.label}</option>
@@ -236,7 +236,7 @@
 						bind:value={recipientData.accountNumber}
 						class="border-fintech-light-gray dark:border-fintech-muted bg-fintech-white dark:bg-fintech-dark-muted w-full rounded-lg border p-3 text-gray-900 dark:text-white {errors.accountNumber
 							? 'border-fintech-warn'
-							: ''} focus:border-fintech-accent focus:ring-fintech-accent transition-colors focus:ring-2"
+							: ''} focus:border-fintech-red-canadian focus:ring-fintech-red-canadian transition-colors focus:ring-2"
 						placeholder="Enter account number"
 					/>
 					{#if errors.accountNumber}
@@ -258,7 +258,7 @@
 						bind:value={recipientData.routingNumber}
 						class="border-fintech-light-gray dark:border-fintech-muted bg-fintech-white dark:bg-fintech-dark-muted w-full rounded-lg border p-3 text-gray-900 dark:text-white {errors.routingNumber
 							? 'border-fintech-warn'
-							: ''} focus:border-fintech-accent focus:ring-fintech-accent transition-colors focus:ring-2"
+							: ''} focus:border-fintech-red-canadian focus:ring-fintech-red-canadian transition-colors focus:ring-2"
 						placeholder="Enter routing number"
 					/>
 					{#if errors.routingNumber}
@@ -269,7 +269,7 @@
 				<!-- Address Section -->
 				<div class="border-fintech-light-gray dark:border-fintech-muted my-6 border-t"></div>
 				<h3
-					class="text-fintech-accent dark:text-fintech-accent text-sm font-semibold tracking-wider uppercase"
+					class="text-fintech-red-canadian dark:text-fintech-red-canadian text-sm font-semibold tracking-wider uppercase"
 				>
 					Address
 				</h3>
@@ -285,7 +285,7 @@
 					<select
 						id="country"
 						bind:value={recipientData.address.country}
-						class="border-fintech-light-gray dark:border-fintech-muted bg-fintech-white dark:bg-fintech-dark-muted focus:border-fintech-accent focus:ring-fintech-accent w-full rounded-lg border p-3 text-gray-900 transition-colors focus:ring-2 dark:text-white"
+						class="border-fintech-light-gray dark:border-fintech-muted bg-fintech-white dark:bg-fintech-dark-muted focus:border-fintech-red-canadian focus:ring-fintech-red-canadian w-full rounded-lg border p-3 text-gray-900 transition-colors focus:ring-2 dark:text-white"
 					>
 						{#each countries as country}
 							<option value={country.code}>{country.name}</option>
@@ -307,7 +307,7 @@
 						bind:value={recipientData.address.line1}
 						class="border-fintech-light-gray dark:border-fintech-muted bg-fintech-white dark:bg-fintech-dark-muted w-full rounded-lg border p-3 text-gray-900 dark:text-white {errors.addressLine1
 							? 'border-fintech-warn'
-							: ''} focus:border-fintech-accent focus:ring-fintech-accent transition-colors focus:ring-2"
+							: ''} focus:border-fintech-red-canadian focus:ring-fintech-red-canadian transition-colors focus:ring-2"
 						placeholder="Street address, P.O. box, etc."
 					/>
 					{#if errors.addressLine1}
@@ -327,7 +327,7 @@
 						type="text"
 						id="addressLine2"
 						bind:value={recipientData.address.line2}
-						class="border-fintech-light-gray dark:border-fintech-muted bg-fintech-white dark:bg-fintech-dark-muted focus:border-fintech-accent focus:ring-fintech-accent w-full rounded-lg border p-3 text-gray-900 transition-colors focus:ring-2 dark:text-white"
+						class="border-fintech-light-gray dark:border-fintech-muted bg-fintech-white dark:bg-fintech-dark-muted focus:border-fintech-red-canadian focus:ring-fintech-red-canadian w-full rounded-lg border p-3 text-gray-900 transition-colors focus:ring-2 dark:text-white"
 						placeholder="Apartment, suite, unit, building, floor, etc."
 					/>
 				</div>
@@ -347,7 +347,7 @@
 							bind:value={recipientData.address.city}
 							class="border-fintech-light-gray dark:border-fintech-muted bg-fintech-white dark:bg-fintech-dark-muted w-full rounded-lg border p-3 text-gray-900 dark:text-white {errors.city
 								? 'border-fintech-warn'
-								: ''} focus:border-fintech-accent focus:ring-fintech-accent transition-colors focus:ring-2"
+								: ''} focus:border-fintech-red-canadian focus:ring-fintech-red-canadian transition-colors focus:ring-2"
 							placeholder="City"
 						/>
 						{#if errors.city}
@@ -368,7 +368,7 @@
 							bind:value={recipientData.address.state}
 							class="border-fintech-light-gray dark:border-fintech-muted bg-fintech-white dark:bg-fintech-dark-muted w-full rounded-lg border p-3 text-gray-900 dark:text-white {errors.state
 								? 'border-fintech-warn'
-								: ''} focus:border-fintech-accent focus:ring-fintech-accent transition-colors focus:ring-2"
+								: ''} focus:border-fintech-red-canadian focus:ring-fintech-red-canadian transition-colors focus:ring-2"
 							placeholder="State/Province"
 						/>
 						{#if errors.state}
@@ -389,7 +389,7 @@
 							bind:value={recipientData.address.postalCode}
 							class="border-fintech-light-gray dark:border-fintech-muted bg-fintech-white dark:bg-fintech-dark-muted w-full rounded-lg border p-3 text-gray-900 dark:text-white {errors.postalCode
 								? 'border-fintech-warn'
-								: ''} focus:border-fintech-accent focus:ring-fintech-accent transition-colors focus:ring-2"
+								: ''} focus:border-fintech-red-canadian focus:ring-fintech-red-canadian transition-colors focus:ring-2"
 							placeholder="Postal code"
 						/>
 						{#if errors.postalCode}
@@ -401,7 +401,7 @@
 				<!-- Payment Details -->
 				<div class="border-fintech-light-gray dark:border-fintech-muted my-6 border-t"></div>
 				<h3
-					class="text-fintech-accent dark:text-fintech-accent text-sm font-semibold tracking-wider uppercase"
+					class="text-fintech-red-canadian dark:text-fintech-red-canadian text-sm font-semibold tracking-wider uppercase"
 				>
 					Payment Details
 				</h3>
@@ -417,7 +417,7 @@
 					<textarea
 						id="description"
 						bind:value={recipientData.description}
-						class="border-fintech-light-gray dark:border-fintech-muted bg-fintech-white dark:bg-fintech-dark-muted focus:border-fintech-accent focus:ring-fintech-accent h-24 w-full rounded-lg border p-3 text-gray-900 transition-colors focus:ring-2 dark:text-white"
+						class="border-fintech-light-gray dark:border-fintech-muted bg-fintech-white dark:bg-fintech-dark-muted focus:border-fintech-red-canadian focus:ring-fintech-red-canadian h-24 w-full rounded-lg border p-3 text-gray-900 transition-colors focus:ring-2 dark:text-white"
 						placeholder="Enter payment purpose or description"
 					></textarea>
 				</div>
@@ -426,7 +426,7 @@
 				<div class="form-control mt-8">
 					<button
 						type="submit"
-						class="bg-fintech-accent text-fintech-dark hover:bg-fintech-accent-muted hover:shadow-fintech-accent/50 focus:ring-fintech-accent dark:focus:ring-offset-fintech-dark w-full rounded-lg px-6 py-3 font-medium shadow-lg transition-colors focus:ring-2 focus:ring-offset-2"
+						class="bg-fintech-red-canadian text-fintech-white hover:bg-fintech-red-canadian-muted hover:shadow-fintech-red-canadian/50 focus:ring-fintech-red-canadian dark:focus:ring-offset-fintech-dark w-full rounded-lg px-6 py-3 font-medium shadow-lg transition-colors focus:ring-2 focus:ring-offset-2"
 					>
 						Save Recipient
 					</button>

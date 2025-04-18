@@ -46,9 +46,9 @@
 			<a
 				href="/"
 				class="text-fintech-red-canadian dark:text-fintech-red-canadian text-xl font-bold"
-				aria-label="Opulent Canada Homepage"
+				aria-label="Opulence Canada Homepage"
 			>
-			<span class="text-fintech-dark dark:text-fintech-white">Opulent</span>
+			<span class="text-fintech-dark dark:text-fintech-white">Opulence</span>
 			<span>Canada</span>
 			</a>
 		</div>

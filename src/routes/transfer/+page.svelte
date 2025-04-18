@@ -37,5 +37,3 @@
 	<!-- import  -->
 	<PaymentForm />
 </main>
-
-<Footer />

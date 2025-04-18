@@ -118,16 +118,16 @@
 	<div class="mb-8 flex rounded-lg bg-fintech-light-gray dark:bg-fintech-muted p-1">
 	  <button
 		class="flex-1 rounded-lg px-6 py-3 text-center font-medium transition-all duration-200 {activeTab === 'remittance'
-		  ? 'bg-fintech-accent dark:text-fintech-dark text-fintech-white shadow-md'
-		  : 'text-gray-600 dark:text-gray-200 hover:bg-fintech-gray dark:hover:bg-fintech-dark-gray'}"
+		  ? 'bg-fintech-accent  text-fintech-white shadow-md'
+		  : 'text-gray-600 dark:text-gray-300 hover:bg-fintech-gray dark:hover:bg-fintech-dark-gray'}"
 		on:click={() => (activeTab = 'remittance')}
 	  >
 		International Remittances
 	  </button>
 	  <button
 		class="flex-1 rounded-lg px-6 py-3 text-center font-medium transition-all duration-200 {activeTab === 'moneyOrder'
-		  ? 'bg-fintech-accent dark:text-fintech-dark text-fintech-white shadow-md'
-		  : 'text-gray-600 dark:text-gray-200 hover:bg-fintech-gray dark:hover:bg-fintech-dark-gray'}"
+		  ? 'bg-fintech-accent  text-fintech-white shadow-md'
+		  : 'text-gray-600 dark:text-gray-300 hover:bg-fintech-gray dark:hover:bg-fintech-dark-gray'}"
 		on:click={() => (activeTab = 'moneyOrder')}
 	  >
 		Money Orders
@@ -331,7 +331,7 @@
 	  <!-- Money Order Form -->
 	  {#if activeTab === 'moneyOrder'}
 		<div in:fade={{ duration: 400 }}>
-		  <h2 class="mb-6 text-2xl font-bold tracking-tight text-fintech-accent dark:text-fintech-accent">
+		  <h2 class="mb-6 text-2xl font-bold tracking-tight text-fintech-yellow dark:text-fintech-yellow">
 			Purchase Money Orders
 		  </h2>
 		  <p class="mb-8 text-gray-600 dark:text-gray-200">
