@@ -63,12 +63,12 @@
         <a
           href="/"
           class="flex items-center space-x-2 mb-4"
-          aria-label="Opulence Canada Homepage"
+          aria-label="The GCE Homepage"
         >
           <span
             class="text-lg font-semibold text-fintech-red-canadian dark:text-fintech-red-canadian"
           >
-            Opulence Canada
+            The GCE
           </span>
         </a>
         <p class="text-sm text-gray-600 dark:text-gray-200">
@@ -106,7 +106,7 @@
     >
       <div class="text-center md:text-left mb-4 md:mb-0">
         <p class="text-gray-600 dark:text-gray-200">
-          © {currentYear} Opulence Canada Inc. All rights reserved.
+          © {currentYear} The GCE Inc. All rights reserved.
         </p>
         <p class="mt-1 text-xs text-gray-500 dark:text-gray-200 opacity-80">
           Financial services involve risk. Please read our full disclosures and terms. Not investment advice.

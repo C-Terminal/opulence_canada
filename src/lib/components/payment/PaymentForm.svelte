@@ -124,38 +124,36 @@
 	$effect(() => {
 		formSubmitted ? validateForm(): null;
 	});
-
-
 </script>
 
 <div
-	class="bg-fintech-white dark:bg-fintech-dark flex min-h-screen items-center justify-center p-4"
+	class="bg-cyber-midnight flex min-h-screen items-center justify-center p-4 cyberpunk-grid"
 	in:fade={{ duration: 400 }}
 >
 	<div
-		class="bg-fintech-white dark:bg-fintech-dark border-fintech-light-gray dark:border-fintech-muted w-full max-w-xl rounded-xl border shadow-xl font-serif"
+		class="cyber-panel w-full max-w-xl rounded-xl font-space-grotesk shadow-lg"
 	>
 		<div class="p-6">
-			<h2
-				class="text-fintech-red-canadian dark:text-fintech-red-canadian mb-6 text-center text-2xl font-bold tracking-tight"
+			<h1
+				class="text-cyber-neon mb-6 text-center text-2xl font-bold tracking-tight cyber-glow"
 			>
 				Payment Recipient Details
-			</h2>
+			</h1>
 
 			<form on:submit|preventDefault={handleSubmit} class="space-y-6">
 				<!-- Personal Information Section -->
-				<div class="border-fintech-light-gray dark:border-fintech-muted my-6 border-t"></div>
+				<div class="cyber-line"></div>
 				<h3
-					class="text-fintech-red-canadian dark:text-fintech-red-canadian text-sm font-semibold tracking-wider uppercase"
+					class="text-cyber-electric text-sm font-semibold tracking-wider uppercase"
 				>
 					Personal Information
 				</h3>
 
 				<!-- Full Name -->
-				<div class="form-control">
+				<div class="form-group">
 					<label
 						for="fullName"
-						class="mb-1 block text-sm font-medium text-gray-700 dark:text-gray-200"
+						class="form-label"
 					>
 						Full Name
 					</label>
@@ -163,21 +161,19 @@
 						type="text"
 						id="fullName"
 						bind:value={recipientData.fullName}
-						class="border-fintech-light-gray dark:border-fintech-muted bg-fintech-white dark:bg-fintech-dark-muted w-full rounded-lg border p-3 text-gray-900 dark:text-white {errors.fullName
-							? 'border-fintech-warn'
-							: ''} focus:border-fintech-red-canadian focus:ring-fintech-red-canadian transition-colors focus:ring-2"
+						class="input {errors.fullName ? 'border-cyber-alert' : 'input-bordered'}"
 						placeholder="Enter recipient's full name"
 					/>
 					{#if errors.fullName}
-						<span class="text-fintech-warn mt-1 text-sm">{errors.fullName}</span>
+						<span class="text-cyber-alert mt-1 text-sm">{errors.fullName}</span>
 					{/if}
 				</div>
 
 				<!-- Email -->
-				<div class="form-control">
+				<div class="form-group">
 					<label
 						for="email"
-						class="mb-1 block text-sm font-medium text-gray-700 dark:text-gray-200"
+						class="form-label"
 					>
 						Email Address
 					</label>
@@ -185,36 +181,34 @@
 						type="email"
 						id="email"
 						bind:value={recipientData.email}
-						class="border-fintech-light-gray dark:border-fintech-muted bg-fintech-white dark:bg-fintech-dark-muted w-full rounded-lg border p-3 text-gray-900 dark:text-white {errors.email
-							? 'border-fintech-warn'
-							: ''} focus:border-fintech-red-canadian focus:ring-fintech-red-canadian transition-colors focus:ring-2"
+						class="input {errors.email ? 'border-cyber-alert' : 'input-bordered'}"
 						placeholder="recipient@example.com"
 					/>
 					{#if errors.email}
-						<span class="text-fintech-warn mt-1 text-sm">{errors.email}</span>
+						<span class="text-cyber-alert mt-1 text-sm">{errors.email}</span>
 					{/if}
 				</div>
 
 				<!-- Bank Account Section -->
-				<div class="border-fintech-light-gray dark:border-fintech-muted my-6 border-t"></div>
+				<div class="cyber-line"></div>
 				<h3
-					class="text-fintech-red-canadian dark:text-fintech-red-canadian text-sm font-semibold tracking-wider uppercase"
+					class="text-cyber-electric text-sm font-semibold tracking-wider uppercase"
 				>
 					Bank Account Information
 				</h3>
 
 				<!-- Account Type -->
-				<div class="form-control">
+				<div class="form-group">
 					<label
 						for="accountType"
-						class="mb-1 block text-sm font-medium text-gray-700 dark:text-gray-200"
+						class="form-label"
 					>
 						Account Type
 					</label>
 					<select
 						id="accountType"
 						bind:value={recipientData.accountType}
-						class="border-fintech-light-gray dark:border-fintech-muted bg-fintech-white dark:bg-fintech-dark-muted focus:border-fintech-red-canadian focus:ring-fintech-red-canadian w-full rounded-lg border p-3 text-gray-900 transition-colors focus:ring-2 dark:text-white"
+						class="select select-bordered w-full"
 					>
 						{#each accountTypes as type}
 							<option value={type.value}>{type.label}</option>
@@ -223,10 +217,10 @@
 				</div>
 
 				<!-- Account Number -->
-				<div class="form-control">
+				<div class="form-group">
 					<label
 						for="accountNumber"
-						class="mb-1 block text-sm font-medium text-gray-700 dark:text-gray-200"
+						class="form-label"
 					>
 						Account Number
 					</label>
@@ -234,21 +228,19 @@
 						type="text"
 						id="accountNumber"
 						bind:value={recipientData.accountNumber}
-						class="border-fintech-light-gray dark:border-fintech-muted bg-fintech-white dark:bg-fintech-dark-muted w-full rounded-lg border p-3 text-gray-900 dark:text-white {errors.accountNumber
-							? 'border-fintech-warn'
-							: ''} focus:border-fintech-red-canadian focus:ring-fintech-red-canadian transition-colors focus:ring-2"
+						class="input {errors.accountNumber ? 'border-cyber-alert' : 'input-bordered'}"
 						placeholder="Enter account number"
 					/>
 					{#if errors.accountNumber}
-						<span class="text-fintech-warn mt-1 text-sm">{errors.accountNumber}</span>
+						<span class="text-cyber-alert mt-1 text-sm">{errors.accountNumber}</span>
 					{/if}
 				</div>
 
 				<!-- Routing Number -->
-				<div class="form-control">
+				<div class="form-group">
 					<label
 						for="routingNumber"
-						class="mb-1 block text-sm font-medium text-gray-700 dark:text-gray-200"
+						class="form-label"
 					>
 						Routing Number {recipientData.address.country !== 'US' ? '(Optional for non-US)' : ''}
 					</label>
@@ -256,36 +248,34 @@
 						type="text"
 						id="routingNumber"
 						bind:value={recipientData.routingNumber}
-						class="border-fintech-light-gray dark:border-fintech-muted bg-fintech-white dark:bg-fintech-dark-muted w-full rounded-lg border p-3 text-gray-900 dark:text-white {errors.routingNumber
-							? 'border-fintech-warn'
-							: ''} focus:border-fintech-red-canadian focus:ring-fintech-red-canadian transition-colors focus:ring-2"
+						class="input {errors.routingNumber ? 'border-cyber-alert' : 'input-bordered'}"
 						placeholder="Enter routing number"
 					/>
 					{#if errors.routingNumber}
-						<span class="text-fintech-warn mt-1 text-sm">{errors.routingNumber}</span>
+						<span class="text-cyber-alert mt-1 text-sm">{errors.routingNumber}</span>
 					{/if}
 				</div>
 
 				<!-- Address Section -->
-				<div class="border-fintech-light-gray dark:border-fintech-muted my-6 border-t"></div>
+				<div class="cyber-line"></div>
 				<h3
-					class="text-fintech-red-canadian dark:text-fintech-red-canadian text-sm font-semibold tracking-wider uppercase"
+					class="text-cyber-electric text-sm font-semibold tracking-wider uppercase"
 				>
 					Address
 				</h3>
 
 				<!-- Country -->
-				<div class="form-control">
+				<div class="form-group">
 					<label
 						for="country"
-						class="mb-1 block text-sm font-medium text-gray-700 dark:text-gray-200"
+						class="form-label"
 					>
 						Country
 					</label>
 					<select
 						id="country"
 						bind:value={recipientData.address.country}
-						class="border-fintech-light-gray dark:border-fintech-muted bg-fintech-white dark:bg-fintech-dark-muted focus:border-fintech-red-canadian focus:ring-fintech-red-canadian w-full rounded-lg border p-3 text-gray-900 transition-colors focus:ring-2 dark:text-white"
+						class="select select-bordered w-full"
 					>
 						{#each countries as country}
 							<option value={country.code}>{country.name}</option>
@@ -294,10 +284,10 @@
 				</div>
 
 				<!-- Address Line 1 -->
-				<div class="form-control">
+				<div class="form-group">
 					<label
 						for="addressLine1"
-						class="mb-1 block text-sm font-medium text-gray-700 dark:text-gray-200"
+						class="form-label"
 					>
 						Address Line 1
 					</label>
@@ -305,21 +295,19 @@
 						type="text"
 						id="addressLine1"
 						bind:value={recipientData.address.line1}
-						class="border-fintech-light-gray dark:border-fintech-muted bg-fintech-white dark:bg-fintech-dark-muted w-full rounded-lg border p-3 text-gray-900 dark:text-white {errors.addressLine1
-							? 'border-fintech-warn'
-							: ''} focus:border-fintech-red-canadian focus:ring-fintech-red-canadian transition-colors focus:ring-2"
+						class="input {errors.addressLine1 ? 'border-cyber-alert' : 'input-bordered'}"
 						placeholder="Street address, P.O. box, etc."
 					/>
 					{#if errors.addressLine1}
-						<span class="text-fintech-warn mt-1 text-sm">{errors.addressLine1}</span>
+						<span class="text-cyber-alert mt-1 text-sm">{errors.addressLine1}</span>
 					{/if}
 				</div>
 
 				<!-- Address Line 2 -->
-				<div class="form-control">
+				<div class="form-group">
 					<label
 						for="addressLine2"
-						class="mb-1 block text-sm font-medium text-gray-700 dark:text-gray-200"
+						class="form-label"
 					>
 						Address Line 2 (Optional)
 					</label>
@@ -327,17 +315,17 @@
 						type="text"
 						id="addressLine2"
 						bind:value={recipientData.address.line2}
-						class="border-fintech-light-gray dark:border-fintech-muted bg-fintech-white dark:bg-fintech-dark-muted focus:border-fintech-red-canadian focus:ring-fintech-red-canadian w-full rounded-lg border p-3 text-gray-900 transition-colors focus:ring-2 dark:text-white"
+						class="input input-bordered"
 						placeholder="Apartment, suite, unit, building, floor, etc."
 					/>
 				</div>
 
 				<!-- City, State, Postal Code -->
 				<div class="grid gap-6 md:grid-cols-3">
-					<div class="form-control">
+					<div class="form-group">
 						<label
 							for="city"
-							class="mb-1 block text-sm font-medium text-gray-700 dark:text-gray-200"
+							class="form-label"
 						>
 							City
 						</label>
@@ -345,20 +333,18 @@
 							type="text"
 							id="city"
 							bind:value={recipientData.address.city}
-							class="border-fintech-light-gray dark:border-fintech-muted bg-fintech-white dark:bg-fintech-dark-muted w-full rounded-lg border p-3 text-gray-900 dark:text-white {errors.city
-								? 'border-fintech-warn'
-								: ''} focus:border-fintech-red-canadian focus:ring-fintech-red-canadian transition-colors focus:ring-2"
+							class="input {errors.city ? 'border-cyber-alert' : 'input-bordered'}"
 							placeholder="City"
 						/>
 						{#if errors.city}
-							<span class="text-fintech-warn mt-1 text-sm">{errors.city}</span>
+							<span class="text-cyber-alert mt-1 text-sm">{errors.city}</span>
 						{/if}
 					</div>
 
-					<div class="form-control">
+					<div class="form-group">
 						<label
 							for="state"
-							class="mb-1 block text-sm font-medium text-gray-700 dark:text-gray-200"
+							class="form-label"
 						>
 							State/Province
 						</label>
@@ -366,20 +352,18 @@
 							type="text"
 							id="state"
 							bind:value={recipientData.address.state}
-							class="border-fintech-light-gray dark:border-fintech-muted bg-fintech-white dark:bg-fintech-dark-muted w-full rounded-lg border p-3 text-gray-900 dark:text-white {errors.state
-								? 'border-fintech-warn'
-								: ''} focus:border-fintech-red-canadian focus:ring-fintech-red-canadian transition-colors focus:ring-2"
+							class="input {errors.state ? 'border-cyber-alert' : 'input-bordered'}"
 							placeholder="State/Province"
 						/>
 						{#if errors.state}
-							<span class="text-fintech-warn mt-1 text-sm">{errors.state}</span>
+							<span class="text-cyber-alert mt-1 text-sm">{errors.state}</span>
 						{/if}
 					</div>
 
-					<div class="form-control">
+					<div class="form-group">
 						<label
 							for="postalCode"
-							class="mb-1 block text-sm font-medium text-gray-700 dark:text-gray-200"
+							class="form-label"
 						>
 							Postal Code
 						</label>
@@ -387,46 +371,44 @@
 							type="text"
 							id="postalCode"
 							bind:value={recipientData.address.postalCode}
-							class="border-fintech-light-gray dark:border-fintech-muted bg-fintech-white dark:bg-fintech-dark-muted w-full rounded-lg border p-3 text-gray-900 dark:text-white {errors.postalCode
-								? 'border-fintech-warn'
-								: ''} focus:border-fintech-red-canadian focus:ring-fintech-red-canadian transition-colors focus:ring-2"
+							class="input {errors.postalCode ? 'border-cyber-alert' : 'input-bordered'}"
 							placeholder="Postal code"
 						/>
 						{#if errors.postalCode}
-							<span class="text-fintech-warn mt-1 text-sm">{errors.postalCode}</span>
+							<span class="text-cyber-alert mt-1 text-sm">{errors.postalCode}</span>
 						{/if}
 					</div>
 				</div>
 
 				<!-- Payment Details -->
-				<div class="border-fintech-light-gray dark:border-fintech-muted my-6 border-t"></div>
+				<div class="cyber-line"></div>
 				<h3
-					class="text-fintech-red-canadian dark:text-fintech-red-canadian text-sm font-semibold tracking-wider uppercase"
+					class="text-cyber-electric text-sm font-semibold tracking-wider uppercase"
 				>
 					Payment Details
 				</h3>
 
 				<!-- Description -->
-				<div class="form-control">
+				<div class="form-group">
 					<label
 						for="description"
-						class="mb-1 block text-sm font-medium text-gray-700 dark:text-gray-200"
+						class="form-label"
 					>
 						Payment Description (Optional)
 					</label>
 					<textarea
 						id="description"
 						bind:value={recipientData.description}
-						class="border-fintech-light-gray dark:border-fintech-muted bg-fintech-white dark:bg-fintech-dark-muted focus:border-fintech-red-canadian focus:ring-fintech-red-canadian h-24 w-full rounded-lg border p-3 text-gray-900 transition-colors focus:ring-2 dark:text-white"
+						class="input input-bordered h-24 w-full"
 						placeholder="Enter payment purpose or description"
 					></textarea>
 				</div>
 
 				<!-- Submit Button -->
-				<div class="form-control mt-8">
+				<div class="form-group mt-8">
 					<button
 						type="submit"
-						class="bg-fintech-red-canadian text-fintech-white hover:bg-fintech-red-canadian-muted hover:shadow-fintech-red-canadian/50 focus:ring-fintech-red-canadian dark:focus:ring-offset-fintech-dark w-full rounded-lg px-6 py-3 font-medium shadow-lg transition-colors focus:ring-2 focus:ring-offset-2"
+						class="btn-primary btn-glow w-full rounded-lg px-6 py-3 font-medium shadow-lg"
 					>
 						Save Recipient
 					</button>
@@ -436,12 +418,12 @@
 			<!-- Form Status Messages -->
 			{#if formSubmitted && !formValid}
 				<div
-					class="bg-fintech-warn/10 mt-6 flex items-center space-x-3 rounded-lg p-4"
+					class="bg-cyber-alert/10 mt-6 flex items-center space-x-3 rounded-lg p-4 border border-cyber-alert/30"
 					in:fade={{ duration: 300 }}
 				>
 					<svg
 						xmlns="http://www.w3.org/2000/svg"
-						class="text-fintech-warn h-6 w-6"
+						class="text-cyber-alert h-6 w-6"
 						fill="none"
 						viewBox="0 0 24 24"
 						stroke="currentColor"
@@ -453,7 +435,7 @@
 							d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z"
 						/>
 					</svg>
-					<span class="text-fintech-warn text-sm">Please correct the errors in the form.</span>
+					<span class="text-cyber-alert text-sm">Please correct the errors in the form.</span>
 				</div>
 			{/if}
 		</div>

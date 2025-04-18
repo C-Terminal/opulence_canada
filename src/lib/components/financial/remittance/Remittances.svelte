@@ -109,25 +109,23 @@
 		deliveryMethod: 'pickup'
 	  };
 	}
-  </script>
+</script>
   
-  <div
-	class="font-serif mx-auto max-w-4xl p-6 rounded-xl bg-fintech-white dark:bg-fintech-dark border border-fintech-light-gray dark:border-fintech-muted shadow-xl"
-  >
+<div class="font-space-grotesk mx-auto max-w-4xl p-6 rounded-xl cyber-panel shadow-xl">
 	<!-- Service Selection Tabs -->
-	<div class="mb-8 flex rounded-lg bg-fintech-light-gray dark:bg-fintech-muted p-1">
+	<div class="mb-8 flex rounded-lg bg-cyber-charcoal p-1">
 	  <button
 		class="flex-1 rounded-lg px-6 py-3 text-center font-medium transition-all duration-200 {activeTab === 'remittance'
-		  ? 'bg-fintech-accent  text-fintech-white shadow-md'
-		  : 'text-gray-600 dark:text-gray-300 hover:bg-fintech-gray dark:hover:bg-fintech-dark-gray'}"
+		  ? 'bg-cyber-blue text-cyber-white shadow-md'
+		  : 'text-cyber-silver hover:bg-cyber-black dark:hover:bg-cyber-charcoal'}"
 		on:click={() => (activeTab = 'remittance')}
 	  >
 		International Remittances
 	  </button>
 	  <button
 		class="flex-1 rounded-lg px-6 py-3 text-center font-medium transition-all duration-200 {activeTab === 'moneyOrder'
-		  ? 'bg-fintech-accent  text-fintech-white shadow-md'
-		  : 'text-gray-600 dark:text-gray-300 hover:bg-fintech-gray dark:hover:bg-fintech-dark-gray'}"
+		  ? 'bg-cyber-blue text-cyber-white shadow-md'
+		  : 'text-cyber-silver hover:bg-cyber-black dark:hover:bg-cyber-charcoal'}"
 		on:click={() => (activeTab = 'moneyOrder')}
 	  >
 		Money Orders
@@ -138,10 +136,10 @@
 	  <!-- Remittance Form -->
 	  {#if activeTab === 'remittance'}
 		<div in:fade={{ duration: 400 }}>
-		  <h2 class="mb-6 text-2xl font-bold tracking-tight text-fintech-accent dark:text-fintech-yellow">
+		  <h2 class="mb-6 text-2xl font-bold tracking-tight text-cyber-neon">
 			Send Money Home
 		  </h2>
-		  <p class="mb-8 text-gray-600 dark:text-gray-200">
+		  <p class="mb-8 text-cyber-silver">
 			Support your loved ones by sending money back home quickly and securely with competitive
 			rates.
 		  </p>
@@ -151,7 +149,7 @@
 			  <div>
 				<label
 				  for="senderName"
-				  class="mb-1 block text-sm font-medium text-gray-700 dark:text-gray-200"
+				  class="form-label"
 				>
 				  Your Name
 				</label>
@@ -159,7 +157,7 @@
 				  type="text"
 				  id="senderName"
 				  bind:value={remittanceData.senderName}
-				  class="w-full rounded-lg border border-fintech-light-gray dark:border-fintech-muted p-3 bg-fintech-white dark:bg-fintech-dark-muted text-gray-900 dark:text-white focus:border-fintech-accent focus:ring-2 focus:ring-fintech-accent transition-colors"
+				  class="input input-bordered"
 				  placeholder="Your full name"
 				  required
 				/>
@@ -167,7 +165,7 @@
 			  <div>
 				<label
 				  for="recipientName"
-				  class="mb-1 block text-sm font-medium text-gray-700 dark:text-gray-200"
+				  class="form-label"
 				>
 				  Recipient Name
 				</label>
@@ -175,7 +173,7 @@
 				  type="text"
 				  id="recipientName"
 				  bind:value={remittanceData.recipientName}
-				  class="w-full rounded-lg border border-fintech-light-gray dark:border-fintech-muted p-3 bg-fintech-white dark:bg-fintech-dark-muted text-gray-900 dark:text-white focus:border-fintech-accent focus:ring-2 focus:ring-fintech-accent transition-colors"
+				  class="input input-bordered"
 				  placeholder="Recipient's full name"
 				  required
 				/>
@@ -186,14 +184,14 @@
 			  <div>
 				<label
 				  for="country"
-				  class="mb-1 block text-sm font-medium text-gray-700 dark:text-gray-200"
+				  class="form-label"
 				>
 				  Recipient Country
 				</label>
 				<select
 				  id="country"
 				  bind:value={remittanceData.recipientCountry}
-				  class="w-full rounded-lg border border-fintech-light-gray dark:border-fintech-muted p-3 bg-fintech-white dark:bg-fintech-dark-muted text-gray-900 dark:text-white focus:border-fintech-accent focus:ring-2 focus:ring-fintech-accent transition-colors"
+				  class="select"
 				  required
 				>
 				  <option value="" disabled selected>Select a country</option>
@@ -207,7 +205,7 @@
 				<div>
 				  <label
 					for="amount"
-					class="mb-1 block text-sm font-medium text-gray-700 dark:text-gray-200"
+					class="form-label"
 				  >
 					Amount
 				  </label>
@@ -217,7 +215,7 @@
 					bind:value={remittanceData.amount}
 					min="1"
 					step="0.01"
-					class="w-full rounded-lg border border-fintech-light-gray dark:border-fintech-muted p-3 bg-fintech-white dark:bg-fintech-dark-muted text-gray-900 dark:text-white focus:border-fintech-accent focus:ring-2 focus:ring-fintech-accent transition-colors"
+					class="input input-bordered"
 					placeholder="0.00"
 					required
 				  />
@@ -225,14 +223,14 @@
 				<div>
 				  <label
 					for="currency"
-					class="mb-1 block text-sm font-medium text-gray-700 dark:text-gray-200"
+					class="form-label"
 				  >
 					Currency
 				  </label>
 				  <select
 					id="currency"
 					bind:value={remittanceData.currency}
-					class="w-full rounded-lg border border-fintech-light-gray dark:border-fintech-muted p-3 bg-fintech-white dark:bg-fintech-dark-muted text-gray-900 dark:text-white focus:border-fintech-accent focus:ring-2 focus:ring-fintech-accent transition-colors"
+					class="select"
 				  >
 					{#each currencies as currency}
 					  <option value={currency}>{currency}</option>
@@ -245,13 +243,13 @@
 			<div>
 			  <label
 				for="paymentMethod"
-				class="mb-1 block text-sm font-medium text-gray-700 dark:text-gray-200"
+				class="form-label"
 			  >
 				Payment Method
 			  </label>
 			  <div class="grid grid-cols-1 gap-3 md:grid-cols-3">
 				<label
-				  class="relative flex cursor-pointer items-center rounded-lg border border-fintech-light-gray dark:border-fintech-muted p-3 bg-fintech-white dark:bg-fintech-dark-muted hover:bg-fintech-light-gray/50 dark:hover:bg-fintech-gray"
+				  class="relative flex cursor-pointer items-center rounded-lg border border-cyber-silver/20 p-3 bg-cyber-black/50 hover:bg-cyber-charcoal"
 				>
 				  <input
 					id="paymentMethod"
@@ -259,57 +257,55 @@
 					name="paymentMethod"
 					value="bank"
 					bind:group={remittanceData.paymentMethod}
-					class="h-4 w-4 text-fintech-accent focus:ring-fintech-accent"
+					class="radio"
 				  />
-				  <span class="ml-3 text-gray-900 dark:text-white">Bank Transfer</span>
+				  <span class="ml-3 text-cyber-white">Bank Transfer</span>
 				</label>
 				<label
-				  class="relative flex cursor-pointer items-center rounded-lg border border-fintech-light-gray dark:border-fintech-muted p-3 bg-fintech-white dark:bg-fintech-dark-muted hover:bg-fintech-light-gray/50 dark:hover:bg-fintech-gray"
+				  class="relative flex cursor-pointer items-center rounded-lg border border-cyber-silver/20 p-3 bg-cyber-black/50 hover:bg-cyber-charcoal"
 				>
 				  <input
 					type="radio"
 					name="paymentMethod"
 					value="card"
 					bind:group={remittanceData.paymentMethod}
-					class="h-4 w-4 text-fintech-accent focus:ring-fintech-accent"
+					class="radio"
 				  />
-				  <span class="ml-3 text-gray-900 dark:text-white">Debit/Credit</span>
+				  <span class="ml-3 text-cyber-white">Debit/Credit</span>
 				</label>
 				<label
-				  class="relative flex cursor-pointer items-center rounded-lg border border-fintech-light-gray dark:border-fintech-muted p-3 bg-fintech-white dark:bg-fintech-dark-muted hover:bg-fintech-light-gray/50 dark:hover:bg-fintech-gray"
+				  class="relative flex cursor-pointer items-center rounded-lg border border-cyber-silver/20 p-3 bg-cyber-black/50 hover:bg-cyber-charcoal"
 				>
 				  <input
 					type="radio"
 					name="paymentMethod"
 					value="cash"
 					bind:group={remittanceData.paymentMethod}
-					class="h-4 w-4 text-fintech-accent focus:ring-fintech-accent"
+					class="radio"
 				  />
-				  <span class="ml-3 text-gray-900 dark:text-white">Cash Deposit</span>
+				  <span class="ml-3 text-cyber-white">Cash Deposit</span>
 				</label>
 			  </div>
 			</div>
   
 			{#if remittanceData.amount}
-			  <div
-				class="rounded-lg border border-fintech-light-gray dark:border-fintech-muted bg-fintech-white dark:bg-fintech-muted p-4"
-			  >
+			  <div class="card-glass">
 				<div class="mb-2 flex items-center justify-between">
-				  <span class="text-gray-600 dark:text-gray-200">Amount</span>
-				  <span class="font-medium text-gray-900 dark:text-white"
+				  <span class="text-cyber-silver">Amount</span>
+				  <span class="font-medium text-cyber-white"
 					>{parseFloat(remittanceData.amount).toFixed(2)} {remittanceData.currency}</span
 				  >
 				</div>
 				<div class="mb-2 flex items-center justify-between">
-				  <span class="text-gray-600 dark:text-gray-200">Transfer Fee</span>
-				  <span class="font-medium text-gray-900 dark:text-white"
+				  <span class="text-cyber-silver">Transfer Fee</span>
+				  <span class="font-medium text-cyber-white"
 					>{remittanceFee.toFixed(2)} {remittanceData.currency}</span
 				  >
 				</div>
-				<div class="my-2 border-t border-fintech-light-gray dark:border-fintech-gray"></div>
+				<div class="my-2 border-t border-cyber-silver/10"></div>
 				<div class="flex items-center justify-between font-bold">
-				  <span class="text-gray-900 dark:text-white">Total</span>
-				  <span class="text-gray-900 dark:text-white"
+				  <span class="text-cyber-white">Total</span>
+				  <span class="text-cyber-neon cyber-glow"
 					>{(Number(remittanceData.amount || 0) + remittanceFee).toFixed(2)}
 					{remittanceData.currency}</span
 				  >
@@ -319,7 +315,7 @@
   
 			<button
 			  type="submit"
-			  class="w-full rounded-lg bg-fintech-accent text-fintech-white px-6 py-4 font-medium  transition-colors shadow-lg hover:shadow-fintech-accent/50 focus:ring-2 focus:ring-fintech-accent focus:ring-offset-2 focus:outline-none disabled:bg-fintech-gray disabled:text-gray-200"
+			  class="btn btn-lg btn-primary btn-glow w-full"
 			  disabled={isSubmitting}
 			>
 			  {isSubmitting ? 'Processing...' : 'Send Remittance'}
@@ -331,10 +327,10 @@
 	  <!-- Money Order Form -->
 	  {#if activeTab === 'moneyOrder'}
 		<div in:fade={{ duration: 400 }}>
-		  <h2 class="mb-6 text-2xl font-bold tracking-tight text-fintech-yellow dark:text-fintech-yellow">
+		  <h2 class="mb-6 text-2xl font-bold tracking-tight text-cyber-accent">
 			Purchase Money Orders
 		  </h2>
-		  <p class="mb-8 text-gray-600 dark:text-gray-200">
+		  <p class="mb-8 text-cyber-silver">
 			Secure alternative to cash or personal checks for convenient and trackable payments.
 		  </p>
   
@@ -343,7 +339,7 @@
 			  <div>
 				<label
 				  for="purchaserName"
-				  class="mb-1 block text-sm font-medium text-gray-700 dark:text-gray-200"
+				  class="form-label"
 				>
 				  Purchaser Name
 				</label>
@@ -351,7 +347,7 @@
 				  type="text"
 				  id="purchaserName"
 				  bind:value={moneyOrderData.purchaserName}
-				  class="w-full rounded-lg border border-fintech-light-gray dark:border-fintech-muted p-3 bg-fintech-white dark:bg-fintech-dark-muted text-gray-900 dark:text-white focus:border-fintech-accent focus:ring-2 focus:ring-fintech-accent transition-colors"
+				  class="input input-bordered"
 				  placeholder="Your full name"
 				  required
 				/>
@@ -359,7 +355,7 @@
 			  <div>
 				<label
 				  for="moRecipientName"
-				  class="mb-1 block text-sm font-medium text-gray-700 dark:text-gray-200"
+				  class="form-label"
 				>
 				  Payable To
 				</label>
@@ -367,7 +363,7 @@
 				  type="text"
 				  id="moRecipientName"
 				  bind:value={moneyOrderData.recipientName}
-				  class="w-full rounded-lg border border-fintech-light-gray dark:border-fintech-muted p-3 bg-fintech-white dark:bg-fintech-dark-muted text-gray-900 dark:text-white focus:border-fintech-accent focus:ring-2 focus:ring-fintech-accent transition-colors"
+				  class="input input-bordered"
 				  placeholder="Recipient's name or business"
 				  required
 				/>
@@ -379,7 +375,7 @@
 				<div>
 				  <label
 					for="moAmount"
-					class="mb-1 block text-sm font-medium text-gray-700 dark:text-gray-200"
+					class="form-label"
 				  >
 					Amount
 				  </label>
@@ -390,7 +386,7 @@
 					min="1"
 					max="1000"
 					step="0.01"
-					class="w-full rounded-lg border border-fintech-light-gray dark:border-fintech-muted p-3 bg-fintech-white dark:bg-fintech-dark-muted text-gray-900 dark:text-white focus:border-fintech-accent focus:ring-2 focus:ring-fintech-accent transition-colors"
+					class="input input-bordered"
 					placeholder="0.00"
 					required
 				  />
@@ -398,14 +394,14 @@
 				<div>
 				  <label
 					for="moCurrency"
-					class="mb-1 block text-sm font-medium text-gray-700 dark:text-gray-200"
+					class="form-label"
 				  >
 					Currency
 				  </label>
 				  <select
 					id="moCurrency"
 					bind:value={moneyOrderData.currency}
-					class="w-full rounded-lg border border-fintech-light-gray dark:border-fintech-muted p-3 bg-fintech-white dark:bg-fintech-dark-muted text-gray-900 dark:text-white focus:border-fintech-accent focus:ring-2 focus:ring-fintech-accent transition-colors"
+					class="select"
 				  >
 					{#each currencies.slice(0, 3) as currency}
 					  <option value={currency}>{currency}</option>
@@ -416,35 +412,33 @@
   
 			  <div>
 				<fieldset>
-				  <legend
-					class="mb-1 block text-sm font-medium text-gray-700 dark:text-gray-200"
-				  >
+				  <legend class="form-label">
 					Delivery Method
 				  </legend>
 				  <div class="grid grid-cols-2 gap-3">
 					<label
-					  class="relative flex cursor-pointer items-center rounded-lg border border-fintech-light-gray dark:border-fintech-muted p-3 bg-fintech-white dark:bg-fintech-dark-muted hover:bg-fintech-light-gray/50 dark:hover:bg-fintech-gray"
+					  class="relative flex cursor-pointer items-center rounded-lg border border-cyber-silver/20 p-3 bg-cyber-black/50 hover:bg-cyber-charcoal"
 					>
 					  <input
 						type="radio"
 						name="deliveryMethod"
 						value="pickup"
 						bind:group={moneyOrderData.deliveryMethod}
-						class="h-4 w-4 text-fintech-accent focus:ring-fintech-accent"
+						class="radio"
 					  />
-					  <span class="ml-3 text-gray-900 dark:text-white">In-store Pickup</span>
+					  <span class="ml-3 text-cyber-white">In-store Pickup</span>
 					</label>
 					<label
-					  class="relative flex cursor-pointer items-center rounded-lg border border-fintech-light-gray dark:border-fintech-muted p-3 bg-fintech-white dark:bg-fintech-dark-muted hover:bg-fintech-light-gray/50 dark:hover:bg-fintech-gray"
+					  class="relative flex cursor-pointer items-center rounded-lg border border-cyber-silver/20 p-3 bg-cyber-black/50 hover:bg-cyber-charcoal"
 					>
 					  <input
 						type="radio"
 						name="deliveryMethod"
 						value="mail"
 						bind:group={moneyOrderData.deliveryMethod}
-						class="h-4 w-4 text-fintech-accent focus:ring-fintech-accent"
+						class="radio"
 					  />
-					  <span class="ml-3 text-gray-900 dark:text-white">Mail Delivery</span>
+					  <span class="ml-3 text-cyber-white">Mail Delivery</span>
 					</label>
 				  </div>
 				</fieldset>
@@ -452,33 +446,31 @@
 			</div>
   
 			{#if moneyOrderData.amount}
-			  <div
-				class="rounded-lg border border-fintech-light-gray dark:border-fintech-muted bg-fintech-white dark:bg-fintech-muted p-4"
-			  >
+			  <div class="card-glass">
 				<div class="mb-2 flex items-center justify-between">
-				  <span class="text-gray-600 dark:text-gray-200">Money Order Amount</span>
-				  <span class="font-medium text-gray-900 dark:text-white"
+				  <span class="text-cyber-silver">Money Order Amount</span>
+				  <span class="font-medium text-cyber-white"
 					>{parseFloat(moneyOrderData.amount).toFixed(2)} {moneyOrderData.currency}</span
 				  >
 				</div>
 				<div class="mb-2 flex items-center justify-between">
-				  <span class="text-gray-600 dark:text-gray-200">Service Fee</span>
-				  <span class="font-medium text-gray-900 dark:text-white"
+				  <span class="text-cyber-silver">Service Fee</span>
+				  <span class="font-medium text-cyber-white"
 					>{moneyOrderFee.toFixed(2)} {moneyOrderData.currency}</span
 				  >
 				</div>
 				{#if moneyOrderData.deliveryMethod === 'mail'}
 				  <div class="mb-2 flex items-center justify-between">
-					<span class="text-gray-600 dark:text-gray-200">Shipping</span>
-					<span class="font-medium text-gray-900 dark:text-white"
+					<span class="text-cyber-silver">Shipping</span>
+					<span class="font-medium text-cyber-white"
 					  >5.00 {moneyOrderData.currency}</span
 					>
 				  </div>
 				{/if}
-				<div class="my-2 border-t border-fintech-light-gray dark:border-fintech-gray"></div>
+				<div class="my-2 border-t border-cyber-silver/10"></div>
 				<div class="flex items-center justify-between font-bold">
-				  <span class="text-gray-900 dark:text-white">Total</span>
-				  <span class="text-gray-900 dark:text-white"
+				  <span class="text-cyber-white">Total</span>
+				  <span class="text-cyber-accent cyber-glow"
 					>{(Number(moneyOrderData.amount || 0) + moneyOrderFee + (moneyOrderData.deliveryMethod === 'mail' ? 5 : 0)).toFixed(2)} {moneyOrderData.currency}</span
 				  >
 				</div>
@@ -487,7 +479,7 @@
   
 			<button
 			  type="submit"
-			  class="w-full rounded-lg bg-fintech-accent text-fintech-white px-6 py-4 font-medium  transition-colors shadow-lg hover:shadow-fintech-accent/50 focus:ring-2 focus:ring-fintech-accent focus:ring-offset-2 focus:outline-none disabled:bg-fintech-gray disabled:text-gray-200"
+			  class="btn btn-lg btn-secondary btn-glow w-full"
 			  disabled={isSubmitting}
 			>
 			  {isSubmitting ? 'Processing...' : 'Purchase Money Order'}
@@ -499,11 +491,11 @@
 	  <!-- Confirmation Screen -->
 	  <div in:fly={{ y: 20, duration: 600 }} class="py-6 text-center">
 		<div
-		  class="mb-6 inline-flex h-16 w-16 items-center justify-center rounded-full bg-fintech-green/10 dark:bg-fintech-green/20"
+		  class="mb-6 inline-flex h-16 w-16 items-center justify-center rounded-full bg-cyber-verify/20"
 		>
 		  <svg
 			xmlns="http://www.w3.org/2000/svg"
-			class="h-8 w-8 text-fintech-green"
+			class="h-8 w-8 text-cyber-verify cyber-animation-pulse"
 			fill="none"
 			viewBox="0 0 24 24"
 			stroke="currentColor"
@@ -517,13 +509,11 @@
 		  </svg>
 		</div>
   
-		<h2
-		  class="mb-2 text-2xl font-bold tracking-tight text-fintech-accent dark:text-fintech-accent"
-		>
+		<h2 class="mb-2 text-2xl font-bold tracking-tight text-cyber-blue">
 		  {activeTab === 'remittance' ? 'Remittance Sent!' : 'Money Order Purchased!'}
 		</h2>
   
-		<p class="mb-6 text-gray-600 dark:text-gray-200">
+		<p class="mb-6 text-cyber-silver">
 		  {#if activeTab === 'remittance'}
 			Your money is on its way to {remittanceData.recipientName} in {remittanceData.recipientCountry}.
 		  {:else}
@@ -533,26 +523,22 @@
 		  {/if}
 		</p>
   
-		<div
-		  class="mx-auto mb-8 max-w-sm rounded-lg border border-fintech-light-gray dark:border-fintech-muted bg-fintech-white dark:bg-fintech-muted p-4"
-		>
+		<div class="mx-auto mb-8 max-w-sm card-glass">
 		  <div class="mb-2 flex items-center justify-between">
-			<span class="text-gray-600 dark:text-gray-200">Reference ID</span>
-			<span class="font-medium text-gray-900 dark:text-white"
+			<span class="text-cyber-silver">Reference ID</span>
+			<span class="font-medium font-jet-mono text-cyber-neon"
 			  >{Math.random().toString(36).substring(2, 10).toUpperCase()}</span
 			>
 		  </div>
 		  <div class="mb-2 flex items-center justify-between">
-			<span class="text-gray-600 dark:text-gray-200">Date</span>
-			<span class="font-medium text-gray-900 dark:text-white"
+			<span class="text-cyber-silver">Date</span>
+			<span class="font-medium text-cyber-white"
 			  >{new Date().toLocaleDateString()}</span
 			>
 		  </div>
 		  <div class="flex items-center justify-between">
-			<span class="text-gray-600 dark:text-gray-200">Status</span>
-			<span
-			  class="inline-flex items-center rounded-full bg-fintech-green/10 dark:bg-fintech-green/20 px-2.5 py-0.5 text-xs font-medium text-fintech-green"
-			>
+			<span class="text-cyber-silver">Status</span>
+			<span class="badge badge-success">
 			  Completed
 			</span>
 		  </div>
@@ -560,10 +546,10 @@
   
 		<button
 		  on:click={resetForms}
-		  class="inline-flex items-center rounded-lg bg-fintech-accent text-fintech-dark px-6 py-3 font-medium shadow-lg hover:bg-fintech-accent-muted hover:shadow-fintech-accent/50 focus:ring-2 focus:ring-fintech-accent focus:ring-offset-2 focus:outline-none"
+		  class="btn btn-accent"
 		>
 		  Return to Form
 		</button>
 	  </div>
 	{/if}
-  </div>
+</div>

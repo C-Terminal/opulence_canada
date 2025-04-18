@@ -2,7 +2,7 @@
 	import { onMount } from 'svelte'; // Import onMount if needed for triggering
 	import TouchableDiv from '$lib/components/common/TouchableDiv.svelte';
 	import { fade } from 'svelte/transition';
-
+	import { WavyBackground } from '$lib/components/ui/WavyBackground';
 	let isLoggedIn = false; // Currently unused, keep or remove as needed
 
 	// Define the modal element reference - Svelte will populate this
@@ -20,31 +20,24 @@
 	}
 </script>
 
-<div class="relative min-h-screen overflow-hidden bg-black text-white">
-	<!-- Hero Section -->
-	<section
-		class="bg-fintech-dark relative flex min-h-screen items-center justify-center overflow-hidden"
-	>
-		<!-- Background Gradient -->
-		<div class="from-fintech-muted/20 absolute inset-0 bg-gradient-to-br to-transparent"></div>
+<div class="relative min-h-screen">
+	<section>
+		<WavyBackground className="max-w-6xl mx-auto py-20 md:py-32 lg:py-40" containerClassName="bg-surface" backgroundFill="bg-surface" speed={'fast'}>
+			<p class="inter-var text-center text-2xl font-bold text-cyber-white md:text-4xl lg:text-7xl">
+				The Great Canadian Exchange
+			</p>
 
-		<div class="z-10 container mx-auto px-6 text-center" in:fade={{ duration: 1000 }}>
-			<h1
-				class="from-fintech-accent mb-6 bg-gradient-to-r to-white bg-clip-text text-5xl font-bold tracking-tight text-transparent md:text-7xl"
-			>
-				Empower Your Wealth
-			</h1>
-			<p class="mx-auto mb-8 max-w-2xl text-xl text-gray-400 md:text-2xl">
+			<p class="inter-var mt-4 text-center text-base font-normal text-white md:text-lg">
 				Unleash the future of finance with cutting-edge tools designed for the bold.
 			</p>
 			<div class="mx-auto mt-6 mb-12 max-w-4xl text-center">
 				<!-- Use bind:this directly instead of document.getElementById -->
 				<button
-					class="btn-ghost rounded-full bg-yellow-400 px-6 py-3 font-medium text-black hover:bg-yellow-500"
+					class="btn-ghost  btn rounded-2xl btn-lg text-white hover:bg-cyber-blue/20 focus-visible:ring-cyber-blue"
 					on:click={openModal}>Request Early Access</button
 				>
 			</div>
-		</div>
+		</WavyBackground>
 	</section>
 
 	<!-- Features Section -->
@@ -75,15 +68,8 @@
 		</div>
 	</section>
 
-	<!-- Main Content -->
 	<div class="relative z-20 container mx-auto px-4 pt-20">
-		<div
-			class="mx-auto mb-20 flex max-w-xl flex-col items-center justify-evenly space-y-1  rounded-full bg-zinc-900 px-6 py-4 md:flex-row md:space-y-0 md:space-x-2"
-		>
-			<span class="hidden text-sm text-gray-200 md:block">Regional access TBA soon</span>
 
-			<button class="btn btn-md rounded-2xl " on:click={openModal}>Get the app</button>
-		</div>
 
 		<dialog id="modal" class="modal modal-bottom sm:modal-middle" bind:this={modal}>
 			<div class="modal-box">

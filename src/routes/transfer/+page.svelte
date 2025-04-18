@@ -25,13 +25,11 @@
 	}
 </script>
 
-<main class="min-h-screen bg-gray-100 py-12">
-	<h1 class="mb-6 text-center text-3xl font-bold text-blue-800">Money Transfer</h1>
+<main class="min-h-screen bg-cyber-white py-12 cyberpunk-grid ">
 	<div class="container mx-auto max-w-2xl px-4">
+		<h1 class="text-center text-3xl cyber-terminal">Money Transfer</h1>
 		<!-- import CreditCardPayment form -->
 		<CreditCardPayment />
-
-	
 	</div>
 
 	<!-- import  -->

@@ -20,7 +20,7 @@
 	class:duration-300={isTouched}
 	on:touchstart={handleTouchStart}
 	on:touchend={handleTouchEnd}
-	class="bg-fintech-dark hover:shadow-fintech-accent/50 rounded-lg p-6 shadow-xl transition-shadow duration-300"
+	class="card card-highlight"
 >
 	<slot />
 </div>

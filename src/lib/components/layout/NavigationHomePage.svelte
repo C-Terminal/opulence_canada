@@ -1,9 +1,19 @@
 <script>
-	import { slide, fade } from 'svelte/transition';
+	import { slide, fade, fly } from 'svelte/transition';
 	import { onMount } from 'svelte';
+	import { quintOut } from 'svelte/easing';
 
 	// Reactive state for menu toggle
 	let isMenuOpen = $state(false);
+	
+	// Active link tracking
+	let activeLink = $state('/');
+	
+	// Animation direction control
+	let menuHeight;
+	
+	// Hover states for glow effects
+	let hoveredLink = $state(Number(null) || null);
 
 	// Navigation links
 	const navLinks = [
@@ -22,60 +32,114 @@
 	function closeMenu() {
 		isMenuOpen = false;
 	}
+	
+	// Set hovered link for glow effect
+	/**
+	 * @param {number | null} index
+	 */
+	function setHoveredLink(index) {
+		hoveredLink = Number(index);
+	}
+	
+	function clearHoveredLink() {
+		hoveredLink = null;
+	}
+	
+	// Set active link based on current path
+	function setActivePath() {
+		activeLink = window.location.pathname;
+	}
 
 	// Ensure menu closes on resize to desktop
 	onMount(() => {
+		setActivePath();
+		
 		const handleResize = () => {
 			if (window.innerWidth >= 768) {
 				isMenuOpen = false;
 			}
 		};
+		
 		window.addEventListener('resize', handleResize);
 		return () => window.removeEventListener('resize', handleResize);
 	});
 </script>
 
 <nav
-	class="bg-fintech-white dark:bg-fintech-dark border-fintech-light-gray dark:border-fintech-muted border-b shadow-sm"
+	class="bg-cyber-midnight border-cyber-blue/20 border-b shadow-md backdrop-blur-sm sticky top-0 z-50 font-jet-mono"
 	aria-label="Main navigation"
 	role="navigation"
 >
-	<div class="container mx-auto flex items-center justify-between px-4 py-4">
+	<div class="container mx-auto flex items-center justify-between px-4 py-3">
 		<!-- Branding -->
 		<div class="flex-shrink-0">
 			<a
 				href="/"
-				class="text-fintech-red-canadian dark:text-fintech-red-canadian text-xl font-bold"
-				aria-label="Opulence Canada Homepage"
+				class="font-space-grotesk text-xl font-bold tracking-tight flex items-center"
+				aria-label="The Great Canadian Exchange Homepage"
 			>
-			<span class="text-fintech-dark dark:text-fintech-white">Opulence</span>
-			<span>Canada</span>
+				<span class="text-cyber-white">The</span>
+				<span class="text-cyber- cyber-glow  text-gradient-purple ml-1">GCE</span>
 			</a>
 		</div>
 
 		<!-- Desktop Navigation (md: and up) -->
-		<div class="hidden md:flex md:items-center md:space-x-6 font-serif">
+		<div class="hidden md:flex md:items-center md:space-x-6">
 			{#each navLinks as link, index}
 				<a
 					href={link.href}
-					class="hover:text-fintech-accent dark:hover:text-fintech-red-canadian focus:ring-fintech-accent dark:focus:ring-offset-fintech-dark text-gray-600 transition-colors duration-200 focus:ring-2 focus:ring-offset-2 focus:outline-none dark:text-gray-200"
+					class="text-cyber-silver hover:text-cyber-neon focus:ring-cyber-neon transition-all duration-300 focus:ring-2 focus:ring-offset-2 focus:outline-none focus:ring-offset-cyber-midnight text-sm font-medium py-2 px-1 border-b-2 border-transparent {activeLink === link.href ? 'border-cyber-electric text-cyber-white' : ''} {hoveredLink === index ? 'cyber-glow' : ''}"
 					in:fade={{ duration: 300, delay: index * 100 }}
+					on:mouseenter={() => setHoveredLink(index)}
+					on:mouseleave={clearHoveredLink}
 				>
 					{link.name}
 				</a>
 			{/each}
 		</div>
 
-		<!-- Mobile Hamburger Button and Search -->
-		<div class="flex items-center space-x-2">
-			<!-- Search Button (visible on all screens) -->
+		<!-- Action Buttons -->
+		<div class="hidden md:flex items-center space-x-4">
+			<button 
+				class="btn-ghost text-cyber-silver hover:text-cyber-white p-2 rounded-full transition-all duration-200" 
+				aria-label="Search"
+				in:fade={{ duration: 300, delay: 400 }}
+			>
+				<svg
+					xmlns="http://www.w3.org/2000/svg"
+					class="h-5 w-5"
+					fill="none"
+					viewBox="0 0 24 24"
+					stroke="currentColor"
+					aria-hidden="true"
+				>
+					<path
+						stroke-linecap="round"
+						stroke-linejoin="round"
+						stroke-width="2"
+						d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
+					/>
+				</svg>
+			</button>
+			
+			<button 
+				class="btn btn-sm btn-primary cyber-glow" 
+				in:fade={{ duration: 300, delay: 500 }}
+			>
+				Sign In
+			</button>
+		</div>
+
+		<!-- Mobile Controls -->
+		<div class="flex items-center space-x-2 md:hidden">
+			<!-- Search Button -->
 			<button
-				class="hover:text-fintech-accent dark:hover:text-fintech-red-canadian focus:ring-fintech-accent dark:focus:ring-offset-fintech-dark rounded-full p-2 text-gray-500 transition-colors focus:ring-2 focus:ring-offset-2 focus:outline-none dark:text-gray-200"
+				class="text-cyber-silver hover:text-cyber-neon focus:ring-cyber-neon rounded-full p-2 transition-colors focus:ring-2 focus:ring-offset-2 focus:outline-none focus:ring-offset-cyber-midnight"
 				aria-label="Search"
 			>
 				<svg
 					xmlns="http://www.w3.org/2000/svg"
-					class="h-6 w-6"
+					class="h-5 w-5"
 					fill="none"
 					viewBox="0 0 24 24"
 					stroke="currentColor"
@@ -90,12 +154,10 @@
 				</svg>
 			</button>
 
-			<!-- Hamburger Button (mobile only) -->
+			<!-- Hamburger Button -->
 			<button
 				type="button"
-				class="hover:text-fintech-accent dark:hover:text-fintech-red-canadian p-2 text-gray-500 transition-transform duration-200 md:hidden dark:text-gray-200 {isMenuOpen
-					? 'rotate-90'
-					: ''}"
+				class="text-cyber-silver hover:text-cyber-neon focus:ring-cyber-neon p-2 transition-all duration-300 md:hidden focus:ring-2 focus:ring-offset-2 focus:ring-offset-cyber-midnight focus:outline-none {isMenuOpen ? 'text-cyber-neon' : ''}"
 				aria-label="Toggle navigation menu"
 				aria-haspopup="true"
 				aria-controls="mobile-menu"
@@ -104,38 +166,50 @@
 			>
 				<svg
 					xmlns="http://www.w3.org/2000/svg"
-					class="h-6 w-6"
+					class="h-6 w-6 transition-transform duration-300 {isMenuOpen ? 'rotate-90' : ''}"
 					fill="none"
 					viewBox="0 0 24 24"
 					stroke="currentColor"
 					aria-hidden="true"
 				>
-					<path
-						stroke-linecap="round"
-						stroke-linejoin="round"
-						stroke-width="2"
-						d="M4 6h16M4 12h16M4 18h7"
-					/>
+					{#if !isMenuOpen}
+						<path
+							stroke-linecap="round"
+							stroke-linejoin="round"
+							stroke-width="2"
+							d="M4 6h16M4 12h16M4 18h7"
+						/>
+					{:else}
+						<path
+							stroke-linecap="round"
+							stroke-linejoin="round"
+							stroke-width="2"
+							d="M6 18L18 6M6 6l12 12"
+						/>
+					{/if}
 				</svg>
 			</button>
 		</div>
 	</div>
 
-	<!-- Mobile Menu (visible when toggled on mobile) -->
+	<!-- Mobile Menu -->
 	{#if isMenuOpen}
 		<div
-			class="bg-fintech-white dark:bg-fintech-dark border-fintech-light-gray dark:border-fintech-muted border-t md:hidden font-montserrat"
+			class="bg-cyber-charcoal border-cyber-blue/10 border-t md:hidden"
 			id="mobile-menu"
 			role="menu"
-			in:slide={{ duration: 300 }}
-			out:slide={{ duration: 300 }}
+			in:fly={{ y: -20, duration: 300, easing: quintOut }}
+			out:fly={{ y: -20, duration: 200 }}
+			bind:clientHeight={menuHeight}
 		>
-			<ul class="space-y-3 px-4 py-4">
-				{#each navLinks as link}
-					<li>
+			<ul class="space-y-1 px-4 py-3">
+				{#each navLinks as link, index}
+					<li
+						in:fly={{ y: -10, delay: index * 75, duration: 200 }}
+					>
 						<a
 							href={link.href}
-							class="hover:text-fintech-accent dark:hover:text-fintech-red-canadian focus:ring-fintech-accent dark:focus:ring-offset-fintech-dark block text-gray-600 transition-colors duration-200 focus:ring-2 focus:ring-offset-2 focus:outline-none dark:text-gray-200"
+							class="text-cyber-silver hover:text-cyber-neon hover:bg-cyber-blue/5 focus:ring-cyber-neon block rounded-md px-3 py-2 text-base transition-all duration-200 focus:ring-2 focus:outline-none {activeLink === link.href ? 'bg-cyber-blue/10 text-cyber-white' : ''}"
 							role="menuitem"
 							on:click={closeMenu}
 						>
@@ -143,23 +217,23 @@
 						</a>
 					</li>
 				{/each}
+				
+				<!-- Mobile sign in button -->
+				<li in:fly={{ y: -10, delay: navLinks.length * 75, duration: 200 }}>
+					<div class="px-3 pt-4 pb-1">
+						<button class="w-full btn btn-sm btn-primary">
+							Sign In
+						</button>
+					</div>
+				</li>
 			</ul>
 		</div>
 	{/if}
 </nav>
-<!-- {#if session?.user}
-		<span>Welcome, {session.user.name ?? session.user.email}!</span>
-		<img
-			src={session.user.image ?? '/default-avatar.png'}
-			alt="User avatar"
-			width="32"
-			height="32"
-			style="border-radius: 50%; margin-left: 10px;"
-		/>
-		<form action="/auth/signout" method="POST">
-			<button type="submit">Sign Out</button>
-		</form>
-	{:else}
-		<span>You are not signed in.</span>
-		<a href="/auth/signin">Sign In</a>
-	{/if} -->
+
+<style>
+	/* Add any additional component-specific styles here */
+	:global(.cyber-glow) {
+		text-shadow: 0 0 5px rgb(34 211 238 / 70%), 0 0 10px rgb(14 165 233 / 30%);
+	}
+</style>

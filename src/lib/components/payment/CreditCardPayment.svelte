@@ -299,7 +299,7 @@
 	}
 
 	.wrapper {
-		min-height: 100vh;
+		min-height: 70vh;
 		display: flex;
 		padding: 50px 15px;
 	}
