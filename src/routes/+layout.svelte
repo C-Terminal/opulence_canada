@@ -2,12 +2,11 @@
 	import NavigationHomePage from '$lib/components/layout/NavigationHomePage.svelte';
 	import Footer from '$lib/components/layout/Footer.svelte';
 	import '../app.css'; // Tailwind CSS import
-	import ThemeToggle from '$lib/components/ThemeToggle.svelte';
-	import type { LayoutData } from './$types';
 
-	export let data: LayoutData;
 
-	$: session = data.session; // Session data is reactive
+	// export let data: LayoutData;
+
+	// $: session = data.session; // Session data is reactive
 
 	// This script ensures the correct theme is applied before the page renders
 	// to prevent theme flickering
