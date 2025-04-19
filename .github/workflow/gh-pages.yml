@@ -1,0 +1,25 @@
+name: Deploy to GitHub Pages
+
+on:
+  push:
+    branches:
+      - gh-pages-deploy # Trigger this workflow when changes are pushed to this branch
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Install dependencies
+        run: npm install # or pnpm install or yarn install
+
+      - name: Build SvelteKit app
+        run: npm run build # or pnpm build or yarn build
+
+      - name: Deploy to GitHub Pages
+        uses: JamesIves/github-pages-deploy-action@v4
+        with:
+          branch: the-great-canadian-exchange  # The branch GitHub Pages will deploy from
+          folder: build   # The folder containing your static site

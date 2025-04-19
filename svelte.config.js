@@ -15,7 +15,7 @@ const config = {
             strict: true
         }),
         paths: {
-            base: process.env.NODE_ENV === 'production' ? 'https://C-Terminal.github.io' : '',
+            base: process.env.NODE_ENV === 'production' ? '/https://C-Terminal.github.io' : '',
         }
     }
 };
